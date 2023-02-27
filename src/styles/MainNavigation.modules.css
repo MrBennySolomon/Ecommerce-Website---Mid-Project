@@ -1,0 +1,115 @@
+body, 
+html {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  background-color: lightgray;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  width: 100vw;
+  height: 100vh;
+}
+
+nav {
+  width:100%;
+  height: 10%;
+  background-color: #999;
+
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+}
+
+ul {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  gap: 2rem;
+  font-size: 1.5rem;
+  list-style: none;
+  text-decoration: none;
+  color: white;
+}
+
+li {
+  color: white;
+
+}
+
+li:visited {
+  color: inherit;
+  text-decoration: none;
+}
+
+a {
+  
+  text-decoration: none;
+
+}
+
+.dark {
+  background-color: black;
+}
+
+.light {
+  background-color: #999;
+}
+
+.btn-dark {
+  color: white;
+  background-color: #333;
+  border: 2px solid coral;
+}
+
+.btn-light {
+  background-color: white;
+  color: black;
+  border: 2px solid #333;
+}
+
+.link-dark {
+  color: white;
+}
+
+.link-light {
+  color: black;
+}
+
+.h1-dark {
+  color: coral;
+}
+
+.h1-light {
+  color: black;
+}
+
+.bg-dark {
+  background-color: #333;
+}
+
+.bg-light {
+  background-color: lightgray;
+}
+
+.home-con-dark
+.about-con-dark {
+  width: 100px;
+  height: 100px;
+  background-color: #333;
+}
+
+.home-con-light,
+.about-con-light {
+  width: 100px;
+  height: 100px;
+  background-color: lightgray;
+}
+
+img.logo {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+}
