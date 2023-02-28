@@ -18,7 +18,7 @@ const UsersDataBaseAPI = {
         });
     },
 
-    async getUser() {
+    async getAllUsers() {
       try {
         const response = await this.users.get(".json");
         if (response.status !== 200) {

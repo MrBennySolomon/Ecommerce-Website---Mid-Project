@@ -18,7 +18,7 @@ const ProductsDataBaseAPI = {
         });
     },
 
-    async getProduct() {
+    async getAllProducts() {
       try {
         const response = await this.products.get(".json");
         if (response.status !== 200) {
