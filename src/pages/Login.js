@@ -24,7 +24,7 @@ const Login = () => {
         navigate('/');
       }
     })
-    .catch((err) => {console.error('error get all users');setIsLoading(true);})
+    .catch((err) => {console.error('error get all users');setIsLoading(false);})
   }, []);
   
 
