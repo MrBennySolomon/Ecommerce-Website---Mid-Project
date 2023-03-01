@@ -1,0 +1,49 @@
+div.course {
+  width:100%;
+  height: 80%;
+  background: linear-gradient(135deg, rgba(212, 162, 191, 0.5) 30%, rgba(84, 44, 68, 1) 70%);
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  overflow: auto;
+}
+
+.course-video-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  width: 40%;
+  height: 80%;
+
+  border: 2px solid rgba(84, 44, 68, 1);
+}
+
+.course-video-items {
+  width: 40%;
+  height: 80%;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  color: rgba(212, 162, 191, 0.5);
+}
+
+.video1,
+.video2,
+.video3,
+.video4,
+.video5,
+.video6 {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+
+  width: 80%;
+  height: 20%;
+  border: 2px solid rgba(212, 162, 191, 0.5);
+}

@@ -1,7 +1,9 @@
 footer {
   width:100%;
   height: 10%;
-  background-color: #999;
+  background-color: rgba(84, 44, 68, 0.8);
+  border-top: 3px solid #D45F8F;
+  color: #D4A2BF;
 
   display: flex;
   justify-content: center;
