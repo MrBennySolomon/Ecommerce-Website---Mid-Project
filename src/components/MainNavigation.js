@@ -1,7 +1,7 @@
 import React from 'react'
 import { Link } from 'react-router-dom';
 import '../styles/MainNavigation.modules.css';
-import { useGlobalContext } from '../context/context';
+// import { useGlobalContext } from '../context/context';
 import logo from '../img/logo.jpg';
 
 
