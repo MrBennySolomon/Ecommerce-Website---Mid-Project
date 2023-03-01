@@ -2,10 +2,13 @@
   box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
   transition: 0.3s;
   width: 10vw;
+  height: 10vh;
   border-radius: 5px;
   margin-left: 2%;
   margin-bottom: 2%;
   background-color: rgba(212, 162, 191, 0.5);
+  z-index: 5;
+  font-size: 0.8rem;
 }
 
 .card:hover {
@@ -18,5 +21,24 @@
 }
 
 .container {
+  width: 100%;
+  height: 10vh;
   padding: 2px 16px;
+  background-color: rgba(212, 162, 191, 0.5);
+
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  flex-direction: column;
+  text-align: center;
+
+}
+
+h4.title {
+  text-decoration: underline;
+}
+
+p.price {
+  color: #D39B8A;
+  background-color: #542C44;
 }

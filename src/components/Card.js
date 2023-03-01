@@ -1,13 +1,14 @@
 import React from 'react'
 import '../styles/Card.modules.css';
 import cardImg from '../img/card.png'
-const Card = () => {
+const Card = ({title, description, price}) => {
   return (
     <div className="card">
       <img className='img-card' src={cardImg} alt="Avatar"/>
       <div className="container">
-        <h4><b>John Doe</b></h4>
-        <p>Architect & Engineer</p>
+        <h4 className='title'><b>{title}</b></h4>
+        <p>{description}</p>
+        <p className='price'>{price}</p>
       </div>
     </div>
   )

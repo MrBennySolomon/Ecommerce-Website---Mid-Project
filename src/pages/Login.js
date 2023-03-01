@@ -1,11 +1,12 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import React, { useRef, useState, useEffect } from 'react';
+import React, { useRef, useState } from 'react';
 import '../styles/Login.modules.css';
 import UsersDataBaseAPI from '../utils/UsersDataBaseAPI';
 import { useNavigate } from 'react-router-dom';
 
 const Login = () => {
   const [isLoading, setIsLoading] = useState(false);
+  const [isError, setIsError] = useState(false);
   const navigate = useNavigate();
   const emailRef    = useRef();
   const passwordRef = useRef();
@@ -13,34 +14,37 @@ const Login = () => {
   let email;
   let password;
 
-  useEffect(() => {
-    setIsLoading(true);
-    UsersDataBaseAPI.getAllUsers()
-    .then((res) => {
-      localStorage.setItem('users', JSON.stringify(res));setIsLoading(false);
-      users.push(...res);
-      const result = users.find((user) => user.email === email && user.password === password);
-      if (result) {
-        navigate('/');
-      }
-    })
-    .catch((err) => {console.error('error get all users');setIsLoading(false);})
-  }, []);
-  
-
   const submitHandler = (e) => {
     e.preventDefault();
     email    = emailRef.current.value;
     password = passwordRef.current.value;
-
-    console.log('email', email);
-    console.log('password', password);
-
+    setIsError(false);
+    setIsLoading(true);
+    UsersDataBaseAPI.getAllUsers()
+    .then((res) => {
+      localStorage.setItem('users', JSON.stringify(res));
+      setIsLoading(false);
+      users.push(...res);
+      const result = users.find((user) => user.email === email && user.password === password);
+      console.log('result', result);
+      if (result) {
+        localStorage.setItem('loggedInUser', JSON.stringify(result));
+        navigate('/');
+      }else{
+        setIsError(true)
+      }
+    })
+    .catch((err) => {
+      console.error('error get all users');
+      setIsLoading(false);
+    })
   }
+
   const resetHandler = (e) => {
     e.preventDefault();
     emailRef.current.value    = '';
     passwordRef.current.value = '';
+    setIsError(false);
   }
 
   return (
@@ -54,6 +58,7 @@ const Login = () => {
           <input ref={passwordRef} type='password' placeholder='Password'/>
           <button onClick={submitHandler}>login</button>
           <button onClick={resetHandler}>reset</button>
+          {isError && <h3 className='error-login'>oops... wrong email or password</h3>}
         </form>
       </div>
     </div>

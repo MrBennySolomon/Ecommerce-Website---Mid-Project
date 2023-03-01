@@ -1,8 +1,18 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import '../styles/Cart.modules.css';
 import cardImg from '../img/card.png'
+import { useNavigate } from 'react-router-dom';
 
 const Cart = () => {
+  const navigate = useNavigate();
+  useEffect(() => {
+    
+    const loggedInUser = localStorage.getItem('loggedInUser');
+    if (!loggedInUser) {
+      navigate('/login');
+    }
+  }, [navigate]);
+  
   return (
     <div className='cart'>
       <h1>Your Shopping Cart</h1>
