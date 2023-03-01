@@ -4,6 +4,7 @@ import Card from '../components/Card';
 import {Link} from 'react-router-dom';
 
 const Products = () => {
+  
   return (
     <div className='products'>
       <h1>Products</h1>

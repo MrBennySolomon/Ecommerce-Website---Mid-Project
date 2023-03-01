@@ -26,7 +26,6 @@ const Login = () => {
       setIsLoading(false);
       users.push(...res);
       const result = users.find((user) => user.email === email && user.password === password);
-      console.log('result', result);
       if (result) {
         localStorage.setItem('loggedInUser', JSON.stringify(result));
         navigate('/');
