@@ -1,10 +1,10 @@
 import React from 'react';
 import '../styles/Product.modules.css';
-import { useParams } from 'react-router-dom';
+// import { useParams } from 'react-router-dom';
 
 
 const Product = () => {
-  const params = useParams();
+  // const params = useParams();
 
   return (
     <div className='product'>

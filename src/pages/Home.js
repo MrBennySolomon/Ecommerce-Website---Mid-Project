@@ -1,7 +1,7 @@
 import ImageSlider from "./ImageSlider";
 import React from 'react'
 import '../styles/Home.modules.css';
-import { useGlobalContext } from '../context/context';
+// import { useGlobalContext } from '../context/context';
 import img0 from '../img/img0.jpg';
 import img1 from '../img/img1.jpg';
 import img2 from '../img/img2.jpg';
@@ -35,7 +35,7 @@ const Home = () => {
     margin: "0 auto",
   };
 
-  const {isDarkMode} = useGlobalContext();
+  // const {isDarkMode} = useGlobalContext();
 
   return (
     <div className='home'>
