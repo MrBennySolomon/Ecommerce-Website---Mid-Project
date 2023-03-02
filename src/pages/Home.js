@@ -1,6 +1,10 @@
 import ImageSlider from "./ImageSlider";
-import React from 'react'
+import React, {useEffect} from 'react'
 import '../styles/Home.modules.css';
+import UsersDataBaseAPI from '../utils/UsersDataBaseAPI';
+import ProductsDataBaseAPI from '../utils/ProductsDataBaseAPI';
+import CartDataBaseAPI from '../utils/CartDataBaseAPI';
+import CoursesDataBaseAPI from '../utils/CoursesDataBaseAPI';
 // import { useGlobalContext } from '../context/context';
 import img0 from '../img/img0.jpg';
 import img1 from '../img/img1.jpg';
@@ -15,6 +19,22 @@ import img9 from '../img/img9.jpg';
 import img10 from '../img/img10.jpg';
 
 const Home = () => {
+
+  const fetchData = async () => {
+    UsersDataBaseAPI.getAllUsers().then((res) => {localStorage.setItem('users', JSON.stringify(res))});
+    ProductsDataBaseAPI.getAllProducts().then((res) => {localStorage.setItem('products', JSON.stringify(res))});
+    CartDataBaseAPI.getAllCarts().then((res) => {localStorage.setItem('carts', JSON.stringify(res))});
+    CoursesDataBaseAPI.getAllCourses().then((res) => {localStorage.setItem('courses', JSON.stringify(res))});
+  }
+
+  useEffect(() => {
+    fetchData();
+    localStorage.setItem('cartCount', '0');
+    localStorage.setItem('cartTotal', '0');
+    localStorage.setItem('productsCart',JSON.stringify([]));
+    localStorage.setItem('coursesCart',JSON.stringify([]));
+
+  }, []);
 
   const slides = [
     { url: img0, title: "img" },

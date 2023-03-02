@@ -6,6 +6,13 @@ const ProductsDataBaseAPI = {
       "https://products-a5ef0-default-rtdb.europe-west1.firebasedatabase.app/products", 
   }),
 
+  async getProduct(id) {
+    return this.getAllProducts().then((products) => {
+      console.log('products', products);
+      products.find((item) => item.id === id)
+    });
+  },
+
   async removeProduct(id) {
     this.products
         .delete(`/${id}.json`)

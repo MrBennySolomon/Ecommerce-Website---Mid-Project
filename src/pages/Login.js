@@ -1,7 +1,6 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { useRef, useState } from 'react';
 import '../styles/Login.modules.css';
-import UsersDataBaseAPI from '../utils/UsersDataBaseAPI';
 import { useNavigate } from 'react-router-dom';
 
 const Login = () => {
@@ -10,33 +9,26 @@ const Login = () => {
   const navigate = useNavigate();
   const emailRef    = useRef();
   const passwordRef = useRef();
-  const users = [];
+  const users = JSON.parse(localStorage.getItem('users'));
   let email;
   let password;
 
   const submitHandler = (e) => {
     e.preventDefault();
+    setIsLoading(true);
     email    = emailRef.current.value;
     password = passwordRef.current.value;
     setIsError(false);
-    setIsLoading(true);
-    UsersDataBaseAPI.getAllUsers()
-    .then((res) => {
-      localStorage.setItem('users', JSON.stringify(res));
+
+    const loggedInUser = users.find((user) => user.email === email && user.password === password);
+    if (loggedInUser) {
+      localStorage.setItem('loggedInUser', JSON.stringify(loggedInUser));
+      navigate('/');
       setIsLoading(false);
-      users.push(...res);
-      const result = users.find((user) => user.email === email && user.password === password);
-      if (result) {
-        localStorage.setItem('loggedInUser', JSON.stringify(result));
-        navigate('/');
-      }else{
-        setIsError(true)
-      }
-    })
-    .catch((err) => {
-      console.error('error get all users');
+    }else{
+      setIsError(true);
       setIsLoading(false);
-    })
+    }
   }
 
   const resetHandler = (e) => {
@@ -51,7 +43,6 @@ const Login = () => {
       <h1>Login Form</h1>
       <div className='form-container'>
         {isLoading && <div className="lds-default"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div>}
-
         <form>
           <input ref={emailRef} type='email' placeholder='Email'/>
           <input ref={passwordRef} type='password' placeholder='Password'/>

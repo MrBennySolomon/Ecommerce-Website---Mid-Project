@@ -1,63 +1,87 @@
 import React, { useState } from 'react';
 import '../styles/Product.modules.css';
 import { useParams, useNavigate } from 'react-router-dom';
-import ProductsDataBaseAPI from '../utils/ProductsDataBaseAPI';
-import CartDataBaseAPI from '../utils/CartDataBaseAPI';
+// import CartDataBaseAPI from '../utils/CartDataBaseAPI';
+// import ProductsDataBaseAPI from '../utils/ProductsDataBaseAPI';
+import { useGlobalContext } from '../context/context';
+
 
 const Product = () => {
   const params = useParams();
+  const {updateCount, updateTotal} = useGlobalContext();
   const [isLoading, setIsLoading] = useState(false);
   const [isError, setIsError] = useState(false);
   const navigate = useNavigate();
-  const products = [];
-  const shoppingCarts = [];
+  const loggedInUser = JSON.parse(localStorage.getItem('loggedInUser'));
+  const products = JSON.parse(localStorage.getItem('products'));
+  const shoppingCarts = JSON.parse(localStorage.getItem('carts'));
+  const selectedProduct = products.find((item) => Number(item.id) === Number(params.id));
+  localStorage.setItem('selectedProduct', JSON.stringify(selectedProduct));
+  let userCart = [];
 
+  
 
   const addToCartHandler = () => {
-    setIsError(false);
-    setIsLoading(true);
-    ProductsDataBaseAPI.getAllProducts()
-    .then((res) => {
-      localStorage.setItem('products', JSON.stringify(res));
-      setIsLoading(false);
-      products.push(...res);
-      const selectedProduct = products.find((product) => product.id === params.id);
-      
-      if (selectedProduct && selectedProduct.stock > 0) {
-        localStorage.setItem('selectedProduct', JSON.stringify(selectedProduct));
-        
-        setIsError(false);
-        setIsLoading(true);
-        CartDataBaseAPI.getAllCarts()
-        .then((res) => {
-          localStorage.setItem('shoppingCarts', JSON.stringify(res));
-          setIsLoading(false);
-          shoppingCarts.push(...res);
-          const loggedInUser = localStorage.getItem('loggedInUser');
-          let userCart = shoppingCarts.find((cart) => cart.user.email === loggedInUser.email);
 
-          if (userCart) {
-            userCart.products.push(JSON.parse(localStorage.getItem('selectedProduct')));
-          }else{
-            userCart = {
-              courses: [],
-              products:[selectedProduct],
-              user: loggedInUser
-            }
-          }
-          navigate('/products');
-        })
-        .catch((err) => {
-          console.error('error get all products');
-          setIsLoading(false);
-        })
+    if (loggedInUser) {
+
+      userCart = shoppingCarts.find((cart) => cart.user.email === loggedInUser.email);
+      localStorage.setItem('userCart', JSON.stringify(userCart));
+
+      setIsError(false);
+      setIsLoading(true);
+
+      if (selectedProduct.stock <= 0) {
+        setIsError(true);
+      }else{
+        if (userCart) {
+          // userCart.products.push(selectedProduct);
+          // CartDataBaseAPI.editCart(userCart, userCart.id);
+        
+        }else{
+          // userCart = {
+          //   courses: [],
+          //   products:[selectedProduct],
+          //   user: loggedInUser
+          // }
+          // CartDataBaseAPI.addCart(userCart);
       }
-      })
-      .catch((err) => {
-        console.error('error product out of stock');
-        setIsLoading(false);
-      })
+      // const currentCart = {
+      //   courses: [],
+      //   products: [selectedProduct],
+      //   user: loggedInUser
+      // };
+
+     
+ 
+
+      const count = Number(localStorage.getItem('cartCount')) + 1;
+      localStorage.setItem('cartCount', JSON.stringify(count));
+      updateCount();
+
+      const total = Number(localStorage.getItem('cartTotal')) + Number(selectedProduct.price);
+      localStorage.setItem('cartTotal', JSON.stringify(total));
+      updateTotal(Number(selectedProduct.price));
+
+      // localStorage.setItem('currentCart', JSON.stringify(currentCart));
+      selectedProduct.stock = selectedProduct.stock - 1;
+
+      const productsCart = JSON.parse(localStorage.getItem('productsCart'));
+      productsCart.push(selectedProduct);
+      localStorage.setItem('productsCart',JSON.stringify(productsCart));
+
+      // localStorage.setItem('selectedProduct', JSON.stringify(selectedProduct))
+      // ProductsDataBaseAPI.editProduct(selectedProduct, selectedProduct.id);
+      // CartDataBaseAPI.getAllCarts().then((res) => {localStorage.setItem('carts', JSON.stringify(res))});
+      // ProductsDataBaseAPI.getAllProducts().then((res) => {localStorage.setItem('products', JSON.stringify(res))});
     }
+    setIsLoading(false);
+    navigate('/products');
+    }else{
+      navigate('/login');
+    }
+    
+  }
 
   return (
     <div className='product'>

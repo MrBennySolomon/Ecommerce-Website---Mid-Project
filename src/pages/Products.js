@@ -1,20 +1,31 @@
-import React from 'react';
+/* eslint-disable react-hooks/exhaustive-deps */
+import React, {useEffect} from 'react';
 import '../styles/Products.modules.css';
 import Card from '../components/Card';
 import {Link} from 'react-router-dom';
+import { useGlobalContext } from '../context/context';
+
 
 const Products = () => {
+  const {arrayIds, updateArrayIds} = useGlobalContext();
+  let products = JSON.parse(localStorage.getItem('products'));
+
+  useEffect(() => {
+    
+    updateArrayIds(Object.keys(products));
+    localStorage.setItem('arrayIds', JSON.stringify(Object.keys(products)));
+  }, []);
+  
   
   return (
     <div className='products'>
       <h1>Products</h1>
       <div className='products-container'>
-        <Link to='/products/1'><Card title='product 1' description='nails polish pink' price='60 NIS'/></Link>
-        <Link to='/products/2'><Card title='product 2' description='nails polish red' price='60 NIS'/></Link>
-        <Link to='/products/3'><Card title='product 3' description='nails polish blue' price='60 NIS'/></Link>
-        <Link to='/products/4'><Card title='product 4' description='nails polish green' price='60 NIS'/></Link>
-        <Link to='/products/5'><Card title='product 5' description='nails polish yellow' price='60 NIS'/></Link>
-        
+      {products && arrayIds.map((id) => <Link key={id} to={`/products/${id}`}><Card 
+          title={products[id]?.title} 
+          description={products[id]?.description}
+          price={products[id]?.price}
+          /></Link>)}
       </div>
     </div>
   )

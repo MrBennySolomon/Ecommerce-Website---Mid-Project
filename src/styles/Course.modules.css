@@ -47,3 +47,28 @@ div.course {
   height: 20%;
   border: 2px solid rgba(212, 162, 191, 0.5);
 }
+
+.course-img-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  width: 40%;
+  height: 80%;
+  background: url(../img/card.png) no-repeat center center/contain;
+}
+
+.course-description-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+
+  width: 40%;
+  height: 80%;
+  color: rgba(212, 162, 191, 0.5);
+}
+
+button.add-to-cart-btn {
+  border: 3px solid rgba(212, 162, 191, 0.5);
+}

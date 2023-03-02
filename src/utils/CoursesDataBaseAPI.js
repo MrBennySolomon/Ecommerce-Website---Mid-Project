@@ -17,6 +17,9 @@ const CoursesDataBaseAPI = {
           return "Error while deleting course";
         });
     },
+    async getCourse(id) {
+      return this.getAllCourses().then((course) => course.find((item) => item.id === id));
+    },
 
     async getAllCourses() {
       try {

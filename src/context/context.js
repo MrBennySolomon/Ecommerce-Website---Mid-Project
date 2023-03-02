@@ -1,23 +1,34 @@
 import { useState, createContext, useContext } from 'react';
 
-const AppContext = createContext(false);
+const AppContext = createContext([]);
 
 const AppProvider = ({ children }) => {
-  const [isDarkMode, setIsDarkMode] = useState(false);
+  const [count, setCount] = useState(0);
+  const [total, setTotal] = useState(0);
+  const [arrayIds, setArrayIds] = useState([]);
 
-  const setDark = (bool) => {
-    if (bool) {
-      setIsDarkMode(true);
-    }else {
-      setIsDarkMode(false);
-    }
+  const updateCount = () => {
+    setCount(count + 1);
+  }
+
+  const updateTotal = (num) => {
+    setTotal(total + num);
+  }
+
+  const updateArrayIds = (arr) => {
+    setArrayIds(arr)
   }
 
   return (
     <AppContext.Provider
       value={{
-        isDarkMode,
-        setDark
+        count,
+        total,
+        arrayIds,
+        updateCount,
+        updateTotal,
+        updateArrayIds
+
       }}
     >
       {children}
