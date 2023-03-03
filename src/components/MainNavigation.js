@@ -18,9 +18,8 @@ const MainNavigation = () => {
 
 
   return (
-
-      <nav className='light'>
-        <div className="menu-wrap">
+    <>
+      <div className="menu-wrap">
         <input ref={inputRef} type="checkbox" className="toggler"/>
         <div className="hamburger">
           <div></div>
@@ -39,6 +38,7 @@ const MainNavigation = () => {
           </div>
         </div>
       </div>
+      <nav className='light'> 
         <ul>
           <li><Link to='/'><img src={logo} alt='logo' className='logo'/></Link></li>
           <li><Link to='/'>Home</Link></li>
@@ -49,6 +49,7 @@ const MainNavigation = () => {
           <li><Link to='/about'>About</Link></li>
         </ul>
       </nav>
+    </>
   )
 }
 

@@ -72,3 +72,19 @@ div.course {
 button.add-to-cart-btn {
   border: 3px solid rgba(212, 162, 191, 0.5);
 }
+
+@media (max-width:600px) {
+  div.course {
+    flex-direction: column;
+  }
+
+  .course-description-container,
+  .course-img-container {
+    width: 90%;
+    font-size: 150%;
+  }
+
+  button.add-to-cart-btn {
+    font-size: 150%;
+  }
+}

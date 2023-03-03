@@ -26,4 +26,13 @@ div.about {
   background-color: rgba(84, 44, 68, 1);
 
   padding: 1rem;
+  overflow-x: hidden;
+  overflow-y: scroll;
+}
+
+@media (max-width:600px) {
+  .about-container {
+    width: 90%;
+    font-size: 180%;
+  }
 }

@@ -80,3 +80,17 @@ td {
 .btnPlus {
   padding: 0.2rem 0rem ;
 }
+
+@media (max-width:600px) {
+  div.cart {
+    font-size: 180%;
+  }
+
+  .btnMinus {
+    padding: 1rem 1.2rem ;
+  }
+  
+  .btnPlus {
+    padding: 1rem 1rem ;
+  }
+}

@@ -1,5 +1,5 @@
 import { useState } from "react";
-
+import '../styles/Carousel.modules.css';
 const slideStyles = {
   width: "100%",
   height: "100%",
@@ -67,7 +67,7 @@ const ImageSlider = ({ slides }) => {
   };
 
   return (
-    <div style={sliderStyles}>
+    <div className='slider' style={sliderStyles}>
       <div>
         <div onClick={goToPrevious} style={leftArrowStyles}>
           ❰
@@ -84,7 +84,6 @@ const ImageSlider = ({ slides }) => {
             key={slideIndex}
             onClick={() => goToSlide(slideIndex)}
           >
-            ●
           </div>
         ))}
       </div>

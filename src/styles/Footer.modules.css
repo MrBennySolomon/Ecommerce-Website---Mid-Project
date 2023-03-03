@@ -1,6 +1,6 @@
 footer {
-  width:100%;
-  height: 10%;
+  width:100vw;
+  height: 10vh;
   background-color: rgba(84, 44, 68, 0.8);
   border-top: 3px solid #D45F8F;
   color: #D4A2BF;
@@ -11,4 +11,10 @@ footer {
 
   font-size: 100%;
 
+}
+
+@media (max-width:600px) {
+  footer {
+    font-size: 150%;
+  }
 }

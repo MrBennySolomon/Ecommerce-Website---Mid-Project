@@ -42,3 +42,15 @@ p.price {
   color: #D39B8A;
   background-color: #542C44;
 }
+
+@media (max-width:600px) {
+  .card {
+    width: 20vw;
+    font-size: 150%;
+  }
+  
+  .container {
+    width: 100%;
+    height: 10vh;
+  }
+}

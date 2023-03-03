@@ -66,7 +66,7 @@ const Home = ({inputRef}) => {
   return (
     <div className='home'>
       <h1>Home</h1>
-      <div style={containerStyles}><ImageSlider slides={slides} /></div>
+      <div className='slider' style={containerStyles}><ImageSlider slides={slides} /></div>
     </div>
     )
 }
