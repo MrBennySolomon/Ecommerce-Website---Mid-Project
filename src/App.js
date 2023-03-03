@@ -10,6 +10,7 @@ import Products from './pages/Products';
 import Course   from './pages/Course';
 import Product  from './pages/Product';
 
+
 const router = createBrowserRouter([
   {
     path: '/', 

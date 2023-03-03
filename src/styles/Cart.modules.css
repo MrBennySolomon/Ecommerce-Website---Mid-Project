@@ -16,7 +16,6 @@ div.cart {
 
   display: flex;
   justify-content: center;
-  align-items: center;
   flex-direction: column;
   gap: 1rem;
 
@@ -61,4 +60,23 @@ th,
 tr,
 td {
   border: 1px solid rgba(84, 44, 68, 1);
+  background-color: rgba(212, 162, 191, 0.5);
+  text-align: center;
+  font-weight: bold;
+}
+
+.btnPlus:hover,
+.btnMinus:hover {
+
+  color:rgba(84, 44, 68, 1);
+  background-color: rgba(212, 162, 191, 0.8);
+  font-weight: bold;
+}
+
+.btnMinus {
+  padding: 0.2rem 0.2rem ;
+}
+
+.btnPlus {
+  padding: 0.2rem 0rem ;
 }

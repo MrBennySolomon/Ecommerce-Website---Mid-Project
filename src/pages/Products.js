@@ -22,9 +22,9 @@ const Products = () => {
       <h1>Products</h1>
       <div className='products-container'>
       {products && arrayIds.map((id) => <Link key={id} to={`/products/${id}`}><Card 
-          title={products[id]?.title} 
-          description={products[id]?.description}
+          title={products[id]?.name} 
           price={products[id]?.price}
+          src='https://i.etsystatic.com/7211054/r/il/bdb222/3947951920/il_1140xN.3947951920_bqg3.jpg'
           /></Link>)}
       </div>
     </div>

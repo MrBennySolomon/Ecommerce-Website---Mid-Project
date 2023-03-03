@@ -57,11 +57,11 @@ const Product = () => {
 
       const count = Number(localStorage.getItem('cartCount')) + 1;
       localStorage.setItem('cartCount', JSON.stringify(count));
-      updateCount();
+      updateCount('+');
 
       const total = Number(localStorage.getItem('cartTotal')) + Number(selectedProduct.price);
       localStorage.setItem('cartTotal', JSON.stringify(total));
-      updateTotal(Number(selectedProduct.price));
+      updateTotal('+', Number(selectedProduct.price));
 
       // localStorage.setItem('currentCart', JSON.stringify(currentCart));
       selectedProduct.stock = selectedProduct.stock - 1;

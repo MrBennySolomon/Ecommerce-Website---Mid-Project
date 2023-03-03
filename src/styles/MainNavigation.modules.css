@@ -133,7 +133,7 @@ label.amount-of-items {
   border-radius: 50%;
   padding: 0 0.3rem;
   font-size: 1rem;
-  margin-top: -1rem;
+  display: inline;
 }
 
 img.no-logged-in-img {

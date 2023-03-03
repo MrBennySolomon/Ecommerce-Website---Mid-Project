@@ -7,12 +7,12 @@ const AppProvider = ({ children }) => {
   const [total, setTotal] = useState(0);
   const [arrayIds, setArrayIds] = useState([]);
 
-  const updateCount = () => {
-    setCount(count + 1);
+  const updateCount = (operation) => {
+    operation === '+' ? setCount(count + 1) : setCount(count - 1);
   }
 
-  const updateTotal = (num) => {
-    setTotal(total + num);
+  const updateTotal = (operation, num) => {
+    operation === '+' ? setTotal(total + num) : setTotal(total - num);
   }
 
   const updateArrayIds = (arr) => {

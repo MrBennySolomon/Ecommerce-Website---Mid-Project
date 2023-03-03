@@ -50,11 +50,11 @@ const Course = () => {
 
       const count = Number(localStorage.getItem('cartCount')) + 1;
       localStorage.setItem('cartCount', JSON.stringify(count));
-      updateCount();
+      updateCount('+');
   
       const total = Number(localStorage.getItem('cartTotal')) + Number(selectedCourse.price);
       localStorage.setItem('cartTotal', JSON.stringify(total));
-      updateTotal(Number(selectedCourse.price));
+      updateTotal('+', Number(selectedCourse.price));
   
       // localStorage.setItem('currentCart', JSON.stringify(currentCart));
       selectedCourse.stock = selectedCourse.stock - 1;
@@ -65,7 +65,7 @@ const Course = () => {
       const coursesCart = JSON.parse(localStorage.getItem('coursesCart'));
       coursesCart.push(selectedCourse);
       localStorage.setItem('coursesCart',JSON.stringify(coursesCart));
-      
+
       setIsLoading(false);
       navigate('/courses');
     }else{

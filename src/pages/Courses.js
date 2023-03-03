@@ -4,7 +4,7 @@ import '../styles/Courses.modules.css';
 import Card from '../components/Card';
 import {Link} from 'react-router-dom';
 import { useGlobalContext } from '../context/context';
-
+import digitalCourse from '../img/digital-course.jpg';
 
 
 
@@ -25,9 +25,10 @@ const Courses = () => {
       <h1>Online Courses</h1>
       <div className='courses-container'>
       {courses && arrayIds.map((id) => <Link key={id} to={`/courses/${id}`}><Card 
-          title={courses[id]?.title} 
-          description={courses[id]?.description}
+          title={courses[id]?.name} 
+          description={'this course is for beginners'}
           price={courses[id]?.price}
+          src={digitalCourse}
           /></Link>)}
         {/* <Link to='/courses/1'><Card title='course 1' description='nails tutorial' price='456 NIS'/></Link>
         <Link to='/courses/2'><Card title='course 2' description='nails beginners' price='556 NIS'/></Link>
