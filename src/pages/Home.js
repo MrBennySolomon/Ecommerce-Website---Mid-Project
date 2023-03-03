@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import ImageSlider from "./ImageSlider";
 import React, {useEffect} from 'react'
 import '../styles/Home.modules.css';
@@ -18,7 +19,8 @@ import img8 from '../img/img8.jpg';
 import img9 from '../img/img9.jpg';
 import img10 from '../img/img10.jpg';
 
-const Home = () => {
+
+const Home = ({inputRef}) => {
 
   const fetchData = async () => {
     UsersDataBaseAPI.getAllUsers().then((res) => {localStorage.setItem('users', JSON.stringify(res))});
@@ -26,6 +28,10 @@ const Home = () => {
     CartDataBaseAPI.getAllCarts().then((res) => {localStorage.setItem('carts', JSON.stringify(res))});
     CoursesDataBaseAPI.getAllCourses().then((res) => {localStorage.setItem('courses', JSON.stringify(res))});
   }
+
+  // useEffect(() => {
+  //   inputRef.current?.checked = false;
+  // }, []);
 
   useEffect(() => {
     fetchData();
