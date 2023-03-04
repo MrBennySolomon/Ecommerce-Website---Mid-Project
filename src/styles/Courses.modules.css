@@ -18,3 +18,26 @@ div.courses {
   gap: 1rem;
 }
 
+.admin-container input{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  
+  width: 90%;
+  padding: 0.7rem;
+}
+
+input[type=text] {
+  width: 90%;
+  padding: 0.6rem 0rem;
+  border: 3px solid rgba(212, 162, 191, 0.5);
+  -webkit-transition: 0.5s;
+  transition: 0.5s;
+  outline: none;
+  font-size: 1.5rem;
+  text-align: center;
+}
+
+input[type=text]:focus {
+  border: 3px solid rgba(84, 44, 68, 1);
+}

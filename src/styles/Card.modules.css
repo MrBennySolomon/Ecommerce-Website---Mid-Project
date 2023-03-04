@@ -53,3 +53,10 @@ p.price {
     font-size: 110%;
   }
 }
+
+@media (min-width:1000px) {
+  .card {
+    width: 10vw;
+    font-size: 130%;
+  }
+}
