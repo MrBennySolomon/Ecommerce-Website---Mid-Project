@@ -20,7 +20,7 @@ import img9 from '../img/img9.jpg';
 import img10 from '../img/img10.jpg';
 
 
-const Home = ({inputRef}) => {
+const Home = () => {
 
   const fetchData = async () => {
     UsersDataBaseAPI.getAllUsers().then((res) => {localStorage.setItem('users', JSON.stringify(res))});

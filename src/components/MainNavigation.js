@@ -25,6 +25,7 @@ const MainNavigation = () => {
             <div>
               <ul className='flex-container'>
                 <li onClick={() => inputRef.current.checked = false}><Link to='/'>Home</Link></li>
+                <li onClick={() => inputRef.current.checked = false}><Link to='/login'>Login</Link></li>
                 <li onClick={() => inputRef.current.checked = false}><Link to='/products'>Products</Link></li>
                 <li onClick={() => inputRef.current.checked = false}><Link to='/courses'>Courses</Link></li>
                 <li onClick={() => inputRef.current.checked = false}><Link to='/cart'>Cart</Link></li>

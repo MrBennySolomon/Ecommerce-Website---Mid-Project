@@ -11,9 +11,11 @@ const Products = () => {
   let products = JSON.parse(localStorage.getItem('products'));
 
   useEffect(() => {
+    
     updateArrayIds(Object.keys(products));
     localStorage.setItem('arrayIds', JSON.stringify(Object.keys(products)));
   }, []);
+  
   
   return (
     <div className='products'>
