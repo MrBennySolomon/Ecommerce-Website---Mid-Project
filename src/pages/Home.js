@@ -6,7 +6,7 @@ import UsersDataBaseAPI from '../utils/UsersDataBaseAPI';
 import ProductsDataBaseAPI from '../utils/ProductsDataBaseAPI';
 import CartDataBaseAPI from '../utils/CartDataBaseAPI';
 import CoursesDataBaseAPI from '../utils/CoursesDataBaseAPI';
-// import { useGlobalContext } from '../context/context';
+
 import img0 from '../img/img0.jpg';
 import img1 from '../img/img1.jpg';
 import img2 from '../img/img2.jpg';
@@ -28,10 +28,6 @@ const Home = ({inputRef}) => {
     CartDataBaseAPI.getAllCarts().then((res) => {localStorage.setItem('carts', JSON.stringify(res))});
     CoursesDataBaseAPI.getAllCourses().then((res) => {localStorage.setItem('courses', JSON.stringify(res))});
   }
-
-  // useEffect(() => {
-  //   inputRef.current?.checked = false;
-  // }, []);
 
   useEffect(() => {
     fetchData();
@@ -60,8 +56,6 @@ const Home = ({inputRef}) => {
     height: "50vmin",
     margin: "0 auto",
   };
-
-  // const {isDarkMode} = useGlobalContext();
 
   return (
     <div className='home'>

@@ -151,10 +151,20 @@ img.logged-in-img {
 
 @media (max-width:600px) {
   nav {
-    visibility: hidden;
+    display: none;
   }
 
   div.menu-wrap {
-    visibility: visible;
+    display: flex;
+  }
+}
+
+@media (min-width:601px) {
+  nav {
+    display: flex;
+  }
+
+  div.menu-wrap {
+    display: none;
   }
 }

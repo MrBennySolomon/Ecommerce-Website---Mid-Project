@@ -34,53 +34,28 @@ const Product = () => {
       if (selectedProduct.stock <= 0) {
         setIsError(true);
       }else{
-        if (userCart) {
-          // userCart.products.push(selectedProduct);
-          // CartDataBaseAPI.editCart(userCart, userCart.id);
-        
-        }else{
-          // userCart = {
-          //   courses: [],
-          //   products:[selectedProduct],
-          //   user: loggedInUser
-          // }
-          // CartDataBaseAPI.addCart(userCart);
+
+        const count = Number(localStorage.getItem('cartCount')) + 1;
+        localStorage.setItem('cartCount', JSON.stringify(count));
+        updateCount('+');
+
+        const total = Number(localStorage.getItem('cartTotal')) + Number(selectedProduct.price);
+        localStorage.setItem('cartTotal', JSON.stringify(total));
+        updateTotal('+', Number(selectedProduct.price));
+
+        selectedProduct.stock = selectedProduct.stock - 1;
+
+        const productsCart = JSON.parse(localStorage.getItem('productsCart'));
+        productsCart.push(selectedProduct);
+        localStorage.setItem('productsCart',JSON.stringify(productsCart));
       }
-      // const currentCart = {
-      //   courses: [],
-      //   products: [selectedProduct],
-      //   user: loggedInUser
-      // };
 
-     
- 
+      setIsLoading(false);
+      navigate('/products');
 
-      const count = Number(localStorage.getItem('cartCount')) + 1;
-      localStorage.setItem('cartCount', JSON.stringify(count));
-      updateCount('+');
-
-      const total = Number(localStorage.getItem('cartTotal')) + Number(selectedProduct.price);
-      localStorage.setItem('cartTotal', JSON.stringify(total));
-      updateTotal('+', Number(selectedProduct.price));
-
-      // localStorage.setItem('currentCart', JSON.stringify(currentCart));
-      selectedProduct.stock = selectedProduct.stock - 1;
-
-      const productsCart = JSON.parse(localStorage.getItem('productsCart'));
-      productsCart.push(selectedProduct);
-      localStorage.setItem('productsCart',JSON.stringify(productsCart));
-
-      // localStorage.setItem('selectedProduct', JSON.stringify(selectedProduct))
-      // ProductsDataBaseAPI.editProduct(selectedProduct, selectedProduct.id);
-      // CartDataBaseAPI.getAllCarts().then((res) => {localStorage.setItem('carts', JSON.stringify(res))});
-      // ProductsDataBaseAPI.getAllProducts().then((res) => {localStorage.setItem('products', JSON.stringify(res))});
-    }
-    setIsLoading(false);
-    navigate('/products');
     }else{
       navigate('/login');
     }
-    
   }
 
   return (

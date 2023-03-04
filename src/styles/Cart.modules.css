@@ -22,8 +22,11 @@ div.cart {
   overflow: auto;
   text-align:justify;
 
+  background-color: rgba(212, 162, 191, 0.2);
+
   border: 2px solid rgba(84, 44, 68, 1);
 }
+
 .item1,
 .item2,
 .item3 {  

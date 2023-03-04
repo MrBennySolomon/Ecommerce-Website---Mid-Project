@@ -1,10 +1,7 @@
 import React from 'react'
 import '../styles/About.modules.css';
-// import { useGlobalContext } from '../context/context';
 
 const About = () => {
-  // const {isDarkMode} = useGlobalContext();
-  // document.body.style.backgroundColor = isDarkMode ? '#333' : 'lightgray';
 
   return (
     <div className='about'>

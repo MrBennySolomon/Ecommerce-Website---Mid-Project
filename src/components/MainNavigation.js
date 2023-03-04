@@ -1,4 +1,3 @@
-// import React, {useState, useEffect} from 'react'
 import { Link } from 'react-router-dom';
 import '../styles/MainNavigation.modules.css';
 import { useGlobalContext } from '../context/context';
@@ -6,13 +5,10 @@ import logo from '../img/logo.jpg';
 import './css/menu.css';
 import './css/style.css';
 import {useRef} from 'react';
-// import noLoggedInIcon from '../img/no-logged-in-icon.png';
-// import loggedInIcon from '../img/logged-in-icon.png';
 
 
 const MainNavigation = () => {
-  // const [count, setCount] = useState(0);
-  // const [total, setTotal] = useState(0);
+
   const inputRef = useRef();
   const {count} = useGlobalContext();
 

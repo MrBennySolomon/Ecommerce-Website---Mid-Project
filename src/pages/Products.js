@@ -11,11 +11,9 @@ const Products = () => {
   let products = JSON.parse(localStorage.getItem('products'));
 
   useEffect(() => {
-    
     updateArrayIds(Object.keys(products));
     localStorage.setItem('arrayIds', JSON.stringify(Object.keys(products)));
   }, []);
-  
   
   return (
     <div className='products'>
@@ -32,10 +30,3 @@ const Products = () => {
 }
 
 export default Products;
-
-// {data && arrayIds.map((id) => <Link key={id} to={`/shoes/${id}`}><img 
-//           key={id} 
-//           alt={data[id]?.description}
-//           src={data[id]?.imgUrl}
-//           width='100%'
-//           /></Link>)}
