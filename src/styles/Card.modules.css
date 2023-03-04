@@ -8,7 +8,10 @@
   margin-bottom: 2%;
   background-color: rgba(212, 162, 191, 0.5);
   z-index: 5;
-  font-size: 0.8rem;
+  font-size: 130%;
+
+  width: 20vw;
+  height: 20vh;
 }
 
 .card:hover {
@@ -17,12 +20,13 @@
 
 .img-card {
   width: 100%;
+  height: 50%;
   border-radius: 5px 5px 0 0;
 }
 
 .container {
   width: 100%;
-  height: 10vh;
+  height: 50%;
   padding: 2px 16px;
   background-color: rgba(212, 162, 191, 0.5);
 
@@ -46,11 +50,6 @@ p.price {
 @media (max-width:600px) {
   .card {
     width: 20vw;
-    font-size: 150%;
-  }
-  
-  .container {
-    width: 100%;
-    height: 10vh;
+    font-size: 110%;
   }
 }

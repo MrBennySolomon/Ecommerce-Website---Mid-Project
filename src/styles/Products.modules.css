@@ -9,6 +9,7 @@ div.products {
   flex-wrap: wrap;
   flex-direction: column;
   gap: 1rem;
+
 }
 
 .products-container {
@@ -17,6 +18,8 @@ div.products {
   align-items: center;
   flex-wrap: wrap;
   gap: 1rem;
+
+  
 }
 
 @media (max-width:600px) {

@@ -26,6 +26,7 @@ nav {
   align-items: center;
   border-bottom: 3px solid #D45F8F;
 
+  font-size: 100%;
 }
 
 ul {
@@ -149,7 +150,7 @@ img.logged-in-img {
   background: url(../img/logged-in-icon.png) no-repeat center center/contain;
 }
 
-@media (max-width:600px) {
+@media (max-width:661px) {
   nav {
     display: none;
   }
@@ -159,7 +160,7 @@ img.logged-in-img {
   }
 }
 
-@media (min-width:601px) {
+@media (min-width:662px) {
   nav {
     display: flex;
   }
@@ -167,4 +168,11 @@ img.logged-in-img {
   div.menu-wrap {
     display: none;
   }
+}
+
+@media (min-width:662px) {
+  nav {
+    font-size: 150%;
+  }
+  
 }
