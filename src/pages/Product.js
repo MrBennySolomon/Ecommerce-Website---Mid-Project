@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/alt-text */
 import React, { useState } from 'react';
 import '../styles/Product.modules.css';
 import { useParams, useNavigate } from 'react-router-dom';
@@ -15,11 +16,9 @@ const Product = () => {
   const loggedInUser = JSON.parse(localStorage.getItem('loggedInUser'));
   const products = JSON.parse(localStorage.getItem('products'));
   const shoppingCarts = JSON.parse(localStorage.getItem('carts'));
-  const selectedProduct = products.find((item) => Number(item.id) === Number(params.id));
+  const selectedProduct = products[params.id];
   localStorage.setItem('selectedProduct', JSON.stringify(selectedProduct));
   let userCart = [];
-
-  
 
   const addToCartHandler = () => {
 
@@ -60,12 +59,11 @@ const Product = () => {
 
   return (
     <div className='product'>
-      <div className='product-img-container'/>
+      <div className='product-img-container'><img src={selectedProduct.imgUrl} width='100%' height='100%'/></div>
       <div className='product-description-container'>
       {isLoading && <div className="lds-default"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div>}
-        <h1>title</h1>
-        <h2>description</h2>
-        <h3>details details details details details details </h3>
+        <h1>{selectedProduct.name}</h1>
+        <h2>{selectedProduct.price}</h2>
         <button onClick={addToCartHandler} className='add-to-cart-btn'>Add to Cart</button>
         {isError && <h3 className='error-msg'>sorry ... this product is out of stock</h3>}
       </div>

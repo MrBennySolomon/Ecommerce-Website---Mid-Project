@@ -2,7 +2,6 @@
 import React, {useEffect} from 'react';
 import '../styles/Cart.modules.css';
 import { useNavigate } from 'react-router-dom';
-import digitalCourse from '../img/digital-course.jpg';
 import { useGlobalContext } from '../context/context';
 
 
@@ -99,8 +98,8 @@ const Cart = () => {
         <table>
           <thead></thead>
           <tbody>
-            {productsCart?.map((item) => <tr key={(new Date().getMilliseconds()) + Math.random()}><td><img alt='img' src='https://i.etsystatic.com/25672645/r/il/249845/2769996240/il_1140xN.2769996240_n6j2.jpg' className='img-cart'/></td><td>{item?.name} </td><td>{item?.price} NIS</td><td><button name={item.name} onClick={minusClickHandler} className='btnMinus'>-</button></td><td className='itemAmount'>{item.count}</td><td><button name={item.name} onClick={plusClickHandler} className='btnPlus'>+</button></td></tr>)}
-            {coursesCart?.map((item) => <tr key={(new Date().getMilliseconds()) + Math.random()}><td><img alt='img' src={digitalCourse} className='img-cart'/></td><td>{item?.name} </td><td>{item?.price} NIS</td><td><button  name={item.name} onClick={minusClickHandler} className='btnMinus'>-</button></td><td className='itemAmount'>{item.count}</td><td><button name={item.name} onClick={plusClickHandler} className='btnPlus'>+</button></td></tr>)}
+            {productsCart?.map((item) => <tr key={(new Date().getMilliseconds()) + Math.random()}><td><img alt='img' src={item.imgUrl} className='img-cart'/></td><td>{item?.name} </td><td>{item?.price} NIS</td><td><button name={item.name} onClick={minusClickHandler} className='btnMinus'>-</button></td><td className='itemAmount'>{item.count}</td><td><button name={item.name} onClick={plusClickHandler} className='btnPlus'>+</button></td></tr>)}
+            {coursesCart?.map((item) => <tr key={(new Date().getMilliseconds()) + Math.random()}><td><img alt='img' src={item.imgUrl} className='img-cart'/></td><td>{item?.name} </td><td>{item?.price} NIS</td><td><button  name={item.name} onClick={minusClickHandler} className='btnMinus'>-</button></td><td className='itemAmount'>{item.count}</td><td><button name={item.name} onClick={plusClickHandler} className='btnPlus'>+</button></td></tr>)}
           </tbody>
         </table>
         

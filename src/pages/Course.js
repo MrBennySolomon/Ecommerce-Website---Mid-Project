@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/alt-text */
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, {useState} from 'react';
 import '../styles/Course.modules.css';
@@ -10,8 +11,7 @@ const Course = () => {
 
   const params = useParams();
   const courses = JSON.parse(localStorage.getItem('courses'));
-  const selectedCourse = courses.find((item) => Number(item.id) === Number(params.id));
-  localStorage.setItem('selectedCourse', JSON.stringify(selectedCourse));
+  const selectedCourse = courses[params.id];  localStorage.setItem('selectedCourse', JSON.stringify(selectedCourse));
   const navigate = useNavigate();
   const loggedInUser = JSON.parse(localStorage.getItem('loggedInUser'));
   const shoppingCarts = JSON.parse(localStorage.getItem('carts'));
@@ -62,12 +62,11 @@ const Course = () => {
 
   return (
     <div className='course'>
-      <div className='course-img-container'/>
+      <div className='course-img-container'><img src={selectedCourse.imgUrl} width='100%' height='100%'/></div>
       <div className='course-description-container'>
         {isLoading && <div className="lds-default"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div>}
-        <h1>course no {params.id}</h1>
-        <h2>description</h2>
-        <h3>details details details details details details </h3>
+        <h1>{selectedCourse.name}</h1>
+        <h2>{selectedCourse.price}</h2>
         <button onClick={addToCartHandler} className='add-to-cart-btn'>Add to Cart</button>
       </div>
     </div>

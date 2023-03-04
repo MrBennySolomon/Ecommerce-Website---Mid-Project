@@ -16,7 +16,7 @@ const Products = () => {
   let products = JSON.parse(localStorage.getItem('products'));
 
   const loggedInUser = JSON.parse(localStorage.getItem('loggedInUser'));
-  const isAdmin = (loggedInUser.type === 'admin');
+  const isAdmin = (loggedInUser?.type === 'admin');
 
   const deleteClickHandler = () => {
     if (nameRef.current.value.length > 0) {
@@ -33,7 +33,6 @@ const Products = () => {
   }
 
   const addClickHandler = () => {
-    console.log('inside add')
     if(nameRef.current.value.length > 0 && priceRef.current.value.length > 0 && imageRef.current.value.length > 0 && stockRef.current.value.length > 0) {
       ProductsDataBaseAPI.addProduct({
         name: nameRef.current.value,
@@ -46,7 +45,22 @@ const Products = () => {
   }
 
   const editClickHandler = () => {
-  
+    if(nameRef.current.value.length > 0 && priceRef.current.value.length > 0 && imageRef.current.value.length > 0 && stockRef.current.value.length > 0) {
+      let id = 0;
+      arrayIds.forEach(element => {
+        if (products[element].name === nameRef.current.value) {
+          id = element;
+        }
+      });
+      
+      ProductsDataBaseAPI.editProduct({
+        name: nameRef.current.value,
+        price: priceRef.current.value,
+        imgUrl: imageRef.current.value,
+        stock: stockRef.current.value
+      }, id);
+      navigate('/');
+    }
   }
 
   useEffect(() => {
@@ -65,13 +79,13 @@ const Products = () => {
   return (
     <div className='products'>
       {isAdmin && <h1>Admin Area</h1>}
-      {isAdmin && <div className='admin-container'><input ref={nameRef} type='text' width='100%' placeholder='Product Name'/><input ref={priceRef} type='text' width='100%' placeholder='Product Price'/><input ref={imageRef} type='text' width='100%' placeholder='Product Image Url'/><input ref={stockRef} type='text' width='100%' placeholder='Stock'/><button onClick={deleteClickHandler} className='btn-delete-admin'>DELETE</button><button ocClick={addClickHandler} className='btn-add-admin'>ADD</button><button onClick={editClickHandler} className='btn-edit-admin'>EDIT</button></div>}
+      {isAdmin && <div className='admin-container'><input ref={nameRef} type='text' width='100%' placeholder='Product Name'/><input ref={priceRef} type='text' width='100%' placeholder='Product Price'/><input ref={imageRef} type='text' width='100%' placeholder='Product Image Url'/><input ref={stockRef} type='text' width='100%' placeholder='Stock'/><button onClick={deleteClickHandler} className='btn-delete-admin'>DELETE</button><button onClick={addClickHandler} className='btn-add-admin'>ADD</button><button onClick={editClickHandler} className='btn-edit-admin'>EDIT</button></div>}
       <h1>Products</h1>
       <div className='products-container'>
       {products && arrayIds.map((id) => <Link key={id} to={`/products/${id}`}><Card 
-          title={products[id]?.name} 
+          name={products[id]?.name} 
           price={products[id]?.price}
-          src='https://i.etsystatic.com/7211054/r/il/bdb222/3947951920/il_1140xN.3947951920_bqg3.jpg'
+          src={products[id]?.imgUrl}
           /></Link>)}
       </div>
     </div>
