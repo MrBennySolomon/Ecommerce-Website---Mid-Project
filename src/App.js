@@ -9,12 +9,13 @@ import Courses    from './MVC/View/Courses';
 import Products   from './MVC/View/Products';
 import Course     from './MVC/View/Course';
 import Product    from './MVC/View/Product';
+import ErrorPage  from './MVC/View/Error';
 
 const router = createBrowserRouter([
   {
     path: '/', 
     element: <Root/>,
-    
+    errorElement: <ErrorPage/>,
   children: [
     {path: '/',             element: <Home/>},
     {path: '/about',        element: <About/>},
