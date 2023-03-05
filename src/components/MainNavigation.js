@@ -26,6 +26,7 @@ const MainNavigation = () => {
         <div className="hamburger">
           <div></div>
         </div>
+        <Link to='/'><img src={logo} alt='logo' className='logo'/></Link>
         <div className="menu">
           <div>
             <div>
