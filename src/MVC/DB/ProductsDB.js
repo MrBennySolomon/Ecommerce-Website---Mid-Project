@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const ProductsDataBaseAPI = {
+const ProductsDB = {
   products: axios.create({
     baseURL:
       "https://products-a5ef0-default-rtdb.europe-west1.firebasedatabase.app/products", 
@@ -59,4 +59,4 @@ const ProductsDataBaseAPI = {
     },
   };
 
-  export default ProductsDataBaseAPI;
+  export default ProductsDB;

@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const CoursesDataBaseAPI = {
+const CoursesDB = {
   courses: axios.create({
     baseURL:
       "https://courses-331d7-default-rtdb.europe-west1.firebasedatabase.app/courses", 
@@ -55,4 +55,4 @@ const CoursesDataBaseAPI = {
     },
   };
 
-  export default CoursesDataBaseAPI;
+  export default CoursesDB;

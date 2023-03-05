@@ -1,8 +1,13 @@
 import { useState, createContext, useContext } from 'react';
+import Model      from '../MVC/Model';
+import Controller from '../MVC/Controller';
 
 const AppContext = createContext([]);
 
 const AppProvider = ({ children }) => {
+  const model = new Model();
+  const controller = new Controller(model);
+
   const [count, setCount] = useState(0);
   const [total, setTotal] = useState(0);
   const [arrayIds, setArrayIds] = useState([]);
@@ -27,7 +32,8 @@ const AppProvider = ({ children }) => {
         arrayIds,
         updateCount,
         updateTotal,
-        updateArrayIds
+        updateArrayIds,
+        controller
 
       }}
     >

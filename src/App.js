@@ -1,15 +1,14 @@
 import './App.css'
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
-import Home     from './pages/Home';
-import About    from './pages/About';
-import Root     from './pages/Root';
-import Login    from './pages/Login';
-import Cart     from './pages/Cart';
-import Courses  from './pages/Courses';
-import Products from './pages/Products';
-import Course   from './pages/Course';
-import Product  from './pages/Product';
-
+import Home       from './MVC/View/Home';
+import About      from './MVC/View/About';
+import Root       from './MVC/View/Root';
+import Login      from './MVC/View/Login';
+import Cart       from './MVC/View/Cart';
+import Courses    from './MVC/View/Courses';
+import Products   from './MVC/View/Products';
+import Course     from './MVC/View/Course';
+import Product    from './MVC/View/Product';
 
 const router = createBrowserRouter([
   {
@@ -29,7 +28,8 @@ const router = createBrowserRouter([
   }
 ]);
 
-const App = () => {
+const App = () => { 
+
   return (
         <RouterProvider router={router} />
   )

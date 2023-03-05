@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const UsersDataBaseAPI = {
+const UsersDB = {
   users: axios.create({
     baseURL:
       "https://users-be4a5-default-rtdb.europe-west1.firebasedatabase.app/users", 
@@ -52,4 +52,4 @@ const UsersDataBaseAPI = {
     },
   };
 
-  export default UsersDataBaseAPI;
+  export default UsersDB;

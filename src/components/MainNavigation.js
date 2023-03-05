@@ -1,20 +1,22 @@
 import { Link, useNavigate } from 'react-router-dom';
-import '../styles/MainNavigation.modules.css';
 import { useGlobalContext } from '../context/context';
-import logo from '../img/logo.jpg';
-import './css/menu.css';
-import './css/style.css';
-import {useRef} from 'react';
 
+import {useRef} from 'react';
+import constants from '../utils/constants';
+
+import '../styles/MainNavigation.modules.css';
+import logo from '../img/logo.jpg';
+import '../styles/menu.css';
+import '../styles/style.css';
 
 const MainNavigation = () => {
   const navigate = useNavigate();
   const inputRef = useRef();
-  const {count} = useGlobalContext();
-  const loggedInUser = JSON.parse(localStorage.getItem('loggedInUser'));
+  const {count, controller} = useGlobalContext();
+  const loggedInUser = controller.model.getLocal(constants.LOGGED_IN_USER);
 
   const logoutHandler = () => {
-    localStorage.removeItem('loggedInUser');
+    controller.model.removeLocal(constants.LOGGED_IN_USER);
     inputRef.current.checked = false;
     navigate('/');
   }

@@ -1,5 +1,5 @@
 import { useState } from "react";
-import '../styles/Carousel.modules.css';
+import '../../styles/Carousel.modules.css';
 const slideStyles = {
   width: "100%",
   height: "100%",
