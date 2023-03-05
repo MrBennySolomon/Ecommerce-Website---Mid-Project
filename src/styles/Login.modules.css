@@ -32,6 +32,7 @@ form {
   align-items: center;
   flex-direction: column;
   border: 2px solid rgba(84, 44, 68, 1);
+  text-align: center;
 }
 
 input[type=password],
@@ -43,6 +44,8 @@ input[type=email] {
   transition: 0.5s;
   outline: none;
   font-size: 1.5rem;
+  text-align: center;
+
 }
 
 input[type=password]:focus,
