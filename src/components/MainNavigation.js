@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import '../styles/MainNavigation.modules.css';
 import { useGlobalContext } from '../context/context';
 import logo from '../img/logo.jpg';
@@ -8,10 +8,16 @@ import {useRef} from 'react';
 
 
 const MainNavigation = () => {
-
+  const navigate = useNavigate();
   const inputRef = useRef();
   const {count} = useGlobalContext();
+  const loggedInUser = JSON.parse(localStorage.getItem('loggedInUser'));
 
+  const logoutHandler = () => {
+    localStorage.removeItem('loggedInUser');
+    inputRef.current.checked = false;
+    navigate('/');
+  }
 
   return (
     <>
@@ -30,6 +36,7 @@ const MainNavigation = () => {
                 <li onClick={() => inputRef.current.checked = false}><Link to='/courses'>Courses</Link></li>
                 <li onClick={() => inputRef.current.checked = false}><Link to='/cart'>Cart</Link></li>
                 <li onClick={() => inputRef.current.checked = false}><Link to='/about'>About</Link></li>
+                {loggedInUser && <li onClick={logoutHandler}>Logout</li>}
               </ul>
             </div>
           </div>
@@ -44,8 +51,10 @@ const MainNavigation = () => {
           <li><Link to='/courses'>Online Courses</Link></li>
           <li><Link to='/products'>Products</Link></li>
           <li><Link to='/about'>About</Link></li>
+          {loggedInUser && <li onClick={logoutHandler}>Logout</li>}
         </ul>
       </nav>
+      
     </>
   )
 }
