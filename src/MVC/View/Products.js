@@ -7,25 +7,24 @@ import { useGlobalContext } from '../../context/context';
 
 const Products = () => {
   const {controller, arrayIds, updateArrayIds} = useGlobalContext();
-  const navigate = useNavigate();
-  const nameRef = useRef();
-  const priceRef = useRef();
-  const imageRef = useRef();
-  const stockRef = useRef();
-  let products = JSON.parse(localStorage.getItem('products'));
-
-  const loggedInUser = JSON.parse(localStorage.getItem('loggedInUser'));
-  const isAdmin = (loggedInUser?.type === 'admin');
+  const navigate                               = useNavigate();
+  const nameRef                                = useRef();
+  const priceRef                               = useRef();
+  const imageRef                               = useRef();
+  const stockRef                               = useRef();
+  let products                                 = JSON.parse(localStorage.getItem('products'));
+  const loggedInUser                           = JSON.parse(localStorage.getItem('loggedInUser'));
+  const isAdmin                                = (loggedInUser?.type === 'admin');
 
   const deleteClickHandler = () => {
     controller.productsDelete(arrayIds, products, nameRef, navigate);
   }
 
-  const addClickHandler = () => {
+  const addClickHandler    = () => {
     controller.productsAdd(nameRef, priceRef, imageRef, stockRef, navigate);
   }
 
-  const editClickHandler = () => {
+  const editClickHandler   = () => {
     controller.productsEdit(arrayIds, products, nameRef, priceRef, imageRef, stockRef, navigate);
   }
 

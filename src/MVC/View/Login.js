@@ -11,11 +11,11 @@ const Login = () => {
   const emailRef              = useRef();
   const passwordRef           = useRef();
 
-  const submitHandler = (e) => {
+  const submitHandler         = (e) => {
     controller.loginSubmit(e, emailRef, passwordRef, setIsError, navigate);
   }
 
-  const resetHandler = (e) => {
+  const resetHandler          = (e) => {
     controller.resetLogin(e, emailRef, passwordRef, setIsError);
   }
 

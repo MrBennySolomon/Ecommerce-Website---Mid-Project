@@ -10,11 +10,11 @@ const Cart = () => {
   const {controller, total, updateCount, updateTotal} = useGlobalContext();
   const navigate                                      = useNavigate();
 
-  const productsCart      = controller.model.getLocal('productsCart');
-  const coursesCart       = controller.model.getLocal('coursesCart');
+  const productsCart                                  = controller.model.getLocal('productsCart');
+  const coursesCart                                   = controller.model.getLocal('coursesCart');
 
-  const plusClickHandler  = e => controller.plusClickHandler(e, updateCount, updateTotal)
-  const minusClickHandler = e => controller.minusClickHandler(e, updateCount, updateTotal);
+  const plusClickHandler                              = e => controller.plusClickHandler(e, updateCount, updateTotal)
+  const minusClickHandler                             = e => controller.minusClickHandler(e, updateCount, updateTotal);
 
   useEffect(() => {
     const loggedInUser = controller.model.getLocal(constants.LOGGED_IN_USER);

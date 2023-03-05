@@ -9,11 +9,11 @@ class Model {
     this.coursesDB  = CoursesDB;
   }
 
-  getLocal = str => {
+  getLocal    = str => {
     return JSON.parse(localStorage.getItem(str));
   }
 
-  setLocal = (key, value) => {
+  setLocal    = (key, value) => {
     localStorage.setItem(key, JSON.stringify(value));
   }
 

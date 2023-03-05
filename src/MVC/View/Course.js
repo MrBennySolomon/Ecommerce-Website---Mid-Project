@@ -13,23 +13,18 @@ import constants from '../../utils/constants';
 
 const Course = () => {
   const {controller, updateCount, updateTotal} = useGlobalContext();
-  const videoRef = useRef();
-  const params = useParams();
-  const navigate = useNavigate();
+  const videoRef                               = useRef();
+  const params                                 = useParams();
+  const navigate                               = useNavigate();
 
-  const courses = controller.model.getLocal('courses');
-  const selectedCourse = courses[params.id];
+  const courses                                = controller.model.getLocal('courses');
+  const selectedCourse                         = courses[params.id];
   
-  const loggedInUser = controller.model.getLocal(constants.LOGGED_IN_USER);
-  const isPurchased = loggedInUser?.courses?.length > 0 && loggedInUser?.courses?.find((course) => course.name === selectedCourse.name);
+  const loggedInUser                           = controller.model.getLocal(constants.LOGGED_IN_USER);
+  const isPurchased                            = loggedInUser?.courses?.length > 0 && loggedInUser?.courses?.find((course) => course.name === selectedCourse.name);
 
-  const addToCartHandler = () => {
-    if (loggedInUser) {
-      controller.addCourseToCart(updateCount, updateTotal, params);
-      navigate('/courses');
-    }else{
-      navigate('/login');
-    }
+  const addToCartHandler                       = () => {
+      controller.addCourseToCart(updateCount, updateTotal, params, loggedInUser, navigate);
   }
 
   return isPurchased ? 

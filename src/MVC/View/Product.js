@@ -6,15 +6,15 @@ import { useGlobalContext } from '../../context/context';
 
 const Product = () => {
 
-  const params = useParams();
+  const params                                 = useParams();
   const {controller, updateCount, updateTotal} = useGlobalContext();
-  const [isError, setIsError] = useState(false);
-  const navigate = useNavigate();
+  const [isError, setIsError]                  = useState(false);
+  const navigate                               = useNavigate();
 
-  const products         = controller.model.getLocal('products');
-  const selectedProduct  = products[params.id];
+  const products                               = controller.model.getLocal('products');
+  const selectedProduct                        = products[params.id];
 
-  const addToCartHandler = () => {
+  const addToCartHandler                       = () => {
     controller.addProductToCart(selectedProduct, setIsError, updateCount, updateTotal, navigate);
   }
 

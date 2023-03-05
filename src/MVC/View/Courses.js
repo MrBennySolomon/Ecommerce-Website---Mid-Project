@@ -14,19 +14,19 @@ const Courses = () => {
   const priceRef                               = useRef();
   const imageRef                               = useRef();
   
-  const loggedInUser = controller.model.getLocal(constants.LOGGED_IN_USER);
-  let courses        = controller.model.getLocal('courses');
-  const isAdmin      = (loggedInUser?.type === 'admin');
+  const loggedInUser                           = controller.model.getLocal(constants.LOGGED_IN_USER);
+  let courses                                  = controller.model.getLocal('courses');
+  const isAdmin                                = (loggedInUser?.type === 'admin');
 
-  const deleteClickHandler = () => {
+  const deleteClickHandler                     = () => {
     controller.deleteCourseFromDB(arrayIds, courses, nameRef, navigate);
   }
 
-  const addClickHandler = () => {
+  const addClickHandler                        = () => {
     controller.addCourseFromDB(nameRef, priceRef, imageRef, navigate);
   }
 
-  const editClickHandler = (arrayIds, courses, nameRef, priceRef, imageRef, navigate) => {
+  const editClickHandler                       = (arrayIds, courses, nameRef, priceRef, imageRef, navigate) => {
     controller.editCourseFromDB();
   }
 

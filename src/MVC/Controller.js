@@ -18,7 +18,7 @@ class Controller {
     this.model = model;
   }
 
-  plusClickHandler = (e, updateCountFn, updateTotalFn) => {
+  plusClickHandler   = (e, updateCountFn, updateTotalFn) => {
     
     const productsCart = this.model.getLocal('productsCart');
     const coursesCart = this.model.getLocal('coursesCart');
@@ -44,7 +44,7 @@ class Controller {
     }
   }
 
-  minusClickHandler = (e, updateCountFn, updateTotalFn) => {
+  minusClickHandler  = (e, updateCountFn, updateTotalFn) => {
 
     const productsCart = this.model.getLocal('productsCart');
     const coursesCart = this.model.getLocal('coursesCart');
@@ -90,22 +90,27 @@ class Controller {
     }
   }
 
-  addCourseToCart = (updateCountFn, updateTotalFn, params) => {
-    const courses = this.model.getLocal('courses');
-    const selectedCourse = courses[params.id];
-    this.model.setLocal('selectedCourse', selectedCourse);
-  
-    const count = Number(this.model.getLocal('cartCount')) + 1;
-    this.model.setLocal('cartCount', count);
-    updateCountFn(constants.PLUS);
+  addCourseToCart    = (updateCountFn, updateTotalFn, params, loggedInUser, navigate) => {
+    if (loggedInUser) {
+      const courses = this.model.getLocal('courses');
+      const selectedCourse = courses[params.id];
+      this.model.setLocal('selectedCourse', selectedCourse);
+    
+      const count = Number(this.model.getLocal('cartCount')) + 1;
+      this.model.setLocal('cartCount', count);
+      updateCountFn(constants.PLUS);
 
-    const total = Number(this.model.getLocal('cartTotal')) + Number(selectedCourse.price);
-    this.model.setLocal('cartTotal', total);
-    updateTotalFn(constants.PLUS, Number(selectedCourse.price));
+      const total = Number(this.model.getLocal('cartTotal')) + Number(selectedCourse.price);
+      this.model.setLocal('cartTotal', total);
+      updateTotalFn(constants.PLUS, Number(selectedCourse.price));
 
-    const coursesCart = this.model.getLocal('coursesCart');
-    coursesCart.push(selectedCourse);
-    this.model.setLocal('coursesCart', coursesCart);
+      const coursesCart = this.model.getLocal('coursesCart');
+      coursesCart.push(selectedCourse);
+      this.model.setLocal('coursesCart', coursesCart);
+      navigate('/courses');
+    }else{
+      navigate('/login');
+    }
   }
 
   deleteCourseFromDB = (arrayIds, courses, nameRef, navigate) => {
@@ -121,7 +126,7 @@ class Controller {
     }
   }
 
-  addCourseToDB = (nameRef, priceRef, imageRef, navigate) => {
+  addCourseToDB      = (nameRef, priceRef, imageRef, navigate) => {
     if(nameRef.current.value.length > 0 && priceRef.current.value.length > 0 && imageRef.current.value.length > 0) {
       this.model.CoursesDB.addCourse({
         name: nameRef.current.value,
@@ -132,7 +137,7 @@ class Controller {
     }
   }
 
-  editCourseFromDB = (arrayIds, courses, nameRef, priceRef, imageRef, navigate) => {
+  editCourseFromDB   = (arrayIds, courses, nameRef, priceRef, imageRef, navigate) => {
     if(nameRef.current.value.length > 0 && priceRef.current.value.length > 0 && imageRef.current.value.length > 0) {
       let id = 0;
       arrayIds.forEach(element => {
@@ -150,20 +155,20 @@ class Controller {
     }
   }
 
-  fetchData = async () => {
+  fetchData          = async () => {
     await this.model.usersDB.getAllUsers().then((res)       => {this.model.setLocal('users', res)});
     await this.model.productsDB.getAllProducts().then((res) => {this.model.setLocal('products', res)});
     await this.model.coursesDB.getAllCourses().then((res)   => {this.model.setLocal('courses', res)});
   }
 
-  initStorage = () => {
+  initStorage        = () => {
     this.model.setLocal('cartCount', '0');
     this.model.setLocal('cartTotal', '0');
     this.model.setLocal('productsCart',[]);
     this.model.setLocal('coursesCart',[]);
   }
 
-  getSlides = () => {
+  getSlides          = () => {
     return [
       { url: img0, title: "img" },
       { url: img1, title: "img" },
@@ -179,7 +184,7 @@ class Controller {
     ];
   }
 
-  getSlidesStyle = () => {
+  getSlidesStyle     = () => {
     return {
       width: "60%",
       height: "50vmin",
@@ -187,7 +192,7 @@ class Controller {
     };
   }
 
-  loginSubmit = (e, emailRef, passwordRef, setIsError, navigate) => {
+  loginSubmit        = (e, emailRef, passwordRef, setIsError, navigate) => {
     e.preventDefault();
 
     const users    = this.model.getLocal('users');
@@ -205,14 +210,14 @@ class Controller {
     }
   }
 
-  resetLogin = (e, emailRef, passwordRef, setIsError) => {
+  resetLogin         = (e, emailRef, passwordRef, setIsError) => {
     e.preventDefault();
     emailRef.current.value    = '';
     passwordRef.current.value = '';
     setIsError(false);
   }
   
-  addProductToCart = (selectedProduct, setIsError, updateCount, updateTotal, navigate) => {
+  addProductToCart   = (selectedProduct, setIsError, updateCount, updateTotal, navigate) => {
     const loggedInUser = this.model.getLocal('loggedInUser');
     this.model.setLocal('selectedProduct', selectedProduct);
 
@@ -244,7 +249,7 @@ class Controller {
     }
   }
 
-  productsDelete = (arrayIds, products, nameRef, navigate) => {
+  productsDelete     = (arrayIds, products, nameRef, navigate) => {
     if (nameRef.current.value.length > 0) {
       let id = 0;
       for (let i = 0; i < arrayIds.length; i++) {
@@ -258,7 +263,7 @@ class Controller {
     }
   }
 
-  productsAdd = (nameRef, priceRef, imageRef, stockRef, navigate) => {
+  productsAdd        = (nameRef, priceRef, imageRef, stockRef, navigate) => {
     if(nameRef.current.value.length > 0 && priceRef.current.value.length > 0 && imageRef.current.value.length > 0 && stockRef.current.value.length > 0) {
       this.model.ProductsDB.addProduct({
         name: nameRef.current.value,
@@ -270,7 +275,7 @@ class Controller {
     }
   }
 
-  productsEdit = (arrayIds, products, nameRef, priceRef, imageRef, stockRef, navigate) => {
+  productsEdit       = (arrayIds, products, nameRef, priceRef, imageRef, stockRef, navigate) => {
     if(nameRef.current.value.length > 0 && priceRef.current.value.length > 0 && imageRef.current.value.length > 0 && stockRef.current.value.length > 0) {  
       let id = 0;
       arrayIds.forEach(element => {
@@ -289,7 +294,7 @@ class Controller {
     }
   }
 
-  checkDB = (sellable, updateArrayIds) => {
+  checkDB            = (sellable, updateArrayIds) => {
     const keys = Object.keys(sellable);
     const newKeys = []
     for (let i = 0; i < keys.length; i++) {
