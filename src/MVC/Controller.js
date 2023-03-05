@@ -113,16 +113,14 @@ class Controller {
   }
 
   deleteCourseFromDB = (arrayIds, courses, nameRef, navigate)                                => {
-    if (nameRef.current.value.length > 0) {
-      let id = 0;
-      for (let i = 0; i < arrayIds.length; i++) {
-        if (courses[arrayIds[i]].name === nameRef.current.value) {
-          id = arrayIds[i];
-        }
+    let id = 0;
+    for (let i = 0; i < arrayIds.length; i++) {
+      if (courses[arrayIds[i]].name === nameRef.current.value) {
+        id = arrayIds[i];
       }
-      this.model.CoursesDB.removeCourse(id);
-      navigate('/');
     }
+    this.model.CoursesDB.removeCourse(id);
+    navigate('/');
   }
 
   addCourseToDB      = (nameRef, priceRef, imageRef, navigate)                               => {

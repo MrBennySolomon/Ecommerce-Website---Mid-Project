@@ -19,15 +19,21 @@ const Products = () => {
   const isAdmin                                = (loggedInUser?.type === 'admin');
 
   const deleteClickHandler = () => {
-    controller.productsDelete(arrayIds, products, nameRef, navigate);
+    if (nameRef.current.value.length > 0) {
+      controller.productsDelete(arrayIds, products, nameRef, navigate);
+    }
   }
 
   const addClickHandler    = () => {
-    controller.productsAdd(nameRef, priceRef, imageRef, stockRef, navigate);
+    if (nameRef.current.value.length  > 0 && priceRef.current.value.length > 0 && imageRef.current.value.length > 0) {
+      controller.productsAdd(nameRef, priceRef, imageRef, stockRef, navigate);
+    }
   }
 
   const editClickHandler   = () => {
-    controller.productsEdit(arrayIds, products, nameRef, priceRef, imageRef, stockRef, navigate);
+    if (nameRef.current.value.length  > 0 && priceRef.current.value.length > 0 && imageRef.current.value.length > 0) {
+      controller.productsEdit(arrayIds, products, nameRef, priceRef, imageRef, stockRef, navigate);
+    }
   }
 
   useEffect(() => {

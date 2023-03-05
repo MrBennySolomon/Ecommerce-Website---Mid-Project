@@ -19,15 +19,21 @@ const Courses = () => {
   const isAdmin                                = (loggedInUser?.type === 'admin');
 
   const deleteClickHandler                     = () => {
-    controller.deleteCourseFromDB(arrayIds, courses, nameRef, navigate);
+    if (nameRef.current.value.length > 0) {
+      controller.deleteCourseFromDB(arrayIds, courses, nameRef, navigate);
+    }
   }
 
   const addClickHandler                        = () => {
-    controller.addCourseFromDB(nameRef, priceRef, imageRef, navigate);
+    if (nameRef.current.value.length  > 0 && priceRef.current.value.length > 0 && imageRef.current.value.length > 0) {
+      controller.addCourseFromDB(nameRef, priceRef, imageRef, navigate);
+    }
   }
 
-  const editClickHandler                       = (arrayIds, courses, nameRef, priceRef, imageRef, navigate) => {
-    controller.editCourseFromDB();
+  const editClickHandler                       = () => {
+    if (nameRef.current.value.length  > 0 && priceRef.current.value.length > 0 && imageRef.current.value.length > 0) {
+      controller.editCourseFromDB(arrayIds, courses, nameRef, priceRef, imageRef, navigate);
+    }
   }
 
   useEffect(() => {
