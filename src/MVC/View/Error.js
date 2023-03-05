@@ -1,7 +1,7 @@
-import MainNavigation from '../../components/MainNavigation';
-import Footer from '../../components/Footer';
 import '../../styles/Error.modules.css';
-import {Link} from 'react-router-dom';
+import MainNavigation from '../../components/MainNavigation';
+import Footer         from '../../components/Footer';
+import {Link}         from 'react-router-dom';
 
 const ErrorPage = () => {
   return (

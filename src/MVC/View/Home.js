@@ -1,7 +1,7 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import '../../styles/Home.modules.css';
-import ImageSlider from "./ImageSlider";
-import React, {useEffect} from 'react';
+import ImageSlider          from "./ImageSlider";
+import React, {useEffect}   from 'react';
 import { useGlobalContext } from '../../context/context';
 
 const Home = () => {

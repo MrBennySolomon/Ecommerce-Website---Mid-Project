@@ -5,11 +5,10 @@ import vid from '../../mp4/vid.mp4';
 import vid2 from '../../mp4/vid2.mp4';
 import vid3 from '../../mp4/vid3.mp4';
 import '../../styles/Course.modules.css';
-import React, {useRef} from 'react';
+import React, {useRef}            from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
-import { useGlobalContext } from '../../context/context';
-
-import constants from '../../utils/constants';
+import { useGlobalContext }       from '../../context/context';
+import constants                  from '../../utils/constants';
 
 const Course = () => {
   const {controller, updateCount, updateTotal} = useGlobalContext();

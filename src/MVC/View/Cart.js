@@ -1,9 +1,9 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import '../../styles/Cart.modules.css';
-import React, {useEffect} from 'react';
-import { useNavigate } from 'react-router-dom';
+import React, {useEffect}   from 'react';
+import { useNavigate }      from 'react-router-dom';
 import { useGlobalContext } from '../../context/context';
-import constants from '../../utils/constants';
+import constants            from '../../utils/constants';
 
 
 const Cart = () => {
@@ -16,7 +16,7 @@ const Cart = () => {
   const plusClickHandler                              = e => controller.plusClickHandler(e, updateCount, updateTotal)
   const minusClickHandler                             = e => controller.minusClickHandler(e, updateCount, updateTotal);
 
-  useEffect(() => {
+  useEffect(()                                            => {
     const loggedInUser = controller.model.getLocal(constants.LOGGED_IN_USER);
     if (!loggedInUser) navigate('/login')
   }, [navigate]);

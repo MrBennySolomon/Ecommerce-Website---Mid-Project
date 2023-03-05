@@ -1,17 +1,19 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import '../../styles/Products.modules.css';
 import React, {useEffect, useRef} from 'react';
-import Card from '../../components/Card';
-import {Link, useNavigate} from 'react-router-dom';
-import { useGlobalContext } from '../../context/context';
+import Card                       from '../../components/Card';
+import {Link, useNavigate}        from 'react-router-dom';
+import { useGlobalContext }       from '../../context/context';
 
 const Products = () => {
   const {controller, arrayIds, updateArrayIds} = useGlobalContext();
   const navigate                               = useNavigate();
+  
   const nameRef                                = useRef();
   const priceRef                               = useRef();
   const imageRef                               = useRef();
   const stockRef                               = useRef();
+
   let products                                 = JSON.parse(localStorage.getItem('products'));
   const loggedInUser                           = JSON.parse(localStorage.getItem('loggedInUser'));
   const isAdmin                                = (loggedInUser?.type === 'admin');

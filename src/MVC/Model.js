@@ -9,7 +9,7 @@ class Model {
     this.coursesDB  = CoursesDB;
   }
 
-  getLocal    = str => {
+  getLocal    = str          => {
     return JSON.parse(localStorage.getItem(str));
   }
 
@@ -17,7 +17,7 @@ class Model {
     localStorage.setItem(key, JSON.stringify(value));
   }
 
-  removeLocal = key => {
+  removeLocal = key          => {
     localStorage.removeItem(key);
   }
 }

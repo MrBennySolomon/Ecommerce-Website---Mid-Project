@@ -1,6 +1,7 @@
 import { useState, createContext, useContext } from 'react';
 import Model      from '../MVC/Model';
 import Controller from '../MVC/Controller';
+import constants from '../utils/constants';
 
 const AppContext = createContext([]);
 
@@ -8,19 +9,20 @@ const AppProvider = ({ children }) => {
   const model = new Model();
   const controller = new Controller(model);
 
-  const [count, setCount] = useState(0);
-  const [total, setTotal] = useState(0);
+  const [isError, setIsError]   = useState(false);
+  const [count, setCount]       = useState(0);
+  const [total, setTotal]       = useState(0);
   const [arrayIds, setArrayIds] = useState([]);
 
-  const updateCount = (operation) => {
-    operation === '+' ? setCount(count + 1) : setCount(count - 1);
+  const updateCount          = (operation)      => {
+    operation === constants.PLUS ? setCount(count + 1) : setCount(count - 1);
   }
 
-  const updateTotal = (operation, num) => {
-    operation === '+' ? setTotal(total + num) : setTotal(total - num);
+  const updateTotal          = (operation, num) => {
+    operation === constants.PLUS ? setTotal(total + num) : setTotal(total - num);
   }
 
-  const updateArrayIds = (arr) => {
+  const updateArrayIds       = (arr)            => {
     setArrayIds(arr)
   }
 
@@ -33,8 +35,9 @@ const AppProvider = ({ children }) => {
         updateCount,
         updateTotal,
         updateArrayIds,
-        controller
-
+        controller,
+        isError,
+        setIsError
       }}
     >
       {children}
@@ -42,7 +45,7 @@ const AppProvider = ({ children }) => {
   );
 };
 
-export const useGlobalContext = () => {
+export const useGlobalContext = ()              => {
   return useContext(AppContext);
 };
 

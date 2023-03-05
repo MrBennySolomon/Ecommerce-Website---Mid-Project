@@ -1,20 +1,19 @@
 /* eslint-disable jsx-a11y/alt-text */
 import '../../styles/Product.modules.css';
-import React, { useState } from 'react';
+import React                      from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
-import { useGlobalContext } from '../../context/context';
+import { useGlobalContext }       from '../../context/context';
 
 const Product = () => {
 
-  const params                                 = useParams();
-  const {controller, updateCount, updateTotal} = useGlobalContext();
-  const [isError, setIsError]                  = useState(false);
-  const navigate                               = useNavigate();
+  const params                                                     = useParams();
+  const {controller, updateCount, updateTotal,isError, setIsError} = useGlobalContext();
+  const navigate                                                   = useNavigate();
 
-  const products                               = controller.model.getLocal('products');
-  const selectedProduct                        = products[params.id];
+  const products                                                   = controller.model.getLocal('products');
+  const selectedProduct                                            = products[params.id];
 
-  const addToCartHandler                       = () => {
+  const addToCartHandler                                           = () => {
     controller.addProductToCart(selectedProduct, setIsError, updateCount, updateTotal, navigate);
   }
 
