@@ -285,7 +285,15 @@ class Controller {
         selectedProduct.cartCount = Number(selectedProduct.cartCount) + 1;
 
         const productsCart = this.model.getLocal('productsCart');
-        productsCart.push(selectedProduct);
+        if (productsCart.find((item) => item.name === selectedProduct.name)) {
+          for (let i = 0; i < productsCart.length; i++) {
+            if (productsCart[i].name === selectedProduct.name) {
+              productsCart[i].cartCount = Number(productsCart[i].cartCount) + 1;
+            }
+          }
+        }else{
+          productsCart.push(selectedProduct);
+        }
         this.model.setLocal('productsCart', productsCart);
       }
       navigate('/products');
