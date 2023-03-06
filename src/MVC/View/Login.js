@@ -1,37 +1,44 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import '../../styles/Login.modules.css';
-import React, { useRef }           from 'react';
-import { useNavigate }             from 'react-router-dom';
-import { useGlobalContext }        from '../../context/context';
+import "../../styles/Login.modules.css";
+import React, { useRef } from "react";
+import { useNavigate } from "react-router-dom";
+import { useGlobalContext } from "../../context/context";
 
 const Login = () => {
-  const {controller, isError, setIsError} = useGlobalContext();
-  const navigate                          = useNavigate();
-  const emailRef                          = useRef();
-  const passwordRef                       = useRef();
+  const { controller, isError, setIsError } = useGlobalContext();
+  const navigate = useNavigate();
+  const emailRef = useRef();
+  const passwordRef = useRef();
 
-  const submitHandler         = (e) => {
+  const submitHandler = (e) => {
     controller.loginSubmit(e, emailRef, passwordRef, setIsError, navigate);
-  }
+  };
 
-  const resetHandler          = (e) => {
+  const resetHandler = (e) => {
     controller.resetLogin(e, emailRef, passwordRef, setIsError);
-  }
+  };
 
   return (
-    <div className='login'>
+    <div className="login">
       <h1>Login Form</h1>
-      <div className='form-container'>
+      <div className="form-container">
         <form>
-          <input ref={emailRef} type='email' placeholder='Email' required/>
-          <input ref={passwordRef} type='password' placeholder='Password' required/>
+          <input ref={emailRef} type="email" placeholder="Email" required />
+          <input
+            ref={passwordRef}
+            type="password"
+            placeholder="Password"
+            required
+          />
           <button onClick={submitHandler}>login</button>
           <button onClick={resetHandler}>reset</button>
-          {isError && <h3 className='error-login'>oops... wrong email or password</h3>}
+          {isError && (
+            <h3 className="error-login">oops... wrong email or password</h3>
+          )}
         </form>
       </div>
     </div>
-  )
-}
+  );
+};
 
 export default Login;

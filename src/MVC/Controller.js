@@ -185,29 +185,54 @@ class Controller {
     }
   };
 
-  deleteCourseFromDB = (arrayIds, courses, nameRef, navigate) => {
+  deleteCourseFromDB = (
+    arrayIds,
+    courses,
+    nameRef,
+    navigate,
+    updateArrayIds,
+    setIsLoading
+  ) => {
     let id = 0;
     for (let i = 0; i < arrayIds.length; i++) {
       if (courses[arrayIds[i]].name === nameRef.current.value) {
         id = arrayIds[i];
       }
     }
-    this.model.CoursesDB.removeCourse(id);
-    navigate("/");
+    setIsLoading(true);
+    this.model.coursesDB.removeCourse(id).then((res) => {
+      this.fetchData().then((res) => {
+        this.checkDB(this.model.getLocal("courses"), updateArrayIds);
+        setIsLoading(false);
+      });
+    });
   };
 
-  addCourseToDB = (nameRef, priceRef, imageRef, navigate) => {
+  addCourseToDB = (
+    nameRef,
+    priceRef,
+    imageRef,
+    navigate,
+    updateArrayIds,
+    setIsLoading
+  ) => {
     if (
       nameRef.current.value.length > 0 &&
       priceRef.current.value.length > 0 &&
       imageRef.current.value.length > 0
     ) {
-      this.model.CoursesDB.addCourse({
-        name: nameRef.current.value,
-        price: priceRef.current.value,
-        imgUrl: imageRef.current.value
-      });
-      navigate("/");
+      this.model.coursesDB
+        .addCourse({
+          name: nameRef.current.value,
+          price: priceRef.current.value,
+          imgUrl: imageRef.current.value
+        })
+        .then((res) => {
+          this.fetchData().then((res) => {
+            this.checkDB(this.model.getLocal("courses"), updateArrayIds);
+            setIsLoading(false);
+          });
+        });
     }
   };
 
@@ -217,7 +242,9 @@ class Controller {
     nameRef,
     priceRef,
     imageRef,
-    navigate
+    navigate,
+    updateArrayIds,
+    setIsLoading
   ) => {
     if (
       nameRef.current.value.length > 0 &&
@@ -230,16 +257,22 @@ class Controller {
           id = element;
         }
       });
-
-      this.CoursesDB.editCourse(
-        {
-          name: nameRef.current.value,
-          price: priceRef.current.value,
-          imgUrl: imageRef.current.value
-        },
-        id
-      );
-      navigate("/");
+      setIsLoading(true);
+      this.model.coursesDB
+        .editCourse(
+          {
+            name: nameRef.current.value,
+            price: priceRef.current.value,
+            imgUrl: imageRef.current.value
+          },
+          id
+        )
+        .then((res) => {
+          this.fetchData().then((res) => {
+            this.checkDB(this.model.getLocal("courses"), updateArrayIds);
+            setIsLoading(false);
+          });
+        });
     }
   };
 
@@ -462,7 +495,13 @@ class Controller {
     }
   };
 
-  checkDB = (sellable, updateArrayIds) => {
+  checkDB = (
+    sellable,
+    updateArrayIds,
+    loggedInUser,
+    setIsLoading,
+    navigate
+  ) => {
     const newKeys = [];
     if (sellable) {
       const keys = Object.keys(sellable);

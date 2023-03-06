@@ -3,6 +3,7 @@ import '../../styles/Product.modules.css';
 import React                      from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { useGlobalContext }       from '../../context/context';
+import constants from '../../utils/constants';
 
 const Product = () => {
 
@@ -10,7 +11,7 @@ const Product = () => {
   const {controller, updateCount, updateTotal,isError, setIsError} = useGlobalContext();
   const navigate                                                   = useNavigate();
 
-  const products                                                   = controller.model.getLocal('products');
+  const products                                                   = controller.model.getLocal(constants.PRODUCTS);
   const selectedProduct                                            = products[params.id];
 
   const addToCartHandler                                           = () => {

@@ -1,25 +1,25 @@
-import UsersDB    from './DB/UsersDB';
-import ProductsDB from './DB/ProductsDB';
-import CoursesDB  from './DB/CoursesDB';
+import UsersDB from "./DB/UsersDB";
+import ProductsDB from "./DB/ProductsDB";
+import CoursesDB from "./DB/CoursesDB";
 
 class Model {
   constructor() {
-    this.usersDB    = UsersDB;
+    this.usersDB = UsersDB;
     this.productsDB = ProductsDB;
-    this.coursesDB  = CoursesDB;
+    this.coursesDB = CoursesDB;
   }
 
-  getLocal    = str          => {
+  getLocal = (str) => {
     return JSON.parse(localStorage.getItem(str));
-  }
+  };
 
-  setLocal    = (key, value) => {
+  setLocal = (key, value) => {
     localStorage.setItem(key, JSON.stringify(value));
-  }
+  };
 
-  removeLocal = key          => {
+  removeLocal = (key) => {
     localStorage.removeItem(key);
-  }
+  };
 }
 
 export default Model;
