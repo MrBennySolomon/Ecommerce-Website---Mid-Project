@@ -35,12 +35,47 @@ class Controller {
 
     if (selectedProduct) {
       selectedProduct.stock = selectedProduct.stock - 1;
-      productsCart.push(selectedProduct);
+      for (let i = 0; i < productsCart.length; i++) {
+        if (productsCart[i].name === selectedProduct.name) {
+          productsCart[i].cartCount = Number(productsCart[i].cartCount) + 1;
+        }
+      }
       this.model.setLocal('productsCart', productsCart);
     }else{
       coursesCart.push(selectedCourse);
       this.model.setLocal('coursesCart', coursesCart);
     }
+
+  }
+
+  updateCourseCartCount = (courses, selectedCourse) => {
+    const updatedArr = [];
+      
+      for (let i = 0; i < courses.length; i++) {
+        if (courses[i].name === selectedCourse.name) {
+          const tempCourse = courses[i];
+          tempCourse.cartCount = Number(tempCourse.cartCount) + 1;
+          updatedArr.push(tempCourse);
+        }else{
+          updatedArr.push(courses[i]);
+        }
+      }
+      this.model.setLocal('coursesCart', updatedArr);
+  }
+
+  updateProductCartCount(products, selectedProduct) {
+    const updatedArr = [];
+      
+      for (let i = 0; i < products.length; i++) {
+        if (products[i].name === selectedProduct.name) {
+          const tempCourse = products[i];
+          tempCourse.cartCount = Number(tempCourse.cartCount) + 1;
+          updatedArr.push(tempCourse);
+        }else{
+          updatedArr.push(products[i]);
+        }
+      }
+      this.model.setLocal('productsCart', updatedArr);
   }
 
   minusClickHandler  = (e, updateCountFn, updateTotalFn)                                     => {
@@ -76,16 +111,26 @@ class Controller {
     }
 
     if (selectedProduct) {
-      let flag = true;
-      const newArr = [];
-      for (let i = 0; i < productsCart.length; i++) {
-        if (flag && (productsCart[i].name === selectedProduct.name)) {
-          flag = false;
-        }else{
-          newArr.push(productsCart[i]);
+      if (Number(selectedProduct.cartCount) === 1) {
+        let flag = true;
+        const newArr = [];
+        for (let i = 0; i < productsCart.length; i++) {
+          if (flag && (productsCart[i].name === selectedProduct.name)) {
+            flag = false;
+          }else{
+            newArr.push(productsCart[i]);
+          }
         }
+        this.model.setLocal('productsCart', newArr);
+      }else{
+        for (let i = 0; i < productsCart.length; i++) {
+          if (productsCart[i].name === selectedProduct.name) {
+            productsCart[i].cartCount = Number(productsCart[i].cartCount) - 1;
+          }
+        }
+        this.model.setLocal('productsCart', productsCart);
       }
-      this.model.setLocal('productsCart', newArr);
+      
     }
   }
 
@@ -163,6 +208,8 @@ class Controller {
     this.model.setLocal('cartTotal', '0');
     this.model.setLocal('productsCart',[]);
     this.model.setLocal('coursesCart',[]);
+    this.model.setLocal('productsCartCount',[]);
+    this.model.setLocal('coursesCartCount',[]);
   }
 
   getSlides          = ()                                                                    => {
@@ -228,13 +275,14 @@ class Controller {
 
         const count = Number(this.model.getLocal('cartCount')) + 1;
         this.model.setLocal('cartCount', count);
-        updateCount('+');
+        updateCount(constants.PLUS);
 
         const total = Number(this.model.getLocal('cartTotal')) + Number(selectedProduct.price);
         this.model.setLocal('cartTotal', total);
-        updateTotal('+', Number(selectedProduct.price));
+        updateTotal(constants.PLUS, Number(selectedProduct.price));
 
         selectedProduct.stock = selectedProduct.stock - 1;
+        selectedProduct.cartCount = Number(selectedProduct.cartCount) + 1;
 
         const productsCart = this.model.getLocal('productsCart');
         productsCart.push(selectedProduct);
