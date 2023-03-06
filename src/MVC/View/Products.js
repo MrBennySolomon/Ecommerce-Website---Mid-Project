@@ -6,7 +6,7 @@ import {Link, useNavigate}        from 'react-router-dom';
 import { useGlobalContext }       from '../../context/context';
 
 const Products = () => {
-  const {controller, arrayIds, updateArrayIds} = useGlobalContext();
+  const {controller, arrayIds, updateArrayIds, isLoading, setIsLoading} = useGlobalContext();
   const navigate                               = useNavigate();
   
   const nameRef                                = useRef();
@@ -20,24 +20,25 @@ const Products = () => {
 
   const deleteClickHandler = () => {
     if (nameRef.current.value.length > 0) {
-      controller.productsDelete(arrayIds, products, nameRef, navigate);
+      controller.productsDelete(arrayIds, products, nameRef, navigate, updateArrayIds, setIsLoading);
     }
   }
 
   const addClickHandler    = () => {
     if (nameRef.current.value.length  > 0 && priceRef.current.value.length > 0 && imageRef.current.value.length > 0) {
-      controller.productsAdd(nameRef, priceRef, imageRef, stockRef, navigate);
+      controller.productsAdd(nameRef, priceRef, imageRef, stockRef, navigate, updateArrayIds, setIsLoading);
     }
   }
 
   const editClickHandler   = () => {
     if (nameRef.current.value.length  > 0 && priceRef.current.value.length > 0 && imageRef.current.value.length > 0) {
-      controller.productsEdit(arrayIds, products, nameRef, priceRef, imageRef, stockRef, navigate);
+      controller.productsEdit(arrayIds, products, nameRef, priceRef, imageRef, stockRef, navigate, updateArrayIds, setIsLoading);
     }
   }
 
   useEffect(() => {
     controller.checkDB(products, updateArrayIds);
+    setIsLoading(false);
   }, []);
   
   return (
@@ -46,7 +47,8 @@ const Products = () => {
       {isAdmin && <div className='admin-container'><input ref={nameRef} type='text' width='100%' placeholder='Product Name'/><input ref={priceRef} type='text' width='100%' placeholder='Product Price'/><input ref={imageRef} type='text' width='100%' placeholder='Product Image Url'/><input ref={stockRef} type='text' width='100%' placeholder='Stock'/><button onClick={deleteClickHandler} className='btn-delete-admin'>DELETE</button><button onClick={addClickHandler} className='btn-add-admin'>ADD</button><button onClick={editClickHandler} className='btn-edit-admin'>EDIT</button></div>}
       <h1>Products</h1>
       <div className='products-container'>
-      {products && arrayIds.map((id) => <Link key={id} to={`/products/${id}`}><Card 
+      {isLoading && <div className="lds-default"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div>}
+      {!isLoading && products && arrayIds.map((id) => <Link key={id} to={`/products/${id}`}><Card 
           name={products[id]?.name} 
           price={products[id]?.price}
           src={products[id]?.imgUrl}

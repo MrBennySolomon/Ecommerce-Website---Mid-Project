@@ -20,7 +20,7 @@ const Courses = () => {
 
   const deleteClickHandler                     = () => {
     if (nameRef.current.value.length > 0) {
-      controller.deleteCourseFromDB(arrayIds, courses, nameRef, navigate);
+      controller.deleteCourseFromDB(arrayIds, courses, nameRef, navigate, updateArrayIds);
     }
   }
 

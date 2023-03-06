@@ -10,6 +10,8 @@ const AppProvider = ({ children }) => {
   const controller = new Controller(model);
 
   const [isError, setIsError]   = useState(false);
+  const [isLoading, setIsLoading]   = useState(true);
+
   const [count, setCount]       = useState(0);
   const [total, setTotal]       = useState(0);
   const [arrayIds, setArrayIds] = useState([]);
@@ -37,7 +39,9 @@ const AppProvider = ({ children }) => {
         updateArrayIds,
         controller,
         isError,
-        setIsError
+        setIsError,
+        isLoading,
+        setIsLoading
       }}
     >
       {children}
