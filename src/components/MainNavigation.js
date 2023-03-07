@@ -40,6 +40,7 @@ const MainNavigation = () => {
                 <li onClick={() => inputRef.current.checked = false}><Link to='/cart'>Cart</Link></li>
                 <li onClick={() => inputRef.current.checked = false}><Link to='/about'>About</Link></li>
                 <li onClick={() => inputRef.current.checked = false}><Link to='/live'>Go Live</Link></li>
+                <li onClick={() => inputRef.current.checked = false}><Link to='/coupons'>Coupons</Link></li>
                 
                 {loggedInUser && <li onClick={logoutHandler}>Logout</li>}
               </ul>
@@ -57,6 +58,7 @@ const MainNavigation = () => {
           <li><Link to='/products'>Products</Link></li>
           <li><Link to='/about'>About</Link></li>
           <li><Link to='/live'>Go Live</Link></li>
+          <li><Link to='/coupons'>Coupons</Link></li>
           {loggedInUser && <li onClick={logoutHandler}>Logout</li>}
         </ul>
       </nav>
