@@ -56,6 +56,7 @@ const MainNavigation = () => {
           <li><Link to='/courses'>Online Courses</Link></li>
           <li><Link to='/products'>Products</Link></li>
           <li><Link to='/about'>About</Link></li>
+          <li><Link to='/live'>Go Live</Link></li>
           {loggedInUser && <li onClick={logoutHandler}>Logout</li>}
         </ul>
       </nav>
