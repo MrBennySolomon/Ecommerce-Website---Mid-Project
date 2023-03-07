@@ -39,6 +39,8 @@ const MainNavigation = () => {
                 <li onClick={() => inputRef.current.checked = false}><Link to='/courses'>Courses</Link></li>
                 <li onClick={() => inputRef.current.checked = false}><Link to='/cart'>Cart</Link></li>
                 <li onClick={() => inputRef.current.checked = false}><Link to='/about'>About</Link></li>
+                <li onClick={() => inputRef.current.checked = false}><Link to='/live'>Go Live</Link></li>
+                
                 {loggedInUser && <li onClick={logoutHandler}>Logout</li>}
               </ul>
             </div>

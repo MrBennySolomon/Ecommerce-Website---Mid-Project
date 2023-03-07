@@ -10,6 +10,7 @@ import Products   from './MVC/View/Products';
 import Course     from './MVC/View/Course';
 import Product    from './MVC/View/Product';
 import ErrorPage  from './MVC/View/Error';
+import Live       from './MVC/View/Live';
 
 const router = createBrowserRouter([
   {
@@ -23,8 +24,9 @@ const router = createBrowserRouter([
     {path: '/cart',         element: <Cart/>},
     {path: '/courses',      element: <Courses/>},
     {path: '/products',     element: <Products/>},
+    {path: '/live',         element: <Live/>},
     {path: '/products/:id', element: <Product/>},
-    {path: '/courses/:id',  element: <Course/>},
+    {path: '/courses/:id',  element: <Course/>}
   ]
   }
 ]);
