@@ -53,8 +53,7 @@ div.course {
   justify-content: center;
   align-items: center;
 
-  width: 40%;
-  height: 80%;
+  height: 80vmin;
   background: url(../img/digital-course.jpg) no-repeat center center/contain;
 }
 
