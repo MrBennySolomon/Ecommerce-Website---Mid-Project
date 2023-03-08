@@ -1,4 +1,4 @@
-import './App.css'
+import './App.css';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import Home       from './MVC/View/Home';
 import About      from './MVC/View/About';
@@ -11,7 +11,7 @@ import Course     from './MVC/View/Course';
 import Product    from './MVC/View/Product';
 import ErrorPage  from './MVC/View/Error';
 import Live       from './MVC/View/Live';
-import Coupons       from './MVC/View/Coupons';
+import Coupons    from './MVC/View/Coupons';
 
 const router = createBrowserRouter([
   {

@@ -216,6 +216,7 @@ class Controller {
     nameRef,
     priceRef,
     imageRef,
+    videoRef,
     navigate,
     updateArrayIds,
     setIsLoading
@@ -223,13 +224,21 @@ class Controller {
     if (
       nameRef.current.value.length > 0 &&
       priceRef.current.value.length > 0 &&
-      imageRef.current.value.length > 0
+      imageRef.current.value.length > 0 &&
+      videoRef.current.value.length > 0
     ) {
+      const videos = videoRef.current.value.split(',');
+      const newVideos = [];
+      videos.forEach((item, i) => {
+        newVideos.push({name: i + 1, url: item});
+      });
       this.model.coursesDB
         .addCourse({
+          cartCount: 1,
+          imgUrl: imageRef.current.value,
           name: nameRef.current.value,
           price: priceRef.current.value,
-          imgUrl: imageRef.current.value
+          videos: newVideos
         })
         .then((res) => {
           this.fetchData(setIsLoading).then((res) => {
@@ -250,6 +259,7 @@ class Controller {
     nameRef,
     priceRef,
     imageRef,
+    videoRef,
     navigate,
     updateArrayIds,
     setIsLoading
@@ -257,8 +267,14 @@ class Controller {
     if (
       nameRef.current.value.length > 0 &&
       priceRef.current.value.length > 0 &&
-      imageRef.current.value.length > 0
+      imageRef.current.value.length > 0 &&
+      videoRef.current.value.length > 0
     ) {
+      const videos = videoRef.current.value.split(',');
+      const newVideos = [];
+      videos.forEach((item, i) => {
+        newVideos.push({name: i + 1, url: item});
+      });
       let id = 0;
       arrayIds.forEach((element) => {
         if (courses[element].name === nameRef.current.value) {
@@ -269,9 +285,11 @@ class Controller {
       this.model.coursesDB
         .editCourse(
           {
+            cartCount: 1,
+            imgUrl: imageRef.current.value,
             name: nameRef.current.value,
             price: priceRef.current.value,
-            imgUrl: imageRef.current.value
+            videos: newVideos
           },
           id
         )

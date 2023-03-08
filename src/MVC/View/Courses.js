@@ -13,6 +13,7 @@ const Courses = () => {
   const nameRef = useRef();
   const priceRef = useRef();
   const imageRef = useRef();
+  const videoRef = useRef();
 
   const loggedInUser = controller.model.getLocal(constants.LOGGED_IN_USER);
   let courses = controller.model.getLocal(constants.COURSES);
@@ -33,41 +34,31 @@ const Courses = () => {
   };
 
   const addClickHandler = () => {
-    if (
-      nameRef.current.value.length > 0 &&
-      priceRef.current.value.length > 0 &&
-      imageRef.current.value.length > 0
-    ) {
-      controller.addCourseToDB(
-        nameRef,
-        priceRef,
-        imageRef,
-        navigate,
-        updateArrayIds,
-        setIsLoading
-      );
-      resetInputFields();
-    }
+    controller.addCourseToDB(
+      nameRef,
+      priceRef,
+      imageRef,
+      videoRef,
+      navigate,
+      updateArrayIds,
+      setIsLoading
+    );
+    resetInputFields();
   };
 
   const editClickHandler = () => {
-    if (
-      nameRef.current.value.length > 0 &&
-      priceRef.current.value.length > 0 &&
-      imageRef.current.value.length > 0
-    ) {
-      controller.editCourseFromDB(
-        arrayIds,
-        courses,
-        nameRef,
-        priceRef,
-        imageRef,
-        navigate,
-        updateArrayIds,
-        setIsLoading
-      );
-      resetInputFields();
-    }
+    controller.editCourseFromDB(
+      arrayIds,
+      courses,
+      nameRef,
+      priceRef,
+      imageRef,
+      videoRef,
+      navigate,
+      updateArrayIds,
+      setIsLoading
+    );
+    resetInputFields();
   };
 
   const resetInputFields = () => {
@@ -109,6 +100,12 @@ const Courses = () => {
             type="text"
             width="100%"
             placeholder="Product Image Url"
+          />
+          <input
+            ref={videoRef}
+            type="text"
+            width="100%"
+            placeholder={`Video seperate with ','`}
           />
           <button onClick={deleteClickHandler} className="btn-delete-admin">
             DELETE
