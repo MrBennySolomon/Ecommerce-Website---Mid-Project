@@ -65,6 +65,7 @@ const Courses = () => {
     nameRef.current.value = '';
     priceRef.current.value = '';
     imageRef.current.value = '';
+    videoRef.current.value = '';
   };
 
   useEffect(() => {
