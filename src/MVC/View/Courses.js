@@ -28,6 +28,7 @@ const Courses = () => {
         updateArrayIds,
         setIsLoading
       );
+      resetInputFields();
     }
   };
 
@@ -45,6 +46,7 @@ const Courses = () => {
         updateArrayIds,
         setIsLoading
       );
+      resetInputFields();
     }
   };
 
@@ -64,7 +66,14 @@ const Courses = () => {
         updateArrayIds,
         setIsLoading
       );
+      resetInputFields();
     }
+  };
+
+  const resetInputFields = () => {
+    nameRef.current.value = '';
+    priceRef.current.value = '';
+    imageRef.current.value = '';
   };
 
   useEffect(() => {

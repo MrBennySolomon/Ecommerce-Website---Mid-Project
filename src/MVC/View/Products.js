@@ -30,6 +30,7 @@ const Products = () => {
         updateArrayIds,
         setIsLoading
       );
+      resetInputFields();
     }
   };
 
@@ -48,6 +49,7 @@ const Products = () => {
         updateArrayIds,
         setIsLoading
       );
+      resetInputFields();
     }
   };
 
@@ -68,7 +70,15 @@ const Products = () => {
         updateArrayIds,
         setIsLoading
       );
+      resetInputFields();
     }
+  };
+
+  const resetInputFields = () => {
+    nameRef.current.value = '';
+    priceRef.current.value = '';
+    imageRef.current.value = '';
+    stockRef.current.value = '';
   };
 
   // const adminDeleteHandler = (id, setIsLoading, updateArrayIds) => {
