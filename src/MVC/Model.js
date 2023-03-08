@@ -1,6 +1,7 @@
 import UsersDB from "./DB/UsersDB";
 import ProductsDB from "./DB/ProductsDB";
 import CoursesDB from "./DB/CoursesDB";
+import  secureLocalStorage  from  "react-secure-storage";
 
 class Model {
   constructor() {
@@ -10,15 +11,15 @@ class Model {
   }
 
   getLocal = (str) => {
-    return JSON.parse(localStorage.getItem(str));
+    return JSON.parse(secureLocalStorage.getItem(str));
   };
 
   setLocal = (key, value) => {
-    localStorage.setItem(key, JSON.stringify(value));
+    secureLocalStorage.setItem(key, JSON.stringify(value));
   };
 
   removeLocal = (key) => {
-    localStorage.removeItem(key);
+    secureLocalStorage.removeItem(key);
   };
 }
 
