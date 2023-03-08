@@ -6,6 +6,7 @@ div.courses {
   display: flex;
   justify-content: center;
   align-items: center;
+  flex-wrap: wrap;
   flex-direction: column;
   gap: 1rem;
 }
@@ -16,6 +17,7 @@ div.courses {
   align-items: center;
   flex-wrap: wrap;
   gap: 1rem;
+  height: 20vh;;
 }
 
 .admin-container input{
@@ -56,6 +58,13 @@ input[type=text]:focus {
   border-radius: 50%;
   animation: lds-default 1.2s linear infinite;
 }
+
+@media (max-width:600px) {
+  div.courses {
+    overflow-y: scroll;
+  }
+}
+
 .lds-default div:nth-child(1) {
   animation-delay: 0s;
   top: 37px;
