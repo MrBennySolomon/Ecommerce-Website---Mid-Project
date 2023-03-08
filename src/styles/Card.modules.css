@@ -49,14 +49,12 @@ p.price {
 
 @media (max-width:600px) {
   .card {
-    width: 20vw;
     font-size: 110%;
   }
 }
 
 @media (min-width:601px) {
   .card {
-    width: 10vw;
     font-size: 130%;
   }
 }
