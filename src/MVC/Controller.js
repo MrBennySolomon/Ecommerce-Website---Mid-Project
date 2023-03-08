@@ -201,11 +201,15 @@ class Controller {
     }
     setIsLoading(true);
     this.model.coursesDB.removeCourse(id).then((res) => {
-      this.fetchData().then((res) => {
+      this.fetchData(setIsLoading).then((res) => {
         this.checkDB(this.model.getLocal("courses"), updateArrayIds);
         setIsLoading(false);
       });
-    });
+    }).catch((err) => {
+      setIsLoading(false);
+      console.log('deleting course from DB failed');
+      throw new Error('deleting course from DB failed');
+    })
   };
 
   addCourseToDB = (
@@ -228,11 +232,15 @@ class Controller {
           imgUrl: imageRef.current.value
         })
         .then((res) => {
-          this.fetchData().then((res) => {
+          this.fetchData(setIsLoading).then((res) => {
             this.checkDB(this.model.getLocal("courses"), updateArrayIds);
             setIsLoading(false);
           });
-        });
+        }).catch((err) => {
+          setIsLoading(false);
+          console.log('adding course to DB failed');
+          throw new Error('adding course to DB failed');
+        })
     }
   };
 
@@ -268,24 +276,44 @@ class Controller {
           id
         )
         .then((res) => {
-          this.fetchData().then((res) => {
+          this.fetchData(setIsLoading).then((res) => {
             this.checkDB(this.model.getLocal("courses"), updateArrayIds);
             setIsLoading(false);
           });
-        });
+        }).catch((err) => {
+          setIsLoading(false);
+          console.log('editing course from DB failed');
+          throw new Error('editing course from DB failed');
+        })
     }
   };
 
-  fetchData = async () => {
+  fetchData = async (setIsLoading) => {
+    setIsLoading(true);
     await this.model.usersDB.getAllUsers().then((res) => {
       this.model.setLocal("users", res);
-    });
+      setIsLoading(false);
+    }).catch((err) => {
+      setIsLoading(false);
+      console.log('getAllUsers from DB failed');
+      throw new Error('getAllUsers from DB failed');
+    })
     await this.model.productsDB.getAllProducts().then((res) => {
       this.model.setLocal("products", res);
-    });
+      setIsLoading(false);
+    }).catch((err) => {
+      setIsLoading(false);
+      console.log('getAllProducts from DB failed');
+      throw new Error('getAllProducts from DB failed');
+    })
     await this.model.coursesDB.getAllCourses().then((res) => {
       this.model.setLocal("courses", res);
-    });
+      setIsLoading(false);
+    }).catch((err) => {
+      setIsLoading(false);
+      console.log('getAllCourses from DB failed');
+      throw new Error('getAllCourses from DB failed');
+    })
   };
 
   initStorage = () => {
@@ -412,7 +440,7 @@ class Controller {
       }
       setIsLoading(true);
       this.model.productsDB.removeProduct(id).then((res) => {
-        this.fetchData().then((res) => {
+        this.fetchData(setIsLoading).then((res) => {
           this.checkDB(this.model.getLocal("products"), updateArrayIds);
           setIsLoading(false);
         });
@@ -444,7 +472,7 @@ class Controller {
           stock: stockRef.current.value
         })
         .then((res) => {
-          this.fetchData().then((res) => {
+          this.fetchData(setIsLoading).then((res) => {
             this.checkDB(this.model.getLocal("products"), updateArrayIds);
             setIsLoading(false);
           });
@@ -487,7 +515,7 @@ class Controller {
           id
         )
         .then((res) => {
-          this.fetchData().then((res) => {
+          this.fetchData(setIsLoading).then((res) => {
             this.checkDB(this.model.getLocal("products"), updateArrayIds);
             setIsLoading(false);
           });
@@ -515,6 +543,26 @@ class Controller {
     updateArrayIds(newKeys);
     this.model.setLocal("arrayIds", newKeys);
   };
+
+  deleteSpecificProduct = (id, setIsLoading, updateArrayIds) => {
+    setIsLoading(true);
+      this.model.productsDB.removeProduct(id).then((res) => {
+        this.fetchData(setIsLoading).then((res) => {
+          this.checkDB(this.model.getLocal("products"), updateArrayIds);
+          setIsLoading(false);
+        });
+      });
+  }
+
+  deleteSpecificCourse = (id, setIsLoading, updateArrayIds) => {
+    setIsLoading(true);
+    this.model.coursesDB.removeCourse(id).then((res) => {
+      this.fetchData(setIsLoading).then((res) => {
+        this.checkDB(this.model.getLocal("courses"), updateArrayIds);
+        setIsLoading(false);
+      });
+    });
+  }
 }
 
 export default Controller;

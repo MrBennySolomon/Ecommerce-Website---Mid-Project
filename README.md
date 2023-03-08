@@ -11,7 +11,7 @@ diagram :
 #### ◯ Products Page - regular user have products with prices and admin type have also editing options.
 #### ◯ Product Page  - name, price and bigger image, and a button "add to cart".
 #### ◯ Courses Page  - regular user have courses with prices and admin type have also editing options.
-#### ◯ Course Page   - name, price and bigger image, and a button "add to cart", if the user already buy this course, he get course videos screen.
+#### ◯ Course Page   - name, price and bigger image, and a button "add to cart", if the user already buy this course, he get      course videos screen.
 #### ◯ Cart Page     - the user have all products and courses he choose to add to cart, with option to increase or decrease the amount.
 #### ◯ About Page    - about the company descriptive text.
 #### ◯ Go Live Page  - make live streamming broadcasting from the app.

@@ -71,10 +71,125 @@ const Products = () => {
     }
   };
 
+  // const adminDeleteHandler = (id, setIsLoading, updateArrayIds) => {
+  //   controller.deleteSpecificProduct(id);
+  // }
+
   useEffect(() => {
-    controller.checkDB(products, updateArrayIds, loggedInUser, setIsLoading, navigate);
+    controller.checkDB(
+      products,
+      updateArrayIds,
+      loggedInUser,
+      setIsLoading,
+      navigate
+    );
     setIsLoading(false);
   }, []);
+
+  // return isAdmin ? 
+  // (
+  //   <div className="products">
+  //     <h1>Admin Area</h1>
+  //     <div className="admin-container">
+  //         <input
+  //           ref={nameRef}
+  //           type="text"
+  //           width="100%"
+  //           placeholder="Product Name"
+  //         />
+  //         <input
+  //           ref={priceRef}
+  //           type="text"
+  //           width="100%"
+  //           placeholder="Product Price"
+  //         />
+  //         <input
+  //           ref={imageRef}
+  //           type="text"
+  //           width="100%"
+  //           placeholder="Product Image Url"
+  //         />
+  //         <input ref={stockRef} type="text" width="100%" placeholder="Stock" />
+  //         <button onClick={deleteClickHandler} className="btn-delete-admin">
+  //           DELETE
+  //         </button>
+  //         <button onClick={addClickHandler} className="btn-add-admin">
+  //           ADD
+  //         </button>
+  //         <button onClick={editClickHandler} className="btn-edit-admin">
+  //           EDIT
+  //         </button>
+  //       </div>
+  //       <h1>Products</h1>
+  //      <div className="products-container">
+  //        {isLoading && (
+  //         <div className="lds-default">
+  //           <div></div>
+  //           <div></div>
+  //           <div></div>
+  //           <div></div>
+  //           <div></div>
+  //           <div></div>
+  //           <div></div>
+  //           <div></div>
+  //           <div></div>
+  //           <div></div>
+  //           <div></div>
+  //           <div></div>
+  //         </div>
+  //       )}
+  //       {!isLoading &&
+  //         products &&
+  //         arrayIds.map((id) => (
+  //           <>
+  //             <div onClick={() => adminDeleteHandler(id)} className='btn-delete'>X</div>
+  //             <Link key={id} to={`/products/${id}`}>
+  //               <Card
+  //                 name={products[id]?.name}
+  //                 price={products[id]?.price}
+  //                 src={products[id]?.imgUrl}
+  //               />
+  //             </Link>
+  //           </>
+  //         ))}
+  //     </div>
+  //   </div>
+  // )
+  // :
+  // (
+  //   <div className="products">
+  //     <h1>Products</h1>
+  //      <div className="products-container">
+  //        {isLoading && (
+  //         <div className="lds-default">
+  //           <div></div>
+  //           <div></div>
+  //           <div></div>
+  //           <div></div>
+  //           <div></div>
+  //           <div></div>
+  //           <div></div>
+  //           <div></div>
+  //           <div></div>
+  //           <div></div>
+  //           <div></div>
+  //           <div></div>
+  //         </div>
+  //       )}
+  //       {!isLoading &&
+  //         products &&
+  //         arrayIds.map((id) => (
+  //           <Link key={id} to={`/products/${id}`}>
+  //             <Card
+  //               name={products[id]?.name}
+  //               price={products[id]?.price}
+  //               src={products[id]?.imgUrl}
+  //             />
+  //           </Link>
+  //         ))}
+  //     </div>
+  //   </div>
+  // );
 
   return (
     <div className="products">

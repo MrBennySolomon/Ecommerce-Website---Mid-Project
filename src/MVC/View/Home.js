@@ -5,12 +5,12 @@ import React, { useEffect } from "react";
 import { useGlobalContext } from "../../context/context";
 
 const Home = () => {
-  const { controller } = useGlobalContext();
+  const { controller, isLoading, setIsLoading } = useGlobalContext();
   const slides = controller.getSlides();
   const containerStyles = controller.getSlidesStyle();
 
   useEffect(() => {
-    controller.fetchData();
+    controller.fetchData(setIsLoading);
     controller.initStorage();
   }, []);
 
@@ -19,6 +19,24 @@ const Home = () => {
       <h1>Home</h1>
       <div className="slider" style={containerStyles}>
         <ImageSlider slides={slides} />
+      </div>
+      <div className='spinner-div'>
+        {isLoading && (
+            <div className="lds-default">
+              <div></div>
+              <div></div>
+              <div></div>
+              <div></div>
+              <div></div>
+              <div></div>
+              <div></div>
+              <div></div>
+              <div></div>
+              <div></div>
+              <div></div>
+              <div></div>
+            </div>
+        )}
       </div>
     </div>
   );

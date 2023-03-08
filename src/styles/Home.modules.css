@@ -10,4 +10,7 @@ div.home {
   gap: 1rem;
 }
 
-
+.spinner-div {
+  width: 20vmin;
+  height: 20vmin;
+}
