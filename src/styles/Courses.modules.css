@@ -9,6 +9,8 @@ div.courses {
   flex-wrap: wrap;
   flex-direction: column;
   gap: 1rem;
+
+  overflow-y: scroll;
 }
 
 .courses-container {
