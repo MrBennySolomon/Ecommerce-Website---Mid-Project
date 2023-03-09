@@ -7,8 +7,7 @@ import { useGlobalContext } from "../../context/context";
 import constants from "../../utils/constants";
 
 const Courses = () => {
-  const { controller, arrayIds, updateArrayIds, isLoading, setIsLoading } =
-    useGlobalContext();
+  const { controller, arrayIds, updateArrayIds, isLoading, setIsLoading } = useGlobalContext();
   const navigate = useNavigate();
 
   const loggedInUser = controller.model.getLocal(constants.LOGGED_IN_USER);

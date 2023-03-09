@@ -1,4 +1,4 @@
-/* eslint-disable jsx-a11y/alt-text */
+/* eslint-disable react-hooks/exhaustive-deps */
 import "../../styles/Product.modules.css";
 import React, {useRef, useEffect} from "react";
 import { useParams, useNavigate } from "react-router-dom";
@@ -57,7 +57,7 @@ const Product = () => {
     setShowEditFields(true);
     setTimeout(() => {
       editHandler();
-    }, 0.000000000001);
+    }, 0.1);
   }
 
   const editHandler = () => {
@@ -76,7 +76,7 @@ const Product = () => {
   return (
     <div className="product">
       <div className="product-img-container">
-        <img src={selectedProduct.imgUrl} width="100%" height="100%" />
+        <img alt={selectedProduct.name} src={selectedProduct.imgUrl} width="100%" height="100%" />
       </div>
       <div className="product-description-container">
         <h1>{selectedProduct.name}</h1>

@@ -1,4 +1,3 @@
-/* eslint-disable jsx-a11y/alt-text */
 /* eslint-disable react-hooks/exhaustive-deps */
 import vid from "../../mp4/vid.mp4";
 import vid2 from "../../mp4/vid2.mp4";
@@ -31,6 +30,7 @@ const Course = () => {
 
   const loggedInUser = controller.model.getLocal(constants.LOGGED_IN_USER);
   const isAdmin = loggedInUser?.type === constants.ADMIN;
+  
   const isPurchased =
     loggedInUser?.courses?.length > 0 &&
     loggedInUser?.courses?.find(
@@ -49,15 +49,15 @@ const Course = () => {
 
   const deleteHandler = () => {
     controller.deleteSpecificCourse(params.id, setIsLoading, updateArrayIds);
-    navigate("/courses");
+    navigate(constants.COURSES_PAGE);
   };
 
   const addHandler = () => {
     controller.coursesAddSame(selectedCourse, updateArrayIds, setIsLoading);
-    navigate("/courses");
+    navigate(constants.COURSES_PAGE);
   };
 
-    useEffect(() => {
+  useEffect(() => {
     setShowEditFields(false);
   }, []);
 
@@ -66,7 +66,7 @@ const Course = () => {
     setTimeout(() => {
       editHandler();
     }, 0.1);
-  }
+  };
 
   const editHandler = () => {
     nameRef.current.value = selectedCourse.name;
@@ -105,7 +105,12 @@ const Course = () => {
         {/* {loggedInUser.courses[0].videos.map ((vid) => {
           return <button key={vid.name} onClick={() => videoRef.current.src = vid.url}>{vid.name}</button>
         })}         */}
-        <button onClick={() => (videoRef.current.src = 'https://v-cg.etsystatic.com/video/upload/s--i2SL9cBi--/ac_none,c_crop,du_15,h_720,q_auto:good,w_960,x_160,y_0/IMG_5633_moezom')}>
+        <button
+          onClick={() =>
+            (videoRef.current.src =
+              "https://v-cg.etsystatic.com/video/upload/s--i2SL9cBi--/ac_none,c_crop,du_15,h_720,q_auto:good,w_960,x_160,y_0/IMG_5633_moezom")
+          }
+        >
           nails art 1
         </button>
         <button onClick={() => (videoRef.current.src = vid2)}>
@@ -119,7 +124,7 @@ const Course = () => {
   ) : (
     <div className="course">
       <div className="course-img-container">
-        <img src={selectedCourse.imgUrl} width="100%" height="100%" />
+        <img alt={selectedCourse.name} src={selectedCourse.imgUrl} width="100%" height="100%" />
       </div>
       <div className="course-description-container">
         <h1>{selectedCourse.name}</h1>
@@ -161,10 +166,10 @@ const Course = () => {
               placeholder="Product Image Url"
             />
             <input
-            ref={videoRef}
-            type="text"
-            width="100%"
-            placeholder={`Video seperate with ','`}
+              ref={videoRef}
+              type="text"
+              width="100%"
+              placeholder={`Video seperate with ','`}
             />
             <button onClick={doneHandler}>Done</button>
           </>

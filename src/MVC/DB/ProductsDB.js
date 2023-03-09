@@ -25,42 +25,42 @@ const ProductsDB = {
         .catch((error) => {
           return "Error while deleting product";
         });
-    },
+  },
 
-    async getAllProducts() {
-      try {
-        const response = await this.products.get(".json");
-        if (response.status !== 200) {
-          console.error("cant get product from the api");
-          return;
-        }
-        return response.data;
-      }catch (error) {
-        console.error("Error getting product", error);
+  async getAllProducts() {
+    try {
+      const response = await this.products.get(".json");
+      if (response.status !== 200) {
+        console.error("cant get product from the api");
+        return;
       }
-    },
+      return response.data;
+    }catch (error) {
+      console.error("Error getting product", error);
+    }
+  },
 
-    async addProduct(newProduct) {
-      this.products
-        .post(".json", newProduct)
-        .then((response) => {
-          console.log("Product added successfully");
-        })
-        .catch((error) => {
-          console.error("Error adding product", error);
-        });
-    },
-    
-    async editProduct(updatedData, id) {
-      this.products
-        .put(`/${id}.json`, updatedData)
-        .then((response) => {
-          console.log("Product updated successfully:", response.data);
-        })
-        .catch((error) => {
-          console.error("Error updating product:", error);
-        });
-    },
-  };
+  async addProduct(newProduct) {
+    this.products
+      .post(".json", newProduct)
+      .then((response) => {
+        console.log("Product added successfully");
+      })
+      .catch((error) => {
+        console.error("Error adding product", error);
+      });
+  },
+  
+  async editProduct(updatedData, id) {
+    this.products
+      .put(`/${id}.json`, updatedData)
+      .then((response) => {
+        console.log("Product updated successfully:", response.data);
+      })
+      .catch((error) => {
+        console.error("Error updating product:", error);
+      });
+  },
+};
 
   export default ProductsDB;

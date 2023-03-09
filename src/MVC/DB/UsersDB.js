@@ -16,40 +16,42 @@ const UsersDB = {
         .catch((error) => {
           return "Error while deleting user";
         });
-    },
+  },
 
-    async getAllUsers() {
-      try {
-        const response = await this.users.get(".json");
-        if (response.status !== 200) {
-          console.error("cant get user from the api");
-          return;
-        }
-        return response.data;
-      } catch (error) {
-        console.error("Error getting user", error);
+  async getAllUsers() {
+    try {
+      const response = await this.users.get(".json");
+      if (response.status !== 200) {
+        console.error("cant get user from the api");
+        return;
       }
-    },
-    async addUser(newUser) {
-      this.users
-        .post(".json", newUser)
-        .then((response) => {
-          console.log("User added successfully");
-        })
-        .catch((error) => {
-          console.error("Error adding user", error);
-        });
-    },
-    async editUser(updatedData, id) {
-      this.users
-        .put(`/${id}.json`, updatedData)
-        .then((response) => {
-          console.log("User updated successfully:", response.data);
-        })
-        .catch((error) => {
-          console.error("Error updating user:", error);
-        });
-    },
-  };
+      return response.data;
+    } catch (error) {
+      console.error("Error getting user", error);
+    }
+  },
+
+  async addUser(newUser) {
+    this.users
+      .post(".json", newUser)
+      .then((response) => {
+        console.log("User added successfully");
+      })
+      .catch((error) => {
+        console.error("Error adding user", error);
+      });
+  },
+  
+  async editUser(updatedData, id) {
+    this.users
+      .put(`/${id}.json`, updatedData)
+      .then((response) => {
+        console.log("User updated successfully:", response.data);
+      })
+      .catch((error) => {
+        console.error("Error updating user:", error);
+      });
+  },
+};
 
   export default UsersDB;

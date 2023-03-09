@@ -41,6 +41,11 @@ button.labels > label {
   padding: 1.5rem 1.5rem;
 }
 
+input {
+  color: rgba(84, 44, 68, 1);
+  font-weight: bold;
+}
+
 h3.error-msg {
   color: #e23030;
 }
@@ -59,6 +64,7 @@ h3.error-msg {
   border-radius: 50%;
   animation: lds-default 1.2s linear infinite;
 }
+
 .lds-default div:nth-child(1) {
   animation-delay: 0s;
   top: 37px;

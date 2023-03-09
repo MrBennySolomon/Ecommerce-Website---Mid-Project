@@ -1,4 +1,3 @@
-/* eslint-disable react-hooks/exhaustive-deps */
 import "../../styles/Login.modules.css";
 import React, { useRef } from "react";
 import { useNavigate } from "react-router-dom";

@@ -8,8 +8,7 @@ import constants from "../../utils/constants";
 
 const Products = () => {
 
-  const { controller, arrayIds, updateArrayIds, isLoading, setIsLoading } =
-    useGlobalContext();
+  const { controller, arrayIds, updateArrayIds, isLoading, setIsLoading } = useGlobalContext();
   const navigate = useNavigate();
 
   let products = controller.model.getLocal(constants.PRODUCTS);

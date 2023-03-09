@@ -21,22 +21,6 @@ const About = () => {
           all the while. That is the reason we make non lethal nail cleans, and
           experience-centered nail studios you’ll cherish investing energy in.
         </p>
-        <br />
-        <p>
-          From our item recipes to our studio structure, we really esteem the
-          significance of straightforwardness in all that we do. Regardless of
-          whether you’re a moderate or a maximalist, there’s a certain stunner
-          to doing things just, in light of the fact that let’s face it – life
-          can be sufficiently entangled as of now.
-        </p>
-        <br />
-        <p>
-          We believe what’s most wonderful in life is simply the opportunity to
-          be. We’re not keen on pursuing patterns, and we acknowledge and
-          commend that there is nobody meaning of excellence – we are for the
-          most part excellent in our very own extraordinary way.
-        </p>
-        <br />
       </div>
     </div>
   );
