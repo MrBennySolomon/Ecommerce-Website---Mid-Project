@@ -1,4 +1,4 @@
-import "../../styles/Carousel.modules.css";
+import                   "../../styles/Carousel.modules.css";
 import { useState } from "react";
 
 const slideStyles                       = {

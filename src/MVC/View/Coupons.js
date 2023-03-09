@@ -1,4 +1,4 @@
-import React from 'react'
+import React    from 'react'
 import discount from '../../img/discount.png';
 
 const Coupons = () => {

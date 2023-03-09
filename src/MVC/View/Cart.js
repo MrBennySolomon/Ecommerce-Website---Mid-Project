@@ -1,9 +1,9 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import "../../styles/Cart.modules.css";
+import                           "../../styles/Cart.modules.css";
 import React, { useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate }      from "react-router-dom";
 import { useGlobalContext } from "../../context/context";
-import constants from "../../utils/constants";
+import constants            from "../../utils/constants";
 
 const Cart = () => {
   const { controller, 

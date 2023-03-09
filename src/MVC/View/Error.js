@@ -1,7 +1,7 @@
-import "../../styles/Error.modules.css";
+import                     "../../styles/Error.modules.css";
 import MainNavigation from "../../components/MainNavigation";
-import Footer from "../../components/Footer";
-import { Link } from "react-router-dom";
+import Footer         from "../../components/Footer";
+import { Link }       from "react-router-dom";
 
 const ErrorPage = () => {
   return (

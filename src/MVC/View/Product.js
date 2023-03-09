@@ -1,9 +1,9 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import "../../styles/Product.modules.css";
+import                                 "../../styles/Product.modules.css";
 import React, {useRef, useEffect} from "react";
 import { useParams, useNavigate } from "react-router-dom";
-import { useGlobalContext } from "../../context/context";
-import constants from "../../utils/constants";
+import { useGlobalContext }       from "../../context/context";
+import constants                  from "../../utils/constants";
 
 const Product = () => {
   const { controller, 

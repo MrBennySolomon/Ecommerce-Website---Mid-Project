@@ -1,12 +1,12 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import vid from "../../mp4/vid.mp4";
-import vid2 from "../../mp4/vid2.mp4";
-import vid3 from "../../mp4/vid3.mp4";
-import "../../styles/Course.modules.css";
+import                                   "../../styles/Course.modules.css";
+import vid                          from "../../mp4/vid.mp4";
+import vid2                         from "../../mp4/vid2.mp4";
+import vid3                         from "../../mp4/vid3.mp4";
 import React, { useRef, useEffect } from "react";
-import { useParams, useNavigate } from "react-router-dom";
-import { useGlobalContext } from "../../context/context";
-import constants from "../../utils/constants";
+import { useParams, useNavigate }   from "react-router-dom";
+import { useGlobalContext }         from "../../context/context";
+import constants                    from "../../utils/constants";
 
 const Course = () => {
   const { controller, 

@@ -1,4 +1,4 @@
-import "../../styles/About.modules.css";
+import            "../../styles/About.modules.css";
 import React from "react";
 
 const About = () => {

@@ -1,6 +1,6 @@
-import "../../styles/Login.modules.css";
-import React, { useRef } from "react";
-import { useNavigate } from "react-router-dom";
+import                           "../../styles/Login.modules.css";
+import React, { useRef }    from "react";
+import { useNavigate }      from "react-router-dom";
 import { useGlobalContext } from "../../context/context";
 
 const Login = () => {

@@ -1,10 +1,10 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import "../../styles/Courses.modules.css";
-import React, { useEffect } from "react";
-import Card from "../../components/Card";
+import                           "../../styles/Courses.modules.css";
+import React, { useEffect }  from "react";
+import Card                  from "../../components/Card";
 import { Link, useNavigate } from "react-router-dom";
-import { useGlobalContext } from "../../context/context";
-import constants from "../../utils/constants";
+import { useGlobalContext }  from "../../context/context";
+import constants             from "../../utils/constants";
 
 const Courses = () => {
   const { controller, 
