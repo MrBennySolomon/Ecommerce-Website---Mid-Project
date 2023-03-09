@@ -142,4 +142,9 @@ h3.error-msg {
   button.add-to-cart-btn {
     font-size: 150%;
   }
+
+  .product-description-container {
+    color: rgba(84, 44, 68, 1);
+  }
+
 }

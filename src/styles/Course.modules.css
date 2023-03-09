@@ -65,7 +65,7 @@ div.course {
 
   width: 40%;
   height: 80%;
-  color: rgba(212, 162, 191, 0.5);
+  color: rgba(212, 162, 191, 1);
 }
 
 button.add-to-cart-btn {
@@ -85,5 +85,9 @@ button.add-to-cart-btn {
 
   button.add-to-cart-btn {
     font-size: 150%;
+  }
+
+  .course-description-container {
+    color: rgba(84, 44, 68, 1);
   }
 }

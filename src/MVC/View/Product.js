@@ -43,7 +43,7 @@ const Product = () => {
     controller.deleteSpecificProduct(params.id, setIsLoading, updateArrayIds);
     navigate("/products");
   };
-  
+
   const addHandler = () => {
     controller.productsAddSame(selectedProduct, updateArrayIds, setIsLoading);
     navigate('/products');
