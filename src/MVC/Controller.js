@@ -502,6 +502,7 @@ class Controller {
     setIsLoading(true);
       this.model.productsDB
         .addProduct({
+          cartCount: 0,
           name: product.name,
           price: product.price,
           imgUrl: product.imgUrl,
@@ -519,6 +520,7 @@ class Controller {
     setIsLoading(true);
       this.model.coursesDB
         .addCourse({
+          cartCount: 1,
           name: course.name,
           price: course.price,
           imgUrl: course.imgUrl,
@@ -611,6 +613,7 @@ class Controller {
       this.model.productsDB
       .editProduct(
         {
+          cartCount: 0,
           name: nameRef.current.value,
           price: priceRef.current.value,
           imgUrl: imageRef.current.value,
@@ -632,6 +635,7 @@ class Controller {
       this.model.coursesDB
       .editCourse(
         {
+          cartCount: 1,
           name: nameRef.current.value,
           price: priceRef.current.value,
           imgUrl: imageRef.current.value,

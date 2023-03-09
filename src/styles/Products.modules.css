@@ -4,7 +4,7 @@ div.products {
   background: linear-gradient(135deg, rgba(212, 162, 191, 0.5) 30%, rgba(84, 44, 68, 1) 70%);
 
   display: flex;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: center;
   flex-wrap: wrap;
   flex-direction: column;
