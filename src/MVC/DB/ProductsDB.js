@@ -10,7 +10,9 @@ const ProductsDB = {
     return this.getAllProducts().then((products) => {
       console.log('products', products);
       products.find((item) => item.id === id)
-    });
+    }).catch((err) => {
+      return `Error while get product id = ${id}`;
+    })
   },
 
   async removeProduct(id) {
@@ -33,10 +35,11 @@ const ProductsDB = {
           return;
         }
         return response.data;
-      } catch (error) {
+      }catch (error) {
         console.error("Error getting product", error);
       }
     },
+
     async addProduct(newProduct) {
       this.products
         .post(".json", newProduct)
@@ -47,6 +50,7 @@ const ProductsDB = {
           console.error("Error adding product", error);
         });
     },
+    
     async editProduct(updatedData, id) {
       this.products
         .put(`/${id}.json`, updatedData)

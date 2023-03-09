@@ -15,6 +15,7 @@ const AppProvider = ({ children }) => {
   const [count, setCount]       = useState(0);
   const [total, setTotal]       = useState(0);
   const [arrayIds, setArrayIds] = useState([]);
+  const [showEditFields, setShowEditFields] = useState(false);
 
   const updateCount          = (operation)      => {
     operation === constants.PLUS ? setCount(count + 1) : setCount(count - 1);
@@ -41,7 +42,9 @@ const AppProvider = ({ children }) => {
         isError,
         setIsError,
         isLoading,
-        setIsLoading
+        setIsLoading,
+        showEditFields,
+        setShowEditFields
       }}
     >
       {children}

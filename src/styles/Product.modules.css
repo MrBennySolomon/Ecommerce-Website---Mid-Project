@@ -31,6 +31,16 @@ button.add-to-cart-btn {
   border: 3px solid rgba(212, 162, 191, 0.5);
 }
 
+button.labels {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+}
+
+button.labels > label {
+  padding: 1.5rem 1.5rem;
+}
+
 h3.error-msg {
   color: #e23030;
 }

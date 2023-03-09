@@ -461,8 +461,8 @@ class Controller {
         this.fetchData(setIsLoading).then((res) => {
           this.checkDB(this.model.getLocal("products"), updateArrayIds);
           setIsLoading(false);
-        });
-      });
+        })
+      })
     }
   };
 
@@ -497,6 +497,40 @@ class Controller {
         });
     }
   };
+
+  productsAddSame = (product, updateArrayIds, setIsLoading) => {
+    setIsLoading(true);
+      this.model.productsDB
+        .addProduct({
+          name: product.name,
+          price: product.price,
+          imgUrl: product.imgUrl,
+          stock: product.stock
+        })
+        .then((res) => {
+          this.fetchData(setIsLoading).then((res) => {
+            this.checkDB(this.model.getLocal("products"), updateArrayIds);
+            setIsLoading(false);
+          });
+        });
+  }
+
+  coursesAddSame = (course, updateArrayIds, setIsLoading) => {
+    setIsLoading(true);
+      this.model.coursesDB
+        .addCourse({
+          name: course.name,
+          price: course.price,
+          imgUrl: course.imgUrl,
+          videos: course.videos
+        })
+        .then((res) => {
+          this.fetchData(setIsLoading).then((res) => {
+            this.checkDB(this.model.getLocal("courses"), updateArrayIds);
+            setIsLoading(false);
+          });
+        });
+  }
 
   productsEdit = (
     arrayIds,
@@ -570,6 +604,48 @@ class Controller {
           setIsLoading(false);
         });
       });
+  }
+
+  editSpecificProduct = (nameRef, priceRef, imageRef, stockRef, id, setIsLoading, updateArrayIds) => {
+    setIsLoading(true);
+      this.model.productsDB
+      .editProduct(
+        {
+          name: nameRef.current.value,
+          price: priceRef.current.value,
+          imgUrl: imageRef.current.value,
+          stock: stockRef.current.value
+        },
+        id
+      )
+      .then((res) => {
+        this.fetchData(setIsLoading).then((res) => {
+          this.checkDB(this.model.getLocal("products"), updateArrayIds);
+          setIsLoading(false);
+        });
+      });
+    setIsLoading(false);
+  }
+
+  editSpecificCourse = (nameRef, priceRef, imageRef, videoRef, id, setIsLoading, updateArrayIds) => {
+    setIsLoading(true);
+      this.model.coursesDB
+      .editCourse(
+        {
+          name: nameRef.current.value,
+          price: priceRef.current.value,
+          imgUrl: imageRef.current.value,
+          videos: JSON.parse(videoRef.current.value)
+        },
+        id
+      )
+      .then((res) => {
+        this.fetchData(setIsLoading).then((res) => {
+          this.checkDB(this.model.getLocal("courses"), updateArrayIds);
+          setIsLoading(false);
+        });
+      });
+    setIsLoading(false);
   }
 
   deleteSpecificCourse = (id, setIsLoading, updateArrayIds) => {

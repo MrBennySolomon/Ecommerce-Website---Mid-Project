@@ -10,15 +10,27 @@ import { useGlobalContext } from "../../context/context";
 import constants from "../../utils/constants";
 
 const Course = () => {
-  const { controller, updateCount, updateTotal } = useGlobalContext();
-  const videoRef = useRef();
+  const {
+    controller,
+    updateCount,
+    updateTotal,
+    showEditFields,
+    setShowEditFields,
+    setIsLoading,
+    updateArrayIds
+  } = useGlobalContext();
   const params = useParams();
   const navigate = useNavigate();
+  const nameRef = useRef();
+  const priceRef = useRef();
+  const imageRef = useRef();
+  const videoRef = useRef();
 
   const courses = controller.model.getLocal(constants.COURSES);
   const selectedCourse = courses[params.id];
 
   const loggedInUser = controller.model.getLocal(constants.LOGGED_IN_USER);
+  const isAdmin = loggedInUser?.type === constants.ADMIN;
   const isPurchased =
     loggedInUser?.courses?.length > 0 &&
     loggedInUser?.courses?.find(
@@ -35,7 +47,39 @@ const Course = () => {
     );
   };
 
-  return isPurchased ? (
+  const deleteHandler = () => {
+    controller.deleteSpecificCourse(params.id, setIsLoading, updateArrayIds);
+    navigate("/courses");
+  };
+
+  const addHandler = () => {
+    controller.coursesAddSame(selectedCourse, updateArrayIds, setIsLoading);
+    navigate("/courses");
+  };
+
+  const editHandler = () => {
+    setShowEditFields(true);
+    nameRef.current.value = selectedCourse.name;
+    priceRef.current.value = selectedCourse.price;
+    imageRef.current.value = selectedCourse.imgUrl;
+    videoRef.current.value = JSON.stringify(selectedCourse.videos);
+  };
+
+  const doneHandler = () => {
+    controller.editSpecificCourse(
+      nameRef,
+      priceRef,
+      imageRef,
+      videoRef,
+      params.id,
+      setIsLoading,
+      updateArrayIds
+    );
+    setShowEditFields(false);
+    navigate("/courses");
+  };
+
+  return isPurchased && !isAdmin ? (
     <div className="course">
       <video
         ref={videoRef}
@@ -51,7 +95,7 @@ const Course = () => {
         {/* {loggedInUser.courses[0].videos.map ((vid) => {
           return <button key={vid.name} onClick={() => videoRef.current.src = vid.url}>{vid.name}</button>
         })}         */}
-        <button onClick={() => (videoRef.current.src = vid)}>
+        <button onClick={() => (videoRef.current.src = 'https://v-cg.etsystatic.com/video/upload/s--i2SL9cBi--/ac_none,c_crop,du_15,h_720,q_auto:good,w_960,x_160,y_0/IMG_5633_moezom')}>
           nails art 1
         </button>
         <button onClick={() => (videoRef.current.src = vid2)}>
@@ -73,6 +117,48 @@ const Course = () => {
         <button onClick={addToCartHandler} className="add-to-cart-btn">
           Add to Cart
         </button>
+        {isAdmin && (
+          <button className="labels">
+            <label onClick={deleteHandler}>
+              <i className="fa-solid fa-trash-can fa-2x"></i>
+            </label>
+            <label onClick={addHandler}>
+              <i className="fa-solid fa-plus fa-2x"></i>
+            </label>
+            <label onClick={editHandler}>
+              <i className="fa-solid fa-pen-to-square fa-2x"></i>
+            </label>
+          </button>
+        )}
+        {showEditFields && (
+          <>
+            <input
+              ref={nameRef}
+              type="text"
+              width="100%"
+              placeholder="Product Name"
+            />
+            <input
+              ref={priceRef}
+              type="text"
+              width="100%"
+              placeholder="Product Price"
+            />
+            <input
+              ref={imageRef}
+              type="text"
+              width="100%"
+              placeholder="Product Image Url"
+            />
+            <input
+            ref={videoRef}
+            type="text"
+            width="100%"
+            placeholder={`Video seperate with ','`}
+            />
+            <button onClick={doneHandler}>Done</button>
+          </>
+        )}
       </div>
     </div>
   );
