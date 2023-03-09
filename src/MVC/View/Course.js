@@ -9,35 +9,30 @@ import { useGlobalContext } from "../../context/context";
 import constants from "../../utils/constants";
 
 const Course = () => {
-  const {
-    controller,
-    updateCount,
-    updateTotal,
-    showEditFields,
-    setShowEditFields,
-    setIsLoading,
-    updateArrayIds
-  } = useGlobalContext();
-  const params = useParams();
-  const navigate = useNavigate();
-  const nameRef = useRef();
-  const priceRef = useRef();
-  const imageRef = useRef();
-  const videoRef = useRef();
-
-  const courses = controller.model.getLocal(constants.COURSES);
-  const selectedCourse = courses[params.id];
-
-  const loggedInUser = controller.model.getLocal(constants.LOGGED_IN_USER);
-  const isAdmin = loggedInUser?.type === constants.ADMIN;
+  const { controller, 
+          updateCount,
+          updateTotal, 
+          showEditFields, 
+          setShowEditFields, 
+          setIsLoading,
+          updateArrayIds} = useGlobalContext();
   
-  const isPurchased =
-    loggedInUser?.courses?.length > 0 &&
-    loggedInUser?.courses?.find(
-      (course) => course.name === selectedCourse.name
-    );
+  const params            = useParams();
+  const navigate          = useNavigate();
+  const nameRef           = useRef();
+  const priceRef          = useRef();
+  const imageRef          = useRef();
+  const videoRef          = useRef();
 
-  const addToCartHandler = () => {
+  const courses           = controller.model.getLocal(constants.COURSES);
+  const selectedCourse    = courses[params.id];
+
+  const loggedInUser      = controller.model.getLocal(constants.LOGGED_IN_USER);
+  const isAdmin           = loggedInUser?.type === constants.ADMIN;
+  
+  const isPurchased       = loggedInUser?.courses?.length > 0 && loggedInUser?.courses?.find((course) => course.name === selectedCourse.name);
+
+  const addToCartHandler  = () => {
     controller.addCourseToCart(
       updateCount,
       updateTotal,
@@ -47,35 +42,31 @@ const Course = () => {
     );
   };
 
-  const deleteHandler = () => {
+  const deleteHandler     = () => {
     controller.deleteSpecificCourse(params.id, setIsLoading, updateArrayIds);
     navigate(constants.COURSES_PAGE);
   };
 
-  const addHandler = () => {
+  const addHandler        = () => {
     controller.coursesAddSame(selectedCourse, updateArrayIds, setIsLoading);
     navigate(constants.COURSES_PAGE);
   };
 
-  useEffect(() => {
-    setShowEditFields(false);
-  }, []);
-
-  const showHandler = () => {
+  const showHandler       = () => {
     setShowEditFields(true);
     setTimeout(() => {
       editHandler();
     }, 0.1);
   };
 
-  const editHandler = () => {
+  const editHandler       = () => {
     nameRef.current.value = selectedCourse.name;
     priceRef.current.value = selectedCourse.price;
     imageRef.current.value = selectedCourse.imgUrl;
     videoRef.current.value = JSON.stringify(selectedCourse.videos);
   };
 
-  const doneHandler = () => {
+  const doneHandler       = () => {
     controller.editSpecificCourse(
       nameRef,
       priceRef,
@@ -88,6 +79,10 @@ const Course = () => {
     setShowEditFields(false);
     navigate(constants.COURSES_PAGE);
   };
+
+  useEffect(() => {
+    setShowEditFields(false);
+  }, []);
 
   return isPurchased && !isAdmin ? (
     <div className="course">

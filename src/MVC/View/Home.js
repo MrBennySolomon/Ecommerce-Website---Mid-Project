@@ -5,9 +5,12 @@ import React, { useEffect } from "react";
 import { useGlobalContext } from "../../context/context";
 
 const Home = () => {
-  const { controller, isLoading, setIsLoading } = useGlobalContext();
-  const slides = controller.getSlides();
-  const containerStyles = controller.getSlidesStyle();
+  const { controller, 
+          isLoading, 
+          setIsLoading } = useGlobalContext();
+
+  const slides           = controller.getSlides();
+  const containerStyles  = controller.getSlidesStyle();
 
   useEffect(() => {
     controller.fetchData(setIsLoading);

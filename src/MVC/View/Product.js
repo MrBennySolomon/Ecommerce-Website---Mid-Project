@@ -6,30 +6,29 @@ import { useGlobalContext } from "../../context/context";
 import constants from "../../utils/constants";
 
 const Product = () => {
-  const params = useParams();
-  const {
-    controller,
-    updateCount,
-    updateTotal,
-    isError,
-    setIsError,
-    setIsLoading,
-    updateArrayIds,
-    showEditFields,
-    setShowEditFields
-  } = useGlobalContext();
-  const navigate = useNavigate();
-  const nameRef = useRef();
-  const priceRef = useRef();
-  const imageRef = useRef();
-  const stockRef = useRef();
+  const { controller, 
+          updateCount, 
+          updateTotal, 
+          isError, 
+          setIsError, 
+          setIsLoading, 
+          updateArrayIds, 
+          showEditFields, 
+          setShowEditFields} = useGlobalContext();
 
-  const products = controller.model.getLocal(constants.PRODUCTS);
-  const selectedProduct = products[params.id];
-  const loggedInUser = controller.model.getLocal(constants.LOGGED_IN_USER);
-  const isAdmin = loggedInUser?.type === constants.ADMIN;
+  const params               = useParams();
+  const navigate             = useNavigate();
+  const nameRef              = useRef();
+  const priceRef             = useRef();
+  const imageRef             = useRef();
+  const stockRef             = useRef();
 
-  const addToCartHandler = () => {
+  const products             = controller.model.getLocal(constants.PRODUCTS);
+  const selectedProduct      = products[params.id];
+  const loggedInUser         = controller.model.getLocal(constants.LOGGED_IN_USER);
+  const isAdmin              = loggedInUser?.type === constants.ADMIN;
+
+  const addToCartHandler     = () => {
     controller.addProductToCart(
       selectedProduct,
       setIsError,
@@ -39,39 +38,41 @@ const Product = () => {
     );
   };
 
-  const deleteHandler = () => {
+  const deleteHandler        = () => {
     controller.deleteSpecificProduct(params.id, setIsLoading, updateArrayIds);
     navigate(constants.PRODUCTS);
   };
 
-  const addHandler = () => {
+  const addHandler           = () => {
     controller.productsAddSame(selectedProduct, updateArrayIds, setIsLoading);
     navigate(constants.PRODUCTS_PAGE);
   };
 
-  useEffect(() => {
-    setShowEditFields(false);
-  }, []);
   
-  const showHandler = () => {
+  
+  const showHandler          = () => {
     setShowEditFields(true);
     setTimeout(() => {
       editHandler();
     }, 0.1);
   }
 
-  const editHandler = () => {
+  const editHandler          = () => {
     nameRef.current.value = selectedProduct.name;
     priceRef.current.value = selectedProduct.price;
     imageRef.current.value = selectedProduct.imgUrl;
     stockRef.current.value = selectedProduct.stock;
   };
 
-  const doneHandler = () => {
+  const doneHandler          = () => {
     controller.editSpecificProduct(nameRef, priceRef, imageRef, stockRef, params.id, setIsLoading, updateArrayIds);
     setShowEditFields(false);
     navigate(constants.PRODUCTS_PAGE);
   }
+
+  useEffect(() => {
+    setShowEditFields(false);
+  }, []);
 
   return (
     <div className="product">

@@ -6,13 +6,17 @@ import { useGlobalContext } from "../../context/context";
 import constants from "../../utils/constants";
 
 const Cart = () => {
-  const { controller, total, updateCount, updateTotal } = useGlobalContext();
-  const navigate = useNavigate();
+  const { controller, 
+          total, 
+          updateCount,
+          updateTotal }   = useGlobalContext();
 
-  const productsCart = controller.model.getLocal(constants.PRODUCTS_CART);
-  const coursesCart = controller.model.getLocal(constants.COURSES_CART);
+  const navigate          = useNavigate();
 
-  const plusClickHandler = (e) => controller.plusClickHandler(e, updateCount, updateTotal);
+  const productsCart      = controller.model.getLocal(constants.PRODUCTS_CART);
+  const coursesCart       = controller.model.getLocal(constants.COURSES_CART);
+
+  const plusClickHandler  = (e) => controller.plusClickHandler(e, updateCount, updateTotal);
   const minusClickHandler = (e) => controller.minusClickHandler(e, updateCount, updateTotal);
 
   useEffect(() => {

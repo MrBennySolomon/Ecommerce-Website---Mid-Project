@@ -4,16 +4,19 @@ import { useNavigate } from "react-router-dom";
 import { useGlobalContext } from "../../context/context";
 
 const Login = () => {
-  const { controller, isError, setIsError } = useGlobalContext();
-  const navigate = useNavigate();
-  const emailRef = useRef();
-  const passwordRef = useRef();
+  const { controller, 
+          isError, 
+          setIsError } = useGlobalContext();
 
-  const submitHandler = (e) => {
+  const navigate       = useNavigate();
+  const emailRef       = useRef();
+  const passwordRef    = useRef();
+
+  const submitHandler  = (e) => {
     controller.loginSubmit(e, emailRef, passwordRef, setIsError, navigate);
   };
 
-  const resetHandler = (e) => {
+  const resetHandler   = (e) => {
     controller.resetLogin(e, emailRef, passwordRef, setIsError);
   };
 

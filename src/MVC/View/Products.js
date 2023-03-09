@@ -8,11 +8,15 @@ import constants from "../../utils/constants";
 
 const Products = () => {
 
-  const { controller, arrayIds, updateArrayIds, isLoading, setIsLoading } = useGlobalContext();
-  const navigate = useNavigate();
-
-  let products = controller.model.getLocal(constants.PRODUCTS);
-  const loggedInUser = controller.model.getLocal(constants.LOGGED_IN_USER);
+  const { controller, 
+          arrayIds, 
+          updateArrayIds, 
+          isLoading, 
+          setIsLoading } = useGlobalContext();
+  
+  const navigate         = useNavigate();
+  const products         = controller.model.getLocal(constants.PRODUCTS);
+  const loggedInUser     = controller.model.getLocal(constants.LOGGED_IN_USER);
 
   useEffect(() => {
     controller.checkDB(
