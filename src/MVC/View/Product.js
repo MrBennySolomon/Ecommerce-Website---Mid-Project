@@ -1,6 +1,6 @@
 /* eslint-disable jsx-a11y/alt-text */
 import "../../styles/Product.modules.css";
-import React, {useRef} from "react";
+import React, {useRef, useEffect} from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { useGlobalContext } from "../../context/context";
 import constants from "../../utils/constants";
@@ -49,9 +49,18 @@ const Product = () => {
     navigate('/products');
   };
 
-  const editHandler = () => {
-    console.log(selectedProduct.name);
+  useEffect(() => {
+    setShowEditFields(false);
+  }, []);
+  
+  const showHandler = () => {
     setShowEditFields(true);
+    setTimeout(() => {
+      editHandler();
+    }, 0.000000000001);
+  }
+
+  const editHandler = () => {
     nameRef.current.value = selectedProduct.name;
     priceRef.current.value = selectedProduct.price;
     imageRef.current.value = selectedProduct.imgUrl;
@@ -83,7 +92,7 @@ const Product = () => {
             <label onClick={addHandler}>
               <i className="fa-solid fa-plus fa-2x"></i>
             </label>
-            <label onClick={editHandler}>
+            <label onClick={showHandler}>
               <i className="fa-solid fa-pen-to-square fa-2x"></i>
             </label>
           </button>

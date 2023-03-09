@@ -4,7 +4,7 @@ import vid from "../../mp4/vid.mp4";
 import vid2 from "../../mp4/vid2.mp4";
 import vid3 from "../../mp4/vid3.mp4";
 import "../../styles/Course.modules.css";
-import React, { useRef } from "react";
+import React, { useRef, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { useGlobalContext } from "../../context/context";
 import constants from "../../utils/constants";
@@ -57,8 +57,18 @@ const Course = () => {
     navigate("/courses");
   };
 
-  const editHandler = () => {
+    useEffect(() => {
+    setShowEditFields(false);
+  }, []);
+
+  const showHandler = () => {
     setShowEditFields(true);
+    setTimeout(() => {
+      editHandler();
+    }, 0.1);
+  }
+
+  const editHandler = () => {
     nameRef.current.value = selectedCourse.name;
     priceRef.current.value = selectedCourse.price;
     imageRef.current.value = selectedCourse.imgUrl;
@@ -125,7 +135,7 @@ const Course = () => {
             <label onClick={addHandler}>
               <i className="fa-solid fa-plus fa-2x"></i>
             </label>
-            <label onClick={editHandler}>
+            <label onClick={showHandler}>
               <i className="fa-solid fa-pen-to-square fa-2x"></i>
             </label>
           </button>
