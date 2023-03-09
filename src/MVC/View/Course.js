@@ -86,7 +86,7 @@ const Course = () => {
       updateArrayIds
     );
     setShowEditFields(false);
-    navigate("/courses");
+    navigate(constants.COURSES_PAGE);
   };
 
   return isPurchased && !isAdmin ? (

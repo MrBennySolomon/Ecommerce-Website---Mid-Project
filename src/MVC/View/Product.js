@@ -41,12 +41,12 @@ const Product = () => {
 
   const deleteHandler = () => {
     controller.deleteSpecificProduct(params.id, setIsLoading, updateArrayIds);
-    navigate("/products");
+    navigate(constants.PRODUCTS);
   };
 
   const addHandler = () => {
     controller.productsAddSame(selectedProduct, updateArrayIds, setIsLoading);
-    navigate('/products');
+    navigate(constants.PRODUCTS_PAGE);
   };
 
   useEffect(() => {
@@ -70,7 +70,7 @@ const Product = () => {
   const doneHandler = () => {
     controller.editSpecificProduct(nameRef, priceRef, imageRef, stockRef, params.id, setIsLoading, updateArrayIds);
     setShowEditFields(false);
-    navigate('/products');
+    navigate(constants.PRODUCTS_PAGE);
   }
 
   return (

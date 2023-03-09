@@ -16,51 +16,44 @@ class Controller {
     this.model = model;
   }
 
-  plusClickHandler = (e, updateCountFn, updateTotalFn) => {
-    const productsCart = this.model.getLocal("productsCart");
-    const coursesCart = this.model.getLocal("coursesCart");
+  resetLogin = (e, emailRef, passwordRef, setIsError) => {
+    e.preventDefault();
+    emailRef.current.value = "";
+    passwordRef.current.value = "";
+    setIsError(false);
+  }
 
-    const selectedProduct = productsCart.find(
-      (item) => item.name === e.target.getAttribute("name")
-    );
-    const selectedCourse = coursesCart.find(
-      (item) => item.name === e.target.getAttribute("name")
-    );
-    const count = Number(this.model.getLocal("cartCount")) + 1;
+  initStorage = () => {
+    this.model.setLocal("cartCount", "0");
+    this.model.setLocal("cartTotal", "0");
+    this.model.setLocal("productsCart", []);
+    this.model.setLocal("coursesCart", []);
+    this.model.setLocal("productsCartCount", []);
+    this.model.setLocal("coursesCartCount", []);
+  }
 
-    this.model.setLocal("cartCount", count);
-    updateCountFn(constants.PLUS);
+  deleteSpecificCourse = (id, setIsLoading, updateArrayIds) => {
+    setIsLoading(true);
+    this.model.coursesDB.removeCourse(id).then((res) => {
+      this.fetchData(setIsLoading).then((res) => {
+        this.checkDB(this.model.getLocal(constants.COURSES), updateArrayIds);
+        setIsLoading(false);
+      });
+    });
+  }
 
-    const total =
-      Number(this.model.getLocal("cartTotal")) +
-      (selectedCourse
-        ? Number(selectedCourse.price)
-        : Number(selectedProduct.price));
-    this.model.setLocal("cartTotal", total);
-    updateTotalFn(
-      constants.PLUS,
-      selectedCourse
-        ? Number(selectedCourse.price)
-        : Number(selectedProduct.price)
-    );
-
-    if (selectedProduct) {
-      selectedProduct.stock = selectedProduct.stock - 1;
-      for (let i = 0; i < productsCart.length; i++) {
-        if (productsCart[i].name === selectedProduct.name) {
-          productsCart[i].cartCount = Number(productsCart[i].cartCount) + 1;
-        }
-      }
-      this.model.setLocal("productsCart", productsCart);
-    } else {
-      coursesCart.push(selectedCourse);
-      this.model.setLocal("coursesCart", coursesCart);
-    }
-  };
-
+  deleteSpecificProduct = (id, setIsLoading, updateArrayIds) => {
+    setIsLoading(true);
+      this.model.productsDB.removeProduct(id).then((res) => {
+        this.fetchData(setIsLoading).then((res) => {
+          this.checkDB(this.model.getLocal(constants.PRODUCTS), updateArrayIds);
+          setIsLoading(false);
+        });
+      });
+  }
+  
   updateCourseCartCount = (courses, selectedCourse) => {
     const updatedArr = [];
-
     for (let i = 0; i < courses.length; i++) {
       if (courses[i].name === selectedCourse.name) {
         const tempCourse = courses[i];
@@ -70,12 +63,11 @@ class Controller {
         updatedArr.push(courses[i]);
       }
     }
-    this.model.setLocal("coursesCart", updatedArr);
-  };
+    this.model.setLocal(constants.COURSES_CART, updatedArr);
+  }
 
   updateProductCartCount(products, selectedProduct) {
     const updatedArr = [];
-
     for (let i = 0; i < products.length; i++) {
       if (products[i].name === selectedProduct.name) {
         const tempCourse = products[i];
@@ -85,105 +77,153 @@ class Controller {
         updatedArr.push(products[i]);
       }
     }
-    this.model.setLocal("productsCart", updatedArr);
+    this.model.setLocal(constants.PRODUCTS_CART, updatedArr);
   }
 
-  minusClickHandler = (e, updateCountFn, updateTotalFn) => {
-    const productsCart = this.model.getLocal("productsCart");
-    const coursesCart = this.model.getLocal("coursesCart");
+  getSlides = () => {
+    return [
+      { url: img0, title: "img" },
+      { url: img1, title: "img" },
+      { url: img2, title: "img" },
+      { url: img3, title: "img" },
+      { url: img4, title: "img" },
+      { url: img5, title: "img" },
+      { url: img6, title: "img" },
+      { url: img7, title: "img" },
+      { url: img8, title: "img" },
+      { url: img9, title: "img" },
+      { url: img10, title: "img" }
+    ];
+  }
 
-    const selectedProduct = productsCart.find(
-      (item) => item.name === e.target.getAttribute("name")
-    );
-    const selectedCourse = coursesCart.find(
-      (item) => item.name === e.target.getAttribute("name")
-    );
-    const count = Number(this.model.getLocal("cartCount")) - 1;
-    this.model.setLocal("cartCount", count);
-    updateCountFn(constants.MINUS);
+  getSlidesStyle = () => {
+    return {
+      width: "60%",
+      height: "50vmin",
+      margin: "0 auto"
+    };
+  }
 
-    const total =
-      Number(this.model.getLocal("cartTotal")) -
-      (selectedCourse
-        ? Number(selectedCourse.price)
-        : Number(selectedProduct.price));
-    this.model.setLocal("cartTotal", total);
-    updateTotalFn(
-      constants.MINUS,
-      selectedCourse
-        ? Number(selectedCourse.price)
-        : Number(selectedProduct.price)
-    );
+  productsAddSame = (product, updateArrayIds, setIsLoading) => {
+    setIsLoading(true);
+      this.model.productsDB
+        .addProduct({
+          cartCount: 0,
+          name: product.name,
+          price: product.price,
+          imgUrl: product.imgUrl,
+          stock: product.stock
+        })
+        .then((res) => {
+          this.fetchData(setIsLoading).then((res) => {
+            this.checkDB(this.model.getLocal(constants.PRODUCTS), updateArrayIds);
+            setIsLoading(false);
+          });
+        });
+  }
 
-    if (selectedProduct) {
-      selectedProduct.stock = selectedProduct.stock + 1;
-    }
+  coursesAddSame = (course, updateArrayIds, setIsLoading) => {
+    setIsLoading(true);
+      this.model.coursesDB
+        .addCourse({
+          cartCount: 1,
+          name: course.name,
+          price: course.price,
+          imgUrl: course.imgUrl,
+          videos: course.videos
+        })
+        .then((res) => {
+          this.fetchData(setIsLoading).then((res) => {
+            this.checkDB(this.model.getLocal(constants.COURSES), updateArrayIds);
+            setIsLoading(false);
+          });
+        });
+  }
 
-    if (selectedCourse) {
-      let flag = true;
-      const newArr = [];
-      for (let i = 0; i < coursesCart.length; i++) {
-        if (flag && coursesCart[i].name === selectedCourse.name) {
-          flag = false;
-        } else {
-          newArr.push(coursesCart[i]);
-        }
-      }
-      this.model.setLocal("coursesCart", newArr);
-    }
-
-    if (selectedProduct) {
-      if (Number(selectedProduct.cartCount) === 1) {
-        let flag = true;
-        const newArr = [];
-        for (let i = 0; i < productsCart.length; i++) {
-          if (flag && productsCart[i].name === selectedProduct.name) {
-            flag = false;
-          } else {
-            newArr.push(productsCart[i]);
-          }
-        }
-        this.model.setLocal("productsCart", newArr);
-      } else {
-        for (let i = 0; i < productsCart.length; i++) {
-          if (productsCart[i].name === selectedProduct.name) {
-            productsCart[i].cartCount = Number(productsCart[i].cartCount) - 1;
-          }
-        }
-        this.model.setLocal("productsCart", productsCart);
-      }
-    }
-  };
-
-  addCourseToCart = (
-    updateCountFn,
-    updateTotalFn,
-    params,
+  checkDB = (
+    sellable,
+    updateArrayIds,
     loggedInUser,
+    setIsLoading,
     navigate
   ) => {
-    if (loggedInUser) {
-      const courses = this.model.getLocal("courses");
-      const selectedCourse = courses[params.id];
-      this.model.setLocal("selectedCourse", selectedCourse);
-
-      const count = Number(this.model.getLocal("cartCount")) + 1;
-      this.model.setLocal("cartCount", count);
-      updateCountFn(constants.PLUS);
-
-      const total =
-        Number(this.model.getLocal("cartTotal")) + Number(selectedCourse.price);
-      this.model.setLocal("cartTotal", total);
-      updateTotalFn(constants.PLUS, Number(selectedCourse.price));
-
-      const coursesCart = this.model.getLocal("coursesCart");
-      coursesCart.push(selectedCourse);
-      this.model.setLocal("coursesCart", coursesCart);
-      navigate("/courses");
-    } else {
-      navigate("/login");
+    const newKeys = [];
+    if (sellable) {
+      const keys = Object.keys(sellable);
+      for (let i = 0; i < keys.length; i++) {
+        if (sellable[keys[i]] !== null) {
+          newKeys.push(keys[i]);
+        }
+      }
     }
-  };
+
+    updateArrayIds(newKeys);
+    this.model.setLocal(constants.ARRAY_IDS, newKeys);
+  }
+
+  editSpecificProduct = (nameRef, priceRef, imageRef, stockRef, id, setIsLoading, updateArrayIds) => {
+    setIsLoading(true);
+      this.model.productsDB
+      .editProduct(
+        {
+          cartCount: 0,
+          name: nameRef.current.value,
+          price: priceRef.current.value,
+          imgUrl: imageRef.current.value,
+          stock: stockRef.current.value
+        },
+        id
+      )
+      .then((res) => {
+        this.fetchData(setIsLoading).then((res) => {
+          this.checkDB(this.model.getLocal(constants.PRODUCTS), updateArrayIds);
+          setIsLoading(false);
+        });
+      });
+    setIsLoading(false);
+  }
+
+  editSpecificCourse = (nameRef, priceRef, imageRef, videoRef, id, setIsLoading, updateArrayIds) => {
+    setIsLoading(true);
+      this.model.coursesDB
+      .editCourse(
+        {
+          cartCount: 1,
+          name: nameRef.current.value,
+          price: priceRef.current.value,
+          imgUrl: imageRef.current.value,
+          videos: JSON.parse(videoRef.current.value)
+        },
+        id
+      )
+      .then((res) => {
+        this.fetchData(setIsLoading).then((res) => {
+          this.checkDB(this.model.getLocal(constants.COURSES), updateArrayIds);
+          setIsLoading(false);
+        });
+      });
+    setIsLoading(false);
+  }
+
+  loginSubmit = (e, emailRef, passwordRef, setIsError, navigate) => {
+    e.preventDefault();
+
+    const users = this.model.getLocal("users");
+    const email = emailRef.current.value;
+    const password = passwordRef.current.value;
+    setIsError(false);
+
+    const loggedInUser = users.find(
+      (user) => user.email === email && user.password === password
+    );
+
+    if (loggedInUser) {
+      this.model.setLocal(constants.LOGGED_IN_USER, loggedInUser);
+      navigate(constants.HOME_PAGE);
+    } else {
+      setIsError(true);
+    }
+  }
 
   deleteCourseFromDB = (
     arrayIds,
@@ -202,15 +242,68 @@ class Controller {
     setIsLoading(true);
     this.model.coursesDB.removeCourse(id).then((res) => {
       this.fetchData(setIsLoading).then((res) => {
-        this.checkDB(this.model.getLocal("courses"), updateArrayIds);
+        this.checkDB(this.model.getLocal(constants.COURSES), updateArrayIds);
         setIsLoading(false);
       });
+    })
+  }
+
+  addCourseToCart = (
+    updateCountFn,
+    updateTotalFn,
+    params,
+    loggedInUser,
+    navigate
+  ) => {
+    if (loggedInUser) {
+      const courses = this.model.getLocal(constants.COURSES);
+      const selectedCourse = courses[params.id];
+      this.model.setLocal(constants.SELECTED_COURSE, selectedCourse);
+
+      const count = Number(this.model.getLocal(constants.CART_COUNT)) + 1;
+      this.model.setLocal(constants.CART_COUNT, count);
+      updateCountFn(constants.PLUS);
+
+      const total = Number(this.model.getLocal(constants.CART_TOTAL)) + Number(selectedCourse.price);
+      this.model.setLocal(constants.CART_TOTAL, total);
+      updateTotalFn(constants.PLUS, Number(selectedCourse.price));
+
+      const coursesCart = this.model.getLocal(constants.COURSES_CART);
+      coursesCart.push(selectedCourse);
+      this.model.setLocal(constants.COURSES_CART, coursesCart);
+      navigate(constants.COURSES_PAGE);
+    } else {
+      navigate(constants.LOGIN_PAGE);
+    }
+  }
+
+  fetchData = async (setIsLoading) => {
+    setIsLoading(true);
+    await this.model.usersDB.getAllUsers().then((res) => {
+      this.model.setLocal("users", res);
+      setIsLoading(false);
     }).catch((err) => {
       setIsLoading(false);
-      console.log('deleting course from DB failed');
-      throw new Error('deleting course from DB failed');
+      console.log('getAllUsers from DB failed');
+      throw new Error('getAllUsers from DB failed');
     })
-  };
+    await this.model.productsDB.getAllProducts().then((res) => {
+      this.model.setLocal("products", res);
+      setIsLoading(false);
+    }).catch((err) => {
+      setIsLoading(false);
+      console.log('getAllProducts from DB failed');
+      throw new Error('getAllProducts from DB failed');
+    })
+    await this.model.coursesDB.getAllCourses().then((res) => {
+      this.model.setLocal("courses", res);
+      setIsLoading(false);
+    }).catch((err) => {
+      setIsLoading(false);
+      console.log('getAllCourses from DB failed');
+      throw new Error('getAllCourses from DB failed');
+    })
+  }
 
   addCourseToDB = (
     nameRef,
@@ -233,25 +326,21 @@ class Controller {
         newVideos.push({name: i + 1, url: item});
       });
       this.model.coursesDB
-        .addCourse({
-          cartCount: 1,
-          imgUrl: imageRef.current.value,
-          name: nameRef.current.value,
-          price: priceRef.current.value,
-          videos: newVideos
-        })
-        .then((res) => {
-          this.fetchData(setIsLoading).then((res) => {
-            this.checkDB(this.model.getLocal("courses"), updateArrayIds);
-            setIsLoading(false);
-          });
-        }).catch((err) => {
+      .addCourse({
+        cartCount: 1,
+        imgUrl: imageRef.current.value,
+        name: nameRef.current.value,
+        price: priceRef.current.value,
+        videos: newVideos
+      })
+      .then((res) => {
+        this.fetchData(setIsLoading).then((res) => {
+          this.checkDB(this.model.getLocal(constants.COURSES), updateArrayIds);
           setIsLoading(false);
-          console.log('adding course to DB failed');
-          throw new Error('adding course to DB failed');
-        })
+        });
+      })
     }
-  };
+  }
 
   editCourseFromDB = (
     arrayIds,
@@ -283,116 +372,24 @@ class Controller {
       });
       setIsLoading(true);
       this.model.coursesDB
-        .editCourse(
-          {
-            cartCount: 1,
-            imgUrl: imageRef.current.value,
-            name: nameRef.current.value,
-            price: priceRef.current.value,
-            videos: newVideos
-          },
-          id
-        )
-        .then((res) => {
-          this.fetchData(setIsLoading).then((res) => {
-            this.checkDB(this.model.getLocal("courses"), updateArrayIds);
-            setIsLoading(false);
-          });
-        }).catch((err) => {
+      .editCourse(
+        {
+          cartCount: 1,
+          imgUrl: imageRef.current.value,
+          name: nameRef.current.value,
+          price: priceRef.current.value,
+          videos: newVideos
+        },
+        id
+      )
+      .then((res) => {
+        this.fetchData(setIsLoading).then((res) => {
+          this.checkDB(this.model.getLocal("courses"), updateArrayIds);
           setIsLoading(false);
-          console.log('editing course from DB failed');
-          throw new Error('editing course from DB failed');
-        })
+        });
+      })
     }
-  };
-
-  fetchData = async (setIsLoading) => {
-    setIsLoading(true);
-    await this.model.usersDB.getAllUsers().then((res) => {
-      this.model.setLocal("users", res);
-      setIsLoading(false);
-    }).catch((err) => {
-      setIsLoading(false);
-      console.log('getAllUsers from DB failed');
-      throw new Error('getAllUsers from DB failed');
-    })
-    await this.model.productsDB.getAllProducts().then((res) => {
-      this.model.setLocal("products", res);
-      setIsLoading(false);
-    }).catch((err) => {
-      setIsLoading(false);
-      console.log('getAllProducts from DB failed');
-      throw new Error('getAllProducts from DB failed');
-    })
-    await this.model.coursesDB.getAllCourses().then((res) => {
-      this.model.setLocal("courses", res);
-      setIsLoading(false);
-    }).catch((err) => {
-      setIsLoading(false);
-      console.log('getAllCourses from DB failed');
-      throw new Error('getAllCourses from DB failed');
-    })
-  };
-
-  initStorage = () => {
-    this.model.setLocal("cartCount", "0");
-    this.model.setLocal("cartTotal", "0");
-    this.model.setLocal("productsCart", []);
-    this.model.setLocal("coursesCart", []);
-    this.model.setLocal("productsCartCount", []);
-    this.model.setLocal("coursesCartCount", []);
-  };
-
-  getSlides = () => {
-    return [
-      { url: img0, title: "img" },
-      { url: img1, title: "img" },
-      { url: img2, title: "img" },
-      { url: img3, title: "img" },
-      { url: img4, title: "img" },
-      { url: img5, title: "img" },
-      { url: img6, title: "img" },
-      { url: img7, title: "img" },
-      { url: img8, title: "img" },
-      { url: img9, title: "img" },
-      { url: img10, title: "img" }
-    ];
-  };
-
-  getSlidesStyle = () => {
-    return {
-      width: "60%",
-      height: "50vmin",
-      margin: "0 auto"
-    };
-  };
-
-  loginSubmit = (e, emailRef, passwordRef, setIsError, navigate) => {
-    e.preventDefault();
-
-    const users = this.model.getLocal("users");
-    const email = emailRef.current.value;
-    const password = passwordRef.current.value;
-    setIsError(false);
-
-    const loggedInUser = users.find(
-      (user) => user.email === email && user.password === password
-    );
-
-    if (loggedInUser) {
-      this.model.setLocal(constants.LOGGED_IN_USER, loggedInUser);
-      navigate("/");
-    } else {
-      setIsError(true);
-    }
-  };
-
-  resetLogin = (e, emailRef, passwordRef, setIsError) => {
-    e.preventDefault();
-    emailRef.current.value = "";
-    passwordRef.current.value = "";
-    setIsError(false);
-  };
+  }
 
   addProductToCart = (
     selectedProduct,
@@ -401,8 +398,8 @@ class Controller {
     updateTotal,
     navigate
   ) => {
-    const loggedInUser = this.model.getLocal("loggedInUser");
-    this.model.setLocal("selectedProduct", selectedProduct);
+    const loggedInUser = this.model.getLocal(constants.LOGGED_IN_USER);
+    this.model.setLocal(constants.SELECTED_PRODUCT, selectedProduct);
 
     if (loggedInUser) {
       setIsError(false);
@@ -410,20 +407,18 @@ class Controller {
       if (selectedProduct.stock <= 0) {
         setIsError(true);
       } else {
-        const count = Number(this.model.getLocal("cartCount")) + 1;
-        this.model.setLocal("cartCount", count);
+        const count = Number(this.model.getLocal(constants.CART_COUNT)) + 1;
+        this.model.setLocal(constants.CART_COUNT, count);
         updateCount(constants.PLUS);
 
-        const total =
-          Number(this.model.getLocal("cartTotal")) +
-          Number(selectedProduct.price);
-        this.model.setLocal("cartTotal", total);
+        const total = Number(this.model.getLocal(constants.CART_TOTAL)) + Number(selectedProduct.price);
+        this.model.setLocal(constants.CART_TOTAL, total);
         updateTotal(constants.PLUS, Number(selectedProduct.price));
 
         selectedProduct.stock = selectedProduct.stock - 1;
         selectedProduct.cartCount = Number(selectedProduct.cartCount) + 1;
 
-        const productsCart = this.model.getLocal("productsCart");
+        const productsCart = this.model.getLocal(constants.PRODUCTS_CART);
         if (productsCart.find((item) => item.name === selectedProduct.name)) {
           for (let i = 0; i < productsCart.length; i++) {
             if (productsCart[i].name === selectedProduct.name) {
@@ -433,13 +428,13 @@ class Controller {
         } else {
           productsCart.push(selectedProduct);
         }
-        this.model.setLocal("productsCart", productsCart);
+        this.model.setLocal(constants.PRODUCTS_CART, productsCart);
       }
-      navigate("/products");
+      navigate(constants.PRODUCTS_PAGE);
     } else {
-      navigate("/login");
+      navigate(constants.LOGIN_PAGE);
     }
-  };
+  }
 
   productsDelete = (
     arrayIds,
@@ -459,12 +454,12 @@ class Controller {
       setIsLoading(true);
       this.model.productsDB.removeProduct(id).then((res) => {
         this.fetchData(setIsLoading).then((res) => {
-          this.checkDB(this.model.getLocal("products"), updateArrayIds);
+          this.checkDB(this.model.getLocal(constants.PRODUCTS), updateArrayIds);
           setIsLoading(false);
         })
       })
     }
-  };
+  }
 
   productsAdd = (
     nameRef,
@@ -491,47 +486,11 @@ class Controller {
         })
         .then((res) => {
           this.fetchData(setIsLoading).then((res) => {
-            this.checkDB(this.model.getLocal("products"), updateArrayIds);
+            this.checkDB(this.model.getLocal(constants.PRODUCTS), updateArrayIds);
             setIsLoading(false);
           });
         });
     }
-  };
-
-  productsAddSame = (product, updateArrayIds, setIsLoading) => {
-    setIsLoading(true);
-      this.model.productsDB
-        .addProduct({
-          cartCount: 0,
-          name: product.name,
-          price: product.price,
-          imgUrl: product.imgUrl,
-          stock: product.stock
-        })
-        .then((res) => {
-          this.fetchData(setIsLoading).then((res) => {
-            this.checkDB(this.model.getLocal("products"), updateArrayIds);
-            setIsLoading(false);
-          });
-        });
-  }
-
-  coursesAddSame = (course, updateArrayIds, setIsLoading) => {
-    setIsLoading(true);
-      this.model.coursesDB
-        .addCourse({
-          cartCount: 1,
-          name: course.name,
-          price: course.price,
-          imgUrl: course.imgUrl,
-          videos: course.videos
-        })
-        .then((res) => {
-          this.fetchData(setIsLoading).then((res) => {
-            this.checkDB(this.model.getLocal("courses"), updateArrayIds);
-            setIsLoading(false);
-          });
-        });
   }
 
   productsEdit = (
@@ -570,96 +529,96 @@ class Controller {
         )
         .then((res) => {
           this.fetchData(setIsLoading).then((res) => {
-            this.checkDB(this.model.getLocal("products"), updateArrayIds);
+            this.checkDB(this.model.getLocal(constants.PRODUCTS), updateArrayIds);
             setIsLoading(false);
           });
         });
     }
-  };
+  }
 
-  checkDB = (
-    sellable,
-    updateArrayIds,
-    loggedInUser,
-    setIsLoading,
-    navigate
-  ) => {
-    const newKeys = [];
-    if (sellable) {
-      const keys = Object.keys(sellable);
-      for (let i = 0; i < keys.length; i++) {
-        if (sellable[keys[i]] !== null) {
-          newKeys.push(keys[i]);
+  plusClickHandler = (e, updateCountFn, updateTotalFn) => {
+    const productsCart = this.model.getLocal(constants.PRODUCTS_CART);
+    const coursesCart = this.model.getLocal(constants.COURSES_CART);
+
+    const selectedProduct = productsCart.find((item) => item.name === e.target.getAttribute(constants.NAME));
+    const selectedCourse = coursesCart.find((item) => item.name === e.target.getAttribute(constants.NAME));
+
+    const count = Number(this.model.getLocal(constants.CART_COUNT)) + 1;
+
+    this.model.setLocal(constants.CART_COUNT, count);
+    updateCountFn(constants.PLUS);
+
+    const total = Number(this.model.getLocal(constants.CART_TOTAL)) + (selectedCourse ? Number(selectedCourse.price) : Number(selectedProduct.price));
+    this.model.setLocal(constants.CART_TOTAL, total);
+    updateTotalFn(constants.PLUS, selectedCourse ? Number(selectedCourse.price) : Number(selectedProduct.price));
+
+    if (selectedProduct) {
+      selectedProduct.stock = selectedProduct.stock - 1;
+      for (let i = 0; i < productsCart.length; i++) {
+        if (productsCart[i].name === selectedProduct.name) {
+          productsCart[i].cartCount = Number(productsCart[i].cartCount) + 1;
         }
       }
+      this.model.setLocal(constants.PRODUCTS_CART, productsCart);
+    } else {
+      coursesCart.push(selectedCourse);
+      this.model.setLocal(constants.COURSES_CART, coursesCart);
+    }
+  }
+
+  minusClickHandler = (e, updateCountFn, updateTotalFn) => {
+    const productsCart = this.model.getLocal(constants.PRODUCTS_CART);
+    const coursesCart = this.model.getLocal(constants.COURSES_CART);
+
+    const selectedProduct = productsCart.find((item) => item.name === e.target.getAttribute(constants.NAME));
+    const selectedCourse = coursesCart.find((item) => item.name === e.target.getAttribute(constants.NAME));
+    const count = Number(this.model.getLocal(constants.CART_COUNT)) - 1;
+    this.model.setLocal(constants.CART_COUNT, count);
+    updateCountFn(constants.MINUS);
+
+    const total = Number(this.model.getLocal(constants.CART_TOTAL)) - (selectedCourse ? Number(selectedCourse.price) : Number(selectedProduct.price));
+    this.model.setLocal(constants.CART_TOTAL, total);
+    
+    updateTotalFn(constants.MINUS, selectedCourse ? Number(selectedCourse.price) : Number(selectedProduct.price));
+
+    if (selectedProduct) {
+      selectedProduct.stock = selectedProduct.stock + 1;
     }
 
-    updateArrayIds(newKeys);
-    this.model.setLocal("arrayIds", newKeys);
-  };
+    if (selectedCourse) {
+      let flag = true;
+      const newArr = [];
+      for (let i = 0; i < coursesCart.length; i++) {
+        if (flag && coursesCart[i].name === selectedCourse.name) {
+          flag = false;
+        } else {
+          newArr.push(coursesCart[i]);
+        }
+      }
+      this.model.setLocal(constants.COURSES_CART, newArr);
+    }
 
-  deleteSpecificProduct = (id, setIsLoading, updateArrayIds) => {
-    setIsLoading(true);
-      this.model.productsDB.removeProduct(id).then((res) => {
-        this.fetchData(setIsLoading).then((res) => {
-          this.checkDB(this.model.getLocal("products"), updateArrayIds);
-          setIsLoading(false);
-        });
-      });
-  }
-
-  editSpecificProduct = (nameRef, priceRef, imageRef, stockRef, id, setIsLoading, updateArrayIds) => {
-    setIsLoading(true);
-      this.model.productsDB
-      .editProduct(
-        {
-          cartCount: 0,
-          name: nameRef.current.value,
-          price: priceRef.current.value,
-          imgUrl: imageRef.current.value,
-          stock: stockRef.current.value
-        },
-        id
-      )
-      .then((res) => {
-        this.fetchData(setIsLoading).then((res) => {
-          this.checkDB(this.model.getLocal("products"), updateArrayIds);
-          setIsLoading(false);
-        });
-      });
-    setIsLoading(false);
-  }
-
-  editSpecificCourse = (nameRef, priceRef, imageRef, videoRef, id, setIsLoading, updateArrayIds) => {
-    setIsLoading(true);
-      this.model.coursesDB
-      .editCourse(
-        {
-          cartCount: 1,
-          name: nameRef.current.value,
-          price: priceRef.current.value,
-          imgUrl: imageRef.current.value,
-          videos: JSON.parse(videoRef.current.value)
-        },
-        id
-      )
-      .then((res) => {
-        this.fetchData(setIsLoading).then((res) => {
-          this.checkDB(this.model.getLocal("courses"), updateArrayIds);
-          setIsLoading(false);
-        });
-      });
-    setIsLoading(false);
-  }
-
-  deleteSpecificCourse = (id, setIsLoading, updateArrayIds) => {
-    setIsLoading(true);
-    this.model.coursesDB.removeCourse(id).then((res) => {
-      this.fetchData(setIsLoading).then((res) => {
-        this.checkDB(this.model.getLocal("courses"), updateArrayIds);
-        setIsLoading(false);
-      });
-    });
+    if (selectedProduct) {
+      if (Number(selectedProduct.cartCount) === 1) {
+        let flag = true;
+        const newArr = [];
+        for (let i = 0; i < productsCart.length; i++) {
+          if (flag && productsCart[i].name === selectedProduct.name) {
+            flag = false;
+          } else {
+            newArr.push(productsCart[i]);
+          }
+        }
+        this.model.setLocal(constants.PRODUCTS_CART, newArr);
+      } else {
+        for (let i = 0; i < productsCart.length; i++) {
+          if (productsCart[i].name === selectedProduct.name) {
+            productsCart[i].cartCount = Number(productsCart[i].cartCount) - 1;
+          }
+        }
+        this.model.setLocal(constants.PRODUCTS_CART, productsCart);
+      }
+    }
   }
 }
 
