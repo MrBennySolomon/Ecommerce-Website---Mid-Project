@@ -48,8 +48,6 @@ const Product = () => {
     navigate(constants.PRODUCTS_PAGE);
   };
 
-  
-  
   const showHandler          = () => {
     setShowEditFields(true);
     setTimeout(() => {

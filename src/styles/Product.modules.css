@@ -27,6 +27,10 @@ div.product {
   color: rgba(212, 162, 191, 0.5);
 }
 
+h2, h1 {
+  color: black;
+}
+
 button.add-to-cart-btn {
   border: 3px solid rgba(212, 162, 191, 0.5);
 }
