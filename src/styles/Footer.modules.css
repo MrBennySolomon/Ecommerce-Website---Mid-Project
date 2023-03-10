@@ -1,9 +1,9 @@
 footer {
   width:100vw;
   height: 10vh;
-  background-color: rgba(84, 44, 68, 0.8);
-  border-top: 3px solid #D45F8F;
-  color: #D4A2BF;
+  background-color: #26001B;
+  border-top: 5px solid #FFF600;
+  color: #FF005C;
 
   display: flex;
   justify-content: center;

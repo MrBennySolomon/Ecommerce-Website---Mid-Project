@@ -1,14 +1,14 @@
 nav {
   width:100vw;
   height: 10vh;
-  background-color: rgba(212, 162, 191, 0.8);
+  background-color: #26001B;
   font-weight: bold;
-  color: #542C44;
+  color: #FF005C;
 
   display: flex;
   justify-content: space-evenly;
   align-items: center;
-  border-bottom: 3px solid #D45F8F;
+  border-bottom: 5px solid #FFF600;
 
   font-size: 150%;
 }
@@ -21,36 +21,36 @@ ul {
   font-size: 100%;
   list-style: none;
   text-decoration: none;
-  color: #542C44;
+  color: #FF005C;
 }
 
 li {
-  color: #542C44;
+  color: #FF005C;
   padding: 1.3rem 2rem;
 }
 
 a {
-  color: #542C44;
+  color: #FF005C;
   text-decoration: none;
 
 }
 
 .dark {
-  background-color: rgba(0, 0, 0, 0.5);
+  background-color: #26001B;
 }
 
 .light {
-  background-color: rgba(212, 162, 191, 0.5);
+  background-color: #26001B;
 }
 
 .btn-dark {
   color: white;
-  background-color: rgba(0, 0, 0, 0.5);
+  background-color: #26001B;
   border: 2px solid coral;
 }
 
 .btn-light {
-  background-color: rgba(0, 0, 0, 0.5);
+  background-color: #26001B;
   color: #542C44;
   
   border: 2px solid #333;
@@ -74,31 +74,32 @@ a {
 }
 
 .bg-dark {
-  background-color: rgba(0, 0, 0, 0.5);
+  background-color: #26001B;
 }
 
 .bg-light {
-  background-color: rgba(0, 0, 0, 0.5);
+  background-color: #26001B;
 }
 
 .home-con-dark
 .about-con-dark {
   width: 100px;
   height: 100px;
-  background-color: rgba(0, 0, 0, 0.5);
+  background-color: #26001B;
 }
 
 .home-con-light,
 .about-con-light {
   width: 100px;
   height: 100px;
-  background-color: rgba(0, 0, 0, 0.5);
+  background-color: #26001B;
 }
 
 img.logo {
   width: 50px;
   height: 50px;
   border-radius: 50%;
+  border: 2px solid #FFF600;
 }
 
 li:hover {
@@ -108,7 +109,7 @@ li:hover {
 label.amount-of-items {
   width: 1rem;
   height: 1rem;
-  border: 1px solid #542C44;
+  border: 1px solid #26001B;
   border-radius: 50%;
   padding: 0 0.3rem;
   font-size: 100%;

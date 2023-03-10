@@ -14,6 +14,10 @@ body {
   gap: 1rem;
 }
 
+.coupons-page h1 {
+  color: #FFF600;
+}
+
 .coupons-container {
   display: flex;
   justify-content: center;

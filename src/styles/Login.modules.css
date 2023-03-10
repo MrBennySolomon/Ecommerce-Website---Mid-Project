@@ -7,7 +7,7 @@
 div.login {
   width:100%;
   height: 80%;
-  background: linear-gradient(135deg, rgba(212, 162, 191, 0.5) 30%, rgba(84, 44, 68, 1) 70%);
+  background: linear-gradient(135deg, rgba(255, 0,92, 0.6) 30%, rgba(129, 0, 52, 1) 70%);
 
   display: flex;
   justify-content: center;
@@ -24,14 +24,18 @@ form {
   gap: 1rem;
 }
 
+.login h1 {
+  color: #FFF600;
+}
+
 .form-container {
-  width: 100%;
-  height: 100%;
+  width: 60%;
+  height: 60%;
   display: flex;
   justify-content: space-evenly;
   align-items: center;
   flex-direction: column;
-  border: 2px solid rgba(84, 44, 68, 1);
+  border: 2px solid #FFF600;
   text-align: center;
 }
 
@@ -39,7 +43,7 @@ input[type=password],
 input[type=email] {
   width: 90%;
   padding: 0.6rem 0rem;
-  border: 3px solid rgba(212, 162, 191, 0.5);
+  border: 3px solid rgba(255, 0, 92, 0.5);
   -webkit-transition: 0.5s;
   transition: 0.5s;
   outline: none;
@@ -50,15 +54,16 @@ input[type=email] {
 
 input[type=password]:focus,
 input[type=email]:focus {
-  border: 3px solid rgba(84, 44, 68, 1);
+  border: 3px solid rgba(255, 0, 92, 1);
 }
 
 button {
   width: 90%;
-  background-color: rgba(84, 44, 68, 1);
+  background-color: #810034;
   padding: 0.6rem 0rem;
-  color: #D9BFC3;
+  color: #FFF600;
   font-size: 1.5rem;
+  border: 2px solid #26001B;
 }
 
 h3.error-login {
@@ -70,13 +75,13 @@ h3.error-login {
   position: relative;
   width: 80px;
   height: 80px;
+  
 }
 
 .lds-default div {
   position: absolute;
   width: 6px;
   height: 6px;
-  background: rgba(84, 44, 68, 1);
   border-radius: 50%;
   animation: lds-default 1.2s linear infinite;
 }

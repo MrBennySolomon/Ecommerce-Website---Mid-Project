@@ -8,7 +8,7 @@ const ErrorPage = () => {
     <div className="error">
       <MainNavigation />
       <main>
-        <h1>An error occurred!</h1>
+        <h1>An <label>error</label> occurred!</h1>
         <h3>Could not find this page!</h3>
         <p>
           <Link to="/">Take me Home</Link>

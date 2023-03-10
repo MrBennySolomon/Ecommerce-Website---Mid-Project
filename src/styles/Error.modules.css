@@ -1,5 +1,5 @@
 div.error {
-  background: linear-gradient(135deg, rgba(212, 162, 191, 0.5) 30%, rgba(84, 44, 68, 1) 70%);
+  background: linear-gradient(135deg, rgba(255, 0,92, 0.6) 30%, rgba(129, 0, 52, 1) 70%);
 
   display: flex;
   justify-content: center;
@@ -21,7 +21,16 @@ div.error main {
 }
 
 main p a {
-  border: 1px solid rgba(84, 44, 68, 1);
+  border: 3px solid #26001B;
   padding: 0.5rem 0.5rem;
   cursor: pointer;
+  color: #FFF600;
+}
+
+main h3 {
+  color: #26001B;
+}
+
+main label {
+  color: #FFF600;
 }
