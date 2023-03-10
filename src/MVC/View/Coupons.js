@@ -2,7 +2,6 @@ import React    from 'react'
 import discount from '../../img/discount.png';
 
 const Coupons = () => {
-
   return (
     <div className='coupons-page'>
       <h1>Coupons</h1>
@@ -12,5 +11,4 @@ const Coupons = () => {
     </div>
   )
 }
-
 export default Coupons;

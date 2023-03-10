@@ -48,7 +48,7 @@ const MainNavigation = () => {
           </div>
         </div>
       </div>
-      <nav className='light'> 
+      <nav className='fullscreen-navbar'> 
         <ul>
           <li><Link to='/'><img src={logo} alt='logo' className='logo'/></Link></li>
           <li><Link to='/'>Home</Link></li>

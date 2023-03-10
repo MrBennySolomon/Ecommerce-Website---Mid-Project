@@ -47,7 +47,7 @@ const Cart = () => {
                     onClick={minusClickHandler}
                     className="btnMinus"
                   >
-                    -
+                    <i name={item.name} className="fa-solid fa-caret-down"></i>
                   </button>
                 </td>
                 <td className="itemAmount">{item.cartCount}</td>
@@ -57,7 +57,7 @@ const Cart = () => {
                     onClick={plusClickHandler}
                     className="btnPlus"
                   >
-                    +
+                    <i name={item.name} className="fa-solid fa-caret-up"></i>
                   </button>
                 </td>
               </tr>
@@ -75,7 +75,7 @@ const Cart = () => {
                     onClick={minusClickHandler}
                     className="btnMinus"
                   >
-                    -
+                    <i name={item.name} className="fa-solid fa-caret-down"></i>
                   </button>
                 </td>
                 <td className="itemAmount">{item.cartCount}</td>
@@ -86,7 +86,7 @@ const Cart = () => {
                     className="btnPlus"
                     disabled
                   >
-                    +
+                    <i name={item.name} className="fa-solid fa-caret-up"></i>
                   </button>
                 </td>
               </tr>

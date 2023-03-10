@@ -1,0 +1,126 @@
+
+nav {
+  @extend %size;
+  @extend %background-color-dark;
+  @extend %font-color-light;
+  @extend %flex-space-evenly;
+  @extend %border-bottom;
+  @extend %font-size-150;
+  ul {
+    @extend %flex-space-evenly;
+    @extend %gap-1;
+    @extend %font-size-100;
+    @extend %list-style-none;
+    @extend %text-decoration-none;
+    @extend %font-color-light;
+    li {
+      @extend %font-color-light;
+      @extend %li-padding;
+
+      a {
+        @extend %font-color-light;
+        @extend %text-decoration-none;
+      }
+      
+      label {
+        @extend %flex;
+        @extend %label-size;
+        @extend %border-radius-50;
+        @extend %label-padding;
+        @extend %font-size-100;
+        @extend %display-inline;
+        @extend %margin-left-4;
+      }
+
+      img {
+        @extend %logo-size;
+        @extend %border-radius-50;
+        @extend %logo-border;
+      }
+    }
+  }
+
+}
+
+%size {
+  width:100vw;
+  height: 10vh;
+}
+
+%background-color-dark {
+  background-color: #26001B;
+}
+
+%font-color-light {
+  color: #FF005C;
+}
+
+%flex-space-evenly {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+}
+
+%border-bottom {
+  border-bottom: 5px solid #FFF600;
+}
+
+%font-size-150 {
+  font-size: 150%;
+}
+
+%font-size-100 {
+  font-size: 100%;
+}
+
+%gap-1 {
+  gap: 1rem;
+}
+
+%list-style-none {
+  list-style: none;
+}
+
+%text-decoration-none {
+  text-decoration: none;
+}
+
+%li-padding {
+  padding: 1.3rem 2rem;
+}
+
+%flex {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+%label-size {
+  width: 1rem;
+  height: 1rem;
+}
+
+%border-radius-50 {
+  border-radius: 50%;
+}
+
+%label-padding {
+  padding: 0 0.3rem;
+}
+
+%display-inline {
+  display: inline;
+}
+
+%margin-left-4 {
+  margin-left: 4px;
+}
+
+%logo-size {
+  width: 50px;
+  height: 50px;
+}
+
+%logo-border {
+  border: 2px solid #FFF600;
+}

@@ -72,7 +72,8 @@ th,
 tr,
 td {
   border: 1px solid #FFF600;
-  background-color: #26001B;
+  /* background-color: #26001B; */
+  background-color: #FFF600;
   text-align: center;
   font-weight: bold;
   font-size: 110%;
@@ -84,22 +85,27 @@ td {
   /* background-color: #26001B; */
   /* color:rgba(84, 44, 68, 1); */
   /* background-color: rgba(212, 162, 191, 0.8); */
-  font-weight: bold;
+  /* font-weight: bold; */
 }
 
 .btnMinus {
   padding: 0.2rem 0.2rem ;
   width: 50px;
   height: 50px;
-  background-color: #26001B;
+  color: #26001B;
+  background-color: #FFF600;
   font-size: 150%;
+  border: none;
 }
 
 .btnPlus {
   padding: 0.2rem 0rem ;
   width: 50px;
   height: 50px;
-  background-color: #26001B;
+  color: #26001B;
+  background-color: #FFF600;
+  border: none;
+
   font-size: 150%;
 
 }
