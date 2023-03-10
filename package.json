@@ -26,7 +26,6 @@
     "web-vitals": "^2.1.4"
   },
   "scripts": {
-    "sass": "node-sass -w src/scss/ -o src/styles/dist/css --recursive",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",

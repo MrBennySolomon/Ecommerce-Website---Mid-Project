@@ -72,20 +72,11 @@ th,
 tr,
 td {
   border: 1px solid #FFF600;
-  /* background-color: #26001B; */
   background-color: #FFF600;
   text-align: center;
   font-weight: bold;
   font-size: 110%;
   color: #FF005C;
-}
-
-.btnPlus:hover,
-.btnMinus:hover {
-  /* background-color: #26001B; */
-  /* color:rgba(84, 44, 68, 1); */
-  /* background-color: rgba(212, 162, 191, 0.8); */
-  /* font-weight: bold; */
 }
 
 .btnMinus {
