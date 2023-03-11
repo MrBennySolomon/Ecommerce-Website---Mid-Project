@@ -1,20 +1,20 @@
 import { useState, createContext, useContext } from 'react';
-import Model      from '../MVC/Model';
-import Controller from '../MVC/Controller';
-import constants from '../utils/constants';
+import Model                                   from '../MVC/Model';
+import Controller                              from '../MVC/Controller';
+import constants                               from '../utils/constants';
 
 const AppContext = createContext([]);
 
 const AppProvider = ({ children }) => {
-  const model = new Model();
-  const controller = new Controller(model);
+  const model                               = new Model();
+  const controller                          = new Controller(model);
 
-  const [isError, setIsError]   = useState(false);
-  const [isLoading, setIsLoading]   = useState(true);
+  const [isError, setIsError]               = useState(false);
+  const [isLoading, setIsLoading]           = useState(true);
 
-  const [count, setCount]       = useState(0);
-  const [total, setTotal]       = useState(0);
-  const [arrayIds, setArrayIds] = useState([]);
+  const [count, setCount]                   = useState(0);
+  const [total, setTotal]                   = useState(0);
+  const [arrayIds, setArrayIds]             = useState([]);
   const [showEditFields, setShowEditFields] = useState(false);
 
   const updateCount          = (operation)      => {

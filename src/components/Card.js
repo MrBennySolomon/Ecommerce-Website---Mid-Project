@@ -1,5 +1,5 @@
+import            '../styles/Card.modules.css';
 import React from 'react'
-import '../styles/Card.modules.css';
 
 const Card = ({name, price, src}) => {
   return (
