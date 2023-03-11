@@ -27,12 +27,17 @@ ul {
 li {
   color: #FF005C;
   padding: 1.3rem 2rem;
+  font-size: 100%;
 }
 
 a {
   color: #FF005C;
   text-decoration: none;
+  font-size: 100%;
+}
 
+.logout-btn-size {
+  font-size: 100%;
 }
 
 .fullscreen-navbar {

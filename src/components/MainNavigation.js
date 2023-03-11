@@ -34,7 +34,7 @@ const MainNavigation = () => {
             <div>
               <ul className='flex-container'>
                 <li onClick={() => inputRef.current.checked = false}><Link to='/'>Home</Link></li>
-                <li onClick={() => inputRef.current.checked = false}><Link to='/login'>Login</Link></li>
+                {!loggedInUser && <li onClick={() => inputRef.current.checked = false}><Link to='/login'>Login</Link></li>}
                 <li onClick={() => inputRef.current.checked = false}><Link to='/products'>Products</Link></li>
                 <li onClick={() => inputRef.current.checked = false}><Link to='/courses'>Courses</Link></li>
                 <li onClick={() => inputRef.current.checked = false}><Link to='/cart'>Cart<label className='amount-of-items-mobile'>{count}</label></Link></li>
@@ -42,7 +42,7 @@ const MainNavigation = () => {
                 <li onClick={() => inputRef.current.checked = false}><Link to='/live'>Go Live</Link></li>
                 <li onClick={() => inputRef.current.checked = false}><Link to='/coupons'>Coupons</Link></li>
                 
-                {loggedInUser && <li onClick={logoutHandler}>Logout</li>}
+                {loggedInUser && <li className='logout-btn-size' onClick={logoutHandler}>Logout</li>}
               </ul>
             </div>
           </div>
@@ -52,14 +52,14 @@ const MainNavigation = () => {
         <ul>
           <li><Link to='/'><img src={logo} alt='logo' className='logo'/></Link></li>
           <li><Link to='/'>Home</Link></li>
-          <li><Link to='/login'>Login</Link></li>
+          {!loggedInUser && <li><Link to='/login'>Login</Link></li>}
           <li><Link to='/cart'>Shopping Cart<label className='amount-of-items'>{count}</label></Link></li>
           <li><Link to='/courses'>Online Courses</Link></li>
           <li><Link to='/products'>Products</Link></li>
           <li><Link to='/about'>About</Link></li>
           <li><Link to='/live'>Go Live</Link></li>
           <li><Link to='/coupons'>Coupons</Link></li>
-          {loggedInUser && <li onClick={logoutHandler}>Logout</li>}
+          {loggedInUser && <li className='logout-btn-size' onClick={logoutHandler}>Logout</li>}
         </ul>
       </nav>
       

@@ -160,7 +160,6 @@
   transition: color 0.4s ease;
   z-index: 10;
   font-size: 80%;
-
 }
 
 .menu-wrap .menu > div > div > ul > li > a:hover {
@@ -173,4 +172,8 @@ ul.flex-container {
   justify-content: center;
   align-items: center;
   flex-direction: column;
+}
+
+.logout-btn-size {
+  font-size: 100%;
 }
