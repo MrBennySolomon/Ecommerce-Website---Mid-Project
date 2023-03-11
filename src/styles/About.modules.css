@@ -21,7 +21,7 @@ div.about {
   font-size: 1.1rem;
 
   display: flex;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: center;
   flex-direction: column;
 

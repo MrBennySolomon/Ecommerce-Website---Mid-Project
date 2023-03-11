@@ -16,7 +16,7 @@ div.error main {
   justify-content: center;
   align-items: center;
   flex-direction: column;
-   gap: 2rem;
+  gap: 2rem;
   font-size: 200%;
 }
 
