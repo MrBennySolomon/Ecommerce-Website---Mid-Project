@@ -16,6 +16,7 @@ diagram :
 #### ◯ About Page    - about the company descriptive text.
 #### ◯ Go Live Page  - make live streamming broadcasting from the app.
 #### ◯ Coupons Page  - coupons and sales very good prices.
+#### ◯ Chat Screen   - online live chat feature.
 ---------------------------------------------------------------------------------------------
 #### technologies used : react / react-router-dom / useState / useEffect / useRef / useContext / useNavigate / JavaScript / css / html
 ---------------------------------------------------------------------------------------------
@@ -23,18 +24,25 @@ diagram :
 ---------------------------------------------------------------------------------------------
 screen-shots:
 -------------
-![home-wide-screenshot](https://user-images.githubusercontent.com/53153372/223573795-d53ecca0-36d4-4f5e-8685-ab7db77eb700.png)
-![home-page-screenshot](https://user-images.githubusercontent.com/53153372/223573891-c2f27f02-7459-483b-969f-465e467e87d1.png)
-![menu-screenshot](https://user-images.githubusercontent.com/53153372/223573904-99e64190-b685-4186-bca4-f274ed674208.png)
-![login-screenshot](https://user-images.githubusercontent.com/53153372/223573915-0c9893c1-3261-4f14-b2c9-167a5290f347.png)
-![products-screenshot](https://user-images.githubusercontent.com/53153372/223573926-781a3a98-bc00-4043-a698-2e763ba7f2aa.png)
-![courses-screenshot](https://user-images.githubusercontent.com/53153372/223573932-afc22706-592a-4c5e-a8c8-7379af9091cd.png)
-![product-screenshot](https://user-images.githubusercontent.com/53153372/223573949-427bd6f5-8079-417f-bd0f-ee63125a38c9.png)
-![cart-screenshot](https://user-images.githubusercontent.com/53153372/223573965-214d70e7-ad3e-499e-91fa-292b0ed23a9c.png)
-![about-screenshot](https://user-images.githubusercontent.com/53153372/223573987-807e4c4a-1afb-410e-bcaf-74d1c7690ff1.png)
-![coupons-screenshot](https://user-images.githubusercontent.com/53153372/223574008-37727756-f6cb-4127-9d3a-98c8b250dbb8.png)
-![admin-edit-page](https://user-images.githubusercontent.com/53153372/223574035-c03d64a2-b39b-475d-992b-773a0171ada8.png)
-![go-live-screenshot](https://user-images.githubusercontent.com/53153372/223574056-e6c457c6-9565-4c1c-9acc-0d518f532000.png)
+![homepage](https://user-images.githubusercontent.com/53153372/224497150-6f00f5b5-be9d-457f-aa8b-6abd5dbc4646.png)
+![menu](https://user-images.githubusercontent.com/53153372/224497161-0202f8c9-4485-4ebd-97ac-2312045208b2.png)
+![login](https://user-images.githubusercontent.com/53153372/224497164-b7c7dbce-2034-4c26-8b6e-8182717b5d45.png)
+![productspage](https://user-images.githubusercontent.com/53153372/224497165-c2be4d68-eab8-4748-95fd-e784e43dbee3.png)
+![coursespage](https://user-images.githubusercontent.com/53153372/224497168-92f9f067-e52f-4357-9551-a9160944d444.png)
+![shoppingcartpage](https://user-images.githubusercontent.com/53153372/224497174-4175715f-45d3-431f-b053-5e0f25f64146.png)
+![aboutpage](https://user-images.githubusercontent.com/53153372/224497179-2e1e4bcb-b7f0-4163-bca0-ad0b1eaef74b.png)
+![golivepage](https://user-images.githubusercontent.com/53153372/224497181-addb6a98-7927-4a82-8f4e-d4cf44544dc3.png)
+![coupons](https://user-images.githubusercontent.com/53153372/224497187-5270a63e-1057-426c-99b3-bd873f26e188.png)
+![onlinecourseinsidemanager](https://user-images.githubusercontent.com/53153372/224497203-4b5ddb29-8687-45b8-8604-3ac646a6b01e.png)
+![productinsidemanager](https://user-images.githubusercontent.com/53153372/224497217-947a5663-1163-41b0-a54c-ab5c31c2ffd1.png)
+![onlinecourseinsidemanageredit](https://user-images.githubusercontent.com/53153372/224497233-c729b318-687f-46e4-827c-be0be4961d60.png)
+![productinsidemanageredit](https://user-images.githubusercontent.com/53153372/224497244-11477646-0788-444f-8ae6-21b926f7f999.png)
+![viewonlinecourse](https://user-images.githubusercontent.com/53153372/224497260-955a894d-5af5-4aec-a998-5ef727323276.png)
+![livechatscreen](https://user-images.githubusercontent.com/53153372/224497276-798c7e78-16cd-4f87-8154-8cb88635fcbd.png)
+![homewithnavbar](https://user-images.githubusercontent.com/53153372/224497292-9b9e7a18-ec8d-4867-b764-de1079b71a5a.png)
+![bigscreenwithnavbarandlogin](https://user-images.githubusercontent.com/53153372/224497302-e8edfecd-e3f3-4860-9909-1e74d0e7a2d6.png)
+![productinsidepageregularuser](https://user-images.githubusercontent.com/53153372/224497322-3d0aaa8f-f87f-4c10-9fa5-eee12f989f5e.png)
+![digitalcourseinsideregularuser](https://user-images.githubusercontent.com/53153372/224497338-c7c897e2-3146-4192-9161-a32a32a44162.png)
 ---------------------------------------------------------------------------------------------
 # Getting Started with Create React App
 ---------------------------------------------------------------------------------------------
