@@ -101,6 +101,10 @@ td {
 
 }
 
+td{
+  border-bottom: 2px solid #FF005C;
+}
+
 @media (max-width:600px) {
   div.cart {
     font-size: 100%;
