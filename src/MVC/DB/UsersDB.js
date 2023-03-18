@@ -3,14 +3,14 @@ import axios from "axios";
 const UsersDB = {
   users: axios.create({
     baseURL:
-      "https://users-be4a5-default-rtdb.europe-west1.firebasedatabase.app/users", 
+      "https://nails-art-server.onrender.com/users", 
   }),
 
   async removeUser(id) {
     this.users
-        .delete(`/${id}.json`)
+        .delete(`/${id}`)
         .then((response) => {
-          console.log(`user id ${id} was deleted seccesfully`);
+          console.log(`user id ${id} was deleted successfully`);
           return "User Was Deleted!";
         })
         .catch((error) => {
@@ -20,20 +20,20 @@ const UsersDB = {
 
   async getAllUsers() {
     try {
-      const response = await this.users.get(".json");
-      if (response.status !== 200) {
+      const response = await this.users.get("");
+      if (response.status >= 400) {
         console.error("cant get user from the api");
         return;
       }
       return response.data;
     } catch (error) {
-      console.error("Error getting user", error);
+      console.error("Error getting users", error);
     }
   },
 
   async addUser(newUser) {
     this.users
-      .post(".json", newUser)
+      .post("", newUser)
       .then((response) => {
         console.log("User added successfully");
       })
@@ -44,7 +44,7 @@ const UsersDB = {
   
   async editUser(updatedData, id) {
     this.users
-      .put(`/${id}.json`, updatedData)
+      .put(`/${id}`, updatedData)
       .then((response) => {
         console.log("User updated successfully:", response.data);
       })
