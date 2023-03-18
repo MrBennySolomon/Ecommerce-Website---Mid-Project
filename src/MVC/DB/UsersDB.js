@@ -3,12 +3,12 @@ import axios from "axios";
 const UsersDB = {
   users: axios.create({
     baseURL:
-      "https://nails-art-server.onrender.com/users", 
+      "https://users-be4a5-default-rtdb.europe-west1.firebasedatabase.app/users", 
   }),
 
   async removeUser(id) {
     this.users
-        .delete(`/${id}`)
+        .delete(`/${id}.json`)
         .then((response) => {
           console.log(`user id ${id} was deleted successfully`);
           return "User Was Deleted!";
@@ -20,8 +20,8 @@ const UsersDB = {
 
   async getAllUsers() {
     try {
-      const response = await this.users.get("");
-      if (response.status >= 400) {
+      const response = await this.users.get(".json");
+      if (response.status !== 200) {
         console.error("cant get user from the api");
         return;
       }
@@ -33,7 +33,7 @@ const UsersDB = {
 
   async addUser(newUser) {
     this.users
-      .post("", newUser)
+      .post(".json", newUser)
       .then((response) => {
         console.log("User added successfully");
       })
@@ -44,7 +44,7 @@ const UsersDB = {
   
   async editUser(updatedData, id) {
     this.users
-      .put(`/${id}`, updatedData)
+      .put(`/${id}.json`, updatedData)
       .then((response) => {
         console.log("User updated successfully:", response.data);
       })

@@ -10,7 +10,7 @@ const CoursesDB = {
   this.courses
       .delete(`/${id}.json`)
       .then((response) => {
-        console.log(`Course id ${id} was deleted seccesfully`);
+        console.log(`Course id ${id} was deleted successfully`);
         return "Course Was Deleted!";
       })
       .catch((error) => {
